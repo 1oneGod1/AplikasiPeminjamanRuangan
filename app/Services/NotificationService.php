@@ -2,25 +2,24 @@
 
 namespace App\Services;
 
+use App\Exceptions\EmailJsException;
 use App\Models\Booking;
 use App\Models\Notification;
 use App\Models\User;
 use App\Mail\BookingCreated;
-use App\Services\BrevoEmailService;
+use App\Mail\BookingApproved;
+use App\Mail\BookingRejected;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
 class NotificationService
 {
-    /**
-     * @var BrevoEmailService
-     */
-    protected $brevo;
+    protected EmailJsService $emailJsService;
 
-    public function __construct(BrevoEmailService $brevoEmailService)
+    public function __construct(EmailJsService $emailJsService)
     {
-        $this->brevo = $brevoEmailService;
+        $this->emailJsService = $emailJsService;
     }
 
     /**
@@ -110,28 +109,32 @@ class NotificationService
                 'is_read' => false,
             ]);
 
-            $params = [
-                'nama_user' => $booking->user->name,
-                'nama_proyek' => $booking->purpose ?? $booking->room->name,
-                'tanggal_pengajuan' => $this->formatDate($booking->created_at, 'd F Y'),
-                'tanggal_approval' => $this->formatDate($booking->approved_at ?? now(), 'd F Y'),
+            $templateParams = [
+                'to_name' => $booking->user->name,
+                'to_email' => $booking->user->email,
+                'room_name' => $booking->room->name,
+                'booking_date' => $this->formatDate($booking->booking_date),
+                'start_time' => $this->formatTime($booking->start_time),
+                'end_time' => $this->formatTime($booking->end_time),
+                'approver_name' => $booking->approver->name ?? 'Admin',
             ];
 
-            $this->brevo->sendTemplate(
-                'emails.brevo.booking-approved',
-                'Pengajuan Peminjaman Disetujui',
-                $booking->user->email,
-                $booking->user->name,
-                $params,
-                [
-                    'button_url' => $this->borrowerStatusUrl(),
-                ]
-            );
+            // Assuming you have a template for approved bookings
+            try {
+                $this->emailJsService->send(config('services.emailjs.approved_template_id'), $templateParams);
 
-            Log::info('Booking approved notification sent', [
-                'booking_id' => $booking->id,
-                'user_id' => $booking->user_id,
-            ]);
+                Log::info('Booking approved notification sent via EmailJS', [
+                    'booking_id' => $booking->id,
+                    'user_id' => $booking->user_id,
+                ]);
+            } catch (EmailJsException $emailJsException) {
+                Log::error('EmailJS failed to send approval email', [
+                    'booking_id' => $booking->id,
+                    'user_id' => $booking->user_id,
+                    'context' => $emailJsException->context(),
+                    'message' => $emailJsException->getMessage(),
+                ]);
+            }
 
         } catch (\Exception $e) {
             Log::error('Failed to send booking approved notification', [
@@ -169,34 +172,32 @@ class NotificationService
                 'is_read' => false,
             ]);
 
-            $params = [
-                'nama_user' => $booking->user->name,
-                'nama_proyek' => $booking->purpose ?? $booking->room->name,
-                'tanggal_pengajuan' => $this->formatDate($booking->created_at, 'd F Y'),
+            $templateParams = [
+                'to_name' => $booking->user->name,
+                'to_email' => $booking->user->email,
+                'room_name' => $booking->room->name,
+                'booking_date' => $this->formatDate($booking->booking_date),
+                'start_time' => $this->formatTime($booking->start_time),
+                'end_time' => $this->formatTime($booking->end_time),
+                'rejection_reason' => $booking->rejection_reason ?? 'Tidak disebutkan',
             ];
 
-            $viewData = [
-                'button_url' => $this->borrowerStatusUrl(),
-            ];
+            // Assuming you have a template for rejected bookings
+            try {
+                $this->emailJsService->send(config('services.emailjs.rejected_template_id'), $templateParams);
 
-            if (!empty($booking->rejection_reason)) {
-                $viewData['alasan_penolakan'] = $booking->rejection_reason;
-                $params['alasan_penolakan'] = $booking->rejection_reason;
+                Log::info('Booking rejected notification sent via EmailJS', [
+                    'booking_id' => $booking->id,
+                    'user_id' => $booking->user_id,
+                ]);
+            } catch (EmailJsException $emailJsException) {
+                Log::error('EmailJS failed to send rejection email', [
+                    'booking_id' => $booking->id,
+                    'user_id' => $booking->user_id,
+                    'context' => $emailJsException->context(),
+                    'message' => $emailJsException->getMessage(),
+                ]);
             }
-
-            $this->brevo->sendTemplate(
-                'emails.brevo.booking-rejected',
-                'Pengajuan Peminjaman Ditolak',
-                $booking->user->email,
-                $booking->user->name,
-                $params,
-                $viewData
-            );
-
-            Log::info('Booking rejected notification sent', [
-                'booking_id' => $booking->id,
-                'user_id' => $booking->user_id,
-            ]);
 
         } catch (\Exception $e) {
             Log::error('Failed to send booking rejected notification', [
@@ -422,12 +423,4 @@ class NotificationService
         return Carbon::parse($value)->format($format);
     }
 
-    private function borrowerStatusUrl(): string
-    {
-        try {
-            return route('bookings.history');
-        } catch (\Throwable $e) {
-            return url('/dashboard');
-        }
-    }
 }

@@ -12,13 +12,12 @@ use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\UserBookingController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\LandingController;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\Booking;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', LandingController::class)->name('home');
 
 // Show login form (kept as closure to preserve role selector query)
 Route::get('/login', function () {

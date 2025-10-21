@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This file is for storing the credentials for third party services such
-    | as Mailgun, Postmark, AWS and more. This file provides the de facto
+    | as Mailgun, Postmark, EmailJS and more. This file provides the de facto
     | location for this type of information, allowing packages to have
     | a conventional file to locate the various service credentials.
     |
@@ -22,12 +22,6 @@ return [
         'key' => env('RESEND_KEY'),
     ],
 
-    'ses' => [
-        'key' => env('AWS_ACCESS_KEY_ID'),
-        'secret' => env('AWS_SECRET_ACCESS_KEY'),
-        'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
-    ],
-
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
@@ -35,15 +29,13 @@ return [
         ],
     ],
 
-    'brevo' => [
-        'api_key' => env('BREVO_API_KEY'),
-        'sender_email' => env('BREVO_SENDER_EMAIL'),
-        'sender_name' => env('BREVO_SENDER_NAME', env('APP_NAME', 'Laravel')),
-        'endpoint' => env('BREVO_API_ENDPOINT', 'https://api.brevo.com/v3/smtp/email'),
-        'templates' => [
-            'approved' => env('BREVO_TEMPLATE_APPROVED_URL'),
-            'rejected' => env('BREVO_TEMPLATE_REJECTED_URL'),
-        ],
+    'emailjs' => [
+        'public_key' => env('EMAILJS_PUBLIC_KEY'),
+        'private_key' => env('EMAILJS_PRIVATE_KEY'),
+        'service_id' => env('EMAILJS_SERVICE_ID'),
+        'user_id' => env('EMAILJS_USER_ID'),
+        'approved_template_id' => env('EMAILJS_APPROVED_TEMPLATE_ID'),
+        'rejected_template_id' => env('EMAILJS_REJECTED_TEMPLATE_ID'),
     ],
 
 ];

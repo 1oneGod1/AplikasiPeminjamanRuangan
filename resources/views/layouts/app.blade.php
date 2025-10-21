@@ -29,7 +29,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
-                    <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white font-semibold">SPH</div>
+                    <img src="https://static.wixstatic.com/media/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png/v1/fill/w_559,h_512,al_c/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png" alt="Logo Sekolah Palembang Harapan" class="h-10 w-10 rounded-xl border border-slate-200 bg-white object-cover p-1 dark:border-slate-700 dark:bg-slate-900" loading="lazy">
                     <div>
                         <p class="text-sm font-semibold text-slate-900 dark:text-white">Peminjaman Ruangan</p>
                         <p class="text-xs text-slate-500 dark:text-slate-400">Sekolah Palembang Harapan</p>

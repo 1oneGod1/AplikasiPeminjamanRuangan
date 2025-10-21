@@ -18,8 +18,8 @@
     <!-- Card -->
     <div class="relative z-10 w-full max-w-md rounded-2xl border border-white/10 bg-white/10 backdrop-blur-lg p-8 shadow-2xl">
       <div class="text-center mb-8">
-        <div class="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm">
-          <span class="text-lg font-semibold tracking-wide">SPH</span>
+        <div class="mx-auto mb-3 h-16 w-16 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm p-2">
+          <img src="https://static.wixstatic.com/media/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png/v1/fill/w_559,h_512,al_c/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png" alt="Logo Sekolah Palembang Harapan" class="h-full w-full object-contain" loading="lazy">
         </div>
         <h1 class="text-2xl font-bold tracking-tight">Sistem Peminjaman Ruangan</h1>
         <p class="mt-1 text-sm text-gray-300">Sekolah Palembang Harapan</p>

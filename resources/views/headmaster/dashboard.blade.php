@@ -72,14 +72,14 @@
             <div class="lg:col-span-2 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
                 <div class="flex items-center justify-between">
                     <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-300">Utilisasi per Ruangan</h3>
-                    <button type="button" class="text-xs font-semibold text-blue-300 hover:text-blue-200">CSV</button>
+                    <button type="button" data-action="export-utilization-csv" class="text-xs font-semibold text-blue-300 hover:text-blue-200">CSV</button>
                 </div>
                 <canvas id="utilizationChart" class="mt-6 h-64 w-full"></canvas>
             </div>
             <div class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
                 <div class="flex items-center justify-between">
                     <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-300">Distribusi Jam Pakai</h3>
-                    <button type="button" class="text-xs font-semibold text-blue-300 hover:text-blue-200">PNG</button>
+                    <button type="button" data-action="export-hour-chart" class="text-xs font-semibold text-blue-300 hover:text-blue-200">PNG</button>
                 </div>
                 <canvas id="hourDistributionChart" class="mt-6 h-64 w-full"></canvas>
             </div>
@@ -88,14 +88,15 @@
         <div class="mt-10 rounded-3xl border border-white/10 bg-white/5 backdrop-blur">
             <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-6 py-4">
                 <div class="flex items-center gap-3 text-sm font-semibold text-slate-200">
-                    <button type="button" class="rounded-xl bg-blue-500 px-3 py-1 text-xs font-semibold text-white">Tabel Detail</button>
-                    <button type="button" class="rounded-xl px-3 py-1 text-xs font-semibold text-slate-300 hover:bg-white/10">Rekap per Kategori</button>
+                    <button type="button" data-view="detail" class="rounded-xl bg-blue-500 px-3 py-1 text-xs font-semibold text-white">Tabel Detail</button>
+                    <button type="button" data-view="summary" class="rounded-xl px-3 py-1 text-xs font-semibold text-slate-300 hover:bg-white/10">Rekap per Kategori</button>
                 </div>
                 <div class="flex items-center gap-3 text-xs">
                     <form method="POST" action="{{ route('reports.export.pdf') }}" class="inline">
                         @csrf
                         <input type="hidden" name="date_from" value="{{ $filters['date_from'] }}">
                         <input type="hidden" name="date_to" value="{{ $filters['date_to'] }}">
+                        <input type="hidden" name="category" value="{{ $filters['category'] }}">
                         <input type="hidden" name="type" value="detail">
                         <button type="submit" class="inline-flex items-center gap-2 rounded-xl border border-white/20 px-3 py-1.5 font-semibold text-slate-200 transition hover:bg-white/10">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4">
@@ -108,6 +109,8 @@
                         @csrf
                         <input type="hidden" name="date_from" value="{{ $filters['date_from'] }}">
                         <input type="hidden" name="date_to" value="{{ $filters['date_to'] }}">
+                        <input type="hidden" name="category" value="{{ $filters['category'] }}">
+                        <input type="hidden" name="type" value="detail">
                         <button type="submit" class="inline-flex items-center gap-2 rounded-xl border border-white/20 px-3 py-1.5 font-semibold text-slate-200 transition hover:bg-white/10">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16 8l-8 8m0-8l8 8" />
@@ -118,7 +121,7 @@
                 </div>
             </div>
 
-            <div class="overflow-hidden rounded-b-3xl">
+            <div id="detail-table" class="overflow-hidden rounded-b-3xl">
                 <table class="min-w-full divide-y divide-white/10 text-sm text-slate-200">
                     <thead class="bg-white/5 text-xs uppercase tracking-wide text-slate-400">
                         <tr>
@@ -146,6 +149,32 @@
                     </tbody>
                 </table>
             </div>
+            <div id="summary-table" class="hidden overflow-hidden rounded-b-3xl">
+                <table class="min-w-full divide-y divide-white/10 text-sm text-slate-200">
+                    <thead class="bg-white/5 text-xs uppercase tracking-wide text-slate-400">
+                        <tr>
+                            <th class="px-6 py-3 text-left">Kategori</th>
+                            <th class="px-6 py-3 text-left">Total Booking</th>
+                            <th class="px-6 py-3 text-left">Total Jam</th>
+                            <th class="px-6 py-3 text-left">Rata-rata Utilisasi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                        @forelse($categorySummary as $item)
+                            <tr class="hover:bg-white/5">
+                                <td class="px-6 py-4 font-semibold text-white">{{ $item['category'] }}</td>
+                                <td class="px-6 py-4">{{ $item['total_bookings'] }}</td>
+                                <td class="px-6 py-4">{{ number_format($item['total_hours'], 2) }} jam</td>
+                                <td class="px-6 py-4">{{ $item['avg_utilization'] }}%</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="px-6 py-8 text-center text-slate-400">Belum ada data rekap kategori untuk periode ini.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
             <p class="px-6 py-4 text-xs text-slate-400">*Angka dan grafik menyesuaikan periode & filter. Tombol export menyiapkan file dengan format resmi sekolah.</p>
         </div>
 
@@ -155,6 +184,7 @@
                 <input type="hidden" name="date_from" value="{{ $filters['date_from'] }}">
                 <input type="hidden" name="date_to" value="{{ $filters['date_to'] }}">
                 <input type="hidden" name="type" value="summary">
+                <input type="hidden" name="category" value="{{ $filters['category'] }}">
                 <button type="submit" class="inline-flex items-center gap-2 rounded-2xl bg-blue-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-400">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
@@ -166,6 +196,8 @@
                 @csrf
                 <input type="hidden" name="date_from" value="{{ $filters['date_from'] }}">
                 <input type="hidden" name="date_to" value="{{ $filters['date_to'] }}">
+                <input type="hidden" name="category" value="{{ $filters['category'] }}">
+                <input type="hidden" name="type" value="summary">
                 <button type="submit" class="inline-flex items-center gap-2 rounded-2xl border border-white/20 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:bg-white/10">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-8.954 8.955a2.25 2.25 0 01-3.182 0L3.75 11.09" />
@@ -181,84 +213,172 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script>
-    const utilizationData = @json($utilizationChart);
-    const hourDistributionData = @json($hourDistribution);
+    document.addEventListener('DOMContentLoaded', () => {
+        const utilizationData = @json($utilizationChart);
+        const hourDistributionData = @json($hourDistribution);
+        const roomTableData = @json($roomTableData);
+        const filtersMeta = @json($filters);
 
-    const hexToRgba = (hex, alpha = 1) => {
-        const sanitized = hex.replace('#', '');
-        const bigint = parseInt(sanitized, 16);
-        const r = (bigint >> 16) & 255;
-        const g = (bigint >> 8) & 255;
-        const b = bigint & 255;
-        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-    };
+        const hexToRgba = (hex, alpha = 1) => {
+            const sanitized = hex.replace('#', '');
+            const bigint = parseInt(sanitized, 16);
+            const r = (bigint >> 16) & 255;
+            const g = (bigint >> 8) & 255;
+            const b = bigint & 255;
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        };
 
-    const palette = ['#60a5fa', '#38bdf8', '#818cf8', '#f472b6', '#f87171', '#facc15', '#34d399'];
+        const palette = ['#60a5fa', '#38bdf8', '#818cf8', '#f472b6', '#f87171', '#facc15', '#34d399'];
 
-    const utilizationCtx = document.getElementById('utilizationChart');
-    if (utilizationCtx) {
-        new Chart(utilizationCtx, {
-            type: 'bar',
-            data: {
-                labels: utilizationData.map(item => item.name),
-                datasets: [{
-                    label: 'Utilisasi (%)',
-                    data: utilizationData.map(item => item.value),
-                    backgroundColor: utilizationData.map((_, idx) => hexToRgba(palette[idx % palette.length], 0.7)),
-                    borderRadius: 14,
-                    borderSkipped: false,
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            color: '#cbd5f5',
-                            callback: value => `${value}%`
-                        },
-                        grid: { color: 'rgba(148, 163, 184, 0.1)' }
-                    },
-                    x: {
-                        ticks: { color: '#cbd5f5' },
-                        grid: { display: false }
-                    }
+        let utilizationChartInstance = null;
+        const utilizationCtx = document.getElementById('utilizationChart');
+        if (utilizationCtx) {
+            utilizationChartInstance = new Chart(utilizationCtx, {
+                type: 'bar',
+                data: {
+                    labels: utilizationData.map(item => item.name),
+                    datasets: [{
+                        label: 'Utilisasi (%)',
+                        data: utilizationData.map(item => item.value),
+                        backgroundColor: utilizationData.map((_, idx) => hexToRgba(palette[idx % palette.length], 0.7)),
+                        borderRadius: 14,
+                        borderSkipped: false,
+                    }]
                 },
-                plugins: {
-                    legend: { display: false }
-                }
-            }
-        });
-    }
-
-    const hourCtx = document.getElementById('hourDistributionChart');
-    if (hourCtx) {
-        new Chart(hourCtx, {
-            type: 'doughnut',
-            data: {
-                labels: hourDistributionData.map(item => `${item.label}`),
-                datasets: [{
-                    data: hourDistributionData.map(item => item.percentage),
-                    backgroundColor: hourDistributionData.map((_, idx) => hexToRgba(palette[idx % palette.length], 0.85)),
-                    borderWidth: 2,
-                    borderColor: '#0f172a'
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: { color: '#cbd5f5', boxWidth: 12 }
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#cbd5f5',
+                                callback: value => `${value}%`
+                            },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#cbd5f5' },
+                            grid: { display: false }
+                        }
                     },
-                    tooltip: {
-                        callbacks: {
-                            label: ctx => `${ctx.label}: ${ctx.raw}%`
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        let hourDistributionChartInstance = null;
+        const hourCtx = document.getElementById('hourDistributionChart');
+        if (hourCtx) {
+            hourDistributionChartInstance = new Chart(hourCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: hourDistributionData.map(item => `${item.label}`),
+                    datasets: [{
+                        data: hourDistributionData.map(item => item.percentage),
+                        backgroundColor: hourDistributionData.map((_, idx) => hexToRgba(palette[idx % palette.length], 0.85)),
+                        borderWidth: 2,
+                        borderColor: '#0f172a'
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { color: '#cbd5f5', boxWidth: 12 }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => `${ctx.label}: ${ctx.raw}%`
+                            }
                         }
                     }
                 }
+            });
+        }
+
+        const downloadFile = (content, filename, mime) => {
+            const blob = new Blob([content], { type: mime });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        };
+
+        const csvButton = document.querySelector('[data-action="export-utilization-csv"]');
+        if (csvButton) {
+            csvButton.addEventListener('click', () => {
+                if (!roomTableData.length) {
+                    csvButton.disabled = true;
+                    setTimeout(() => (csvButton.disabled = false), 1500);
+                    return;
+                }
+
+                const header = ['Ruangan', 'Kategori', 'Jumlah Booking', 'Total Jam', 'Utilisasi (%)'];
+                const rows = roomTableData.map(item => [
+                    item.room,
+                    item.category,
+                    item.total_bookings,
+                    item.total_hours,
+                    item.utilization,
+                ]);
+                const csvContent = [header, ...rows]
+                    .map(cols => cols.map(col => `"${String(col).replace(/"/g, '""')}"`).join(','))
+                    .join('\r\n');
+                const filename = `utilisasi-ruangan_${filtersMeta.date_from}_${filtersMeta.date_to}.csv`;
+                downloadFile(csvContent, filename, 'text/csv;charset=utf-8;');
+            });
+        }
+
+        const pngButton = document.querySelector('[data-action="export-hour-chart"]');
+        if (pngButton) {
+            pngButton.addEventListener('click', () => {
+                if (!hourDistributionChartInstance) {
+                    pngButton.disabled = true;
+                    setTimeout(() => (pngButton.disabled = false), 1500);
+                    return;
+                }
+
+                const image = hourDistributionChartInstance.toBase64Image();
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = `distribusi-jam_${filtersMeta.date_from}_${filtersMeta.date_to}.png`;
+                link.click();
+            });
+        }
+
+        const detailButton = document.querySelector('[data-view="detail"]');
+        const summaryButton = document.querySelector('[data-view="summary"]');
+        const detailTable = document.getElementById('detail-table');
+        const summaryTable = document.getElementById('summary-table');
+
+        const setActiveView = (view) => {
+            if (!detailButton || !summaryButton || !detailTable || !summaryTable) {
+                return;
             }
-        });
-    }
+
+            const isDetail = view === 'detail';
+            detailTable.classList.toggle('hidden', !isDetail);
+            summaryTable.classList.toggle('hidden', isDetail);
+
+            detailButton.classList.toggle('bg-blue-500', isDetail);
+            detailButton.classList.toggle('text-white', isDetail);
+            detailButton.classList.toggle('text-slate-300', !isDetail);
+            detailButton.classList.toggle('hover:bg-white/10', !isDetail);
+
+            summaryButton.classList.toggle('bg-blue-500', !isDetail);
+            summaryButton.classList.toggle('text-white', !isDetail);
+            summaryButton.classList.toggle('text-slate-300', isDetail);
+            summaryButton.classList.toggle('hover:bg-white/10', isDetail);
+        };
+
+        detailButton?.addEventListener('click', () => setActiveView('detail'));
+        summaryButton?.addEventListener('click', () => setActiveView('summary'));
+        setActiveView('detail');
+    });
 </script>
 @endpush
