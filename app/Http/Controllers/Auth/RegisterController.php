@@ -83,11 +83,11 @@ class RegisterController extends Controller
                 'is_active' => true,
             ]);
 
-            // Login user automatically after registration
-            Auth::login($user);
-
-            // For API request
+            // For API request - auto login for API
             if ($request->expectsJson()) {
+                // Login user automatically for API
+                Auth::login($user);
+                
                 // Create token for API
                 $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -108,9 +108,9 @@ class RegisterController extends Controller
                 ], 201);
             }
 
-            // For web request
-            return redirect()->route('dashboard')
-                ->with('success', 'Registrasi berhasil! Selamat datang, ' . $user->name);
+            // For web request - redirect to login without auto login
+            return redirect()->route('login')
+                ->with('success', 'Registrasi berhasil! Silakan login dengan akun Anda.');
 
         } catch (\Exception $e) {
             // For API request
