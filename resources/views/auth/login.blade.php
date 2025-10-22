@@ -25,8 +25,32 @@
         <p class="mt-1 text-sm text-gray-300">Sekolah Palembang Harapan</p>
       </div>
 
+      @if (session('success'))
+        <div class="mb-4 rounded-xl bg-green-500/20 border border-green-500/30 p-4 text-sm">
+          <div class="flex items-center gap-2">
+            <svg class="h-5 w-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-green-200 font-medium">{{ session('success') }}</span>
+          </div>
+        </div>
+      @endif
+
       @if (session('status'))
-        <div class="mb-4 rounded-md bg-white/10 p-3 text-sm">{{ session('status') }}</div>
+        <div class="mb-4 rounded-xl bg-blue-500/20 border border-blue-500/30 p-4 text-sm">
+          <span class="text-blue-200">{{ session('status') }}</span>
+        </div>
+      @endif
+
+      @if (session('error'))
+        <div class="mb-4 rounded-xl bg-red-500/20 border border-red-500/30 p-4 text-sm">
+          <div class="flex items-center gap-2">
+            <svg class="h-5 w-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-red-200">{{ session('error') }}</span>
+          </div>
+        </div>
       @endif
 
       <!-- Role selector removed: authentication will detect role from email in DB -->
