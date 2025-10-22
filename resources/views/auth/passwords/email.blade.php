@@ -1,6 +1,14 @@
-@extends('layouts.auth')
-
-@section('content')
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-white">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lupa Kata Sandi - Sistem Peminjaman Ruangan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <style> body { font-family: 'Inter', sans-serif; } </style>
+</head>
+<body class="h-full">
 <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
         <div>
@@ -96,4 +104,5 @@
         </form>
     </div>
 </div>
-@endsection
+</body>
+</html>
