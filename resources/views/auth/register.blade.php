@@ -60,7 +60,7 @@
           @error('password_confirmation')<p class="mt-1 text-xs text-red-400">{{ $message }}</p>@enderror
         </div>
 
-        <button type="submit" id="submit-btn" class="w-full rounded-xl border border-white/30 bg-white/10 px-4 py-2 font-medium text-white transition hover:bg-white/20 focus:ring-4 focus:ring-white/40">Daftar sebagai {{ $currentRole }}</button>
+        <button type="submit" id="submit-btn" class="w-full rounded-xl border border-white/30 bg-white/10 px-4 py-2 font-medium text-white transition hover:bg-white/20 focus:ring-4 focus:ring-white/40">Daftar Akun</button>
 
         <p class="text-center text-sm text-gray-400 mt-4">Sudah punya akun? <a href="{{ route('login') }}" class="underline hover:text-white">Masuk</a></p>
       </form>
@@ -70,6 +70,7 @@
   </main>
 
   <script>
+    // Toggle password visibility
     (function(){
       const t=document.getElementById('togglePassword');
       const p=document.getElementById('password');
@@ -78,11 +79,6 @@
       const pc=document.getElementById('password_confirmation');
       if(tc&&pc){tc.addEventListener('click',()=>{const h=pc.type==='password';pc.type=h?'text':'password';tc.textContent=h?'Sembunyikan':'Tampilkan';});}
     })();
-
-        })();
-  </script>
-</body>
-</html>
   </script>
 </body>
 </html>
