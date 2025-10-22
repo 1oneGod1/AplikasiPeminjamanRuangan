@@ -47,7 +47,7 @@
                                     Atur peminjaman ruangan sekolah tanpa perlu spreadsheet.
                                 </h2>
                                 <p class="text-lg leading-relaxed text-neutral-600">
-                                    Sistem terpusat untuk mengecek ketersediaan ruangan, mengajukan peminjaman, dan memantau status persetujuan secara real-time bagi guru, siswa, admin, dan kepala sekolah.
+                                    Sistem terpusat untuk mengecek ketersediaan ruangan, mengajukan peminjaman, dan memantau status persetujuan secara real-time bagi peminjam, admin, dan kepala sekolah.
                                 </p>
                             </div>
                             <div class="flex flex-wrap items-center gap-4 text-sm">
@@ -92,7 +92,7 @@
                                 <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
                                     <p class="text-xs uppercase tracking-wide text-neutral-500">Langkah 2</p>
                                     <h3 class="mt-1 text-lg font-semibold text-neutral-900">Ajukan peminjaman dalam hitungan menit</h3>
-                                    <p class="mt-2 text-sm">Form digital membantu guru dan siswa mengajukan kebutuhan lengkap beserta catatan.</p>
+                                    <p class="mt-2 text-sm">Form digital membantu peminjam mengajukan kebutuhan lengkap beserta catatan.</p>
                                 </div>
                                 <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
                                     <p class="text-xs uppercase tracking-wide text-neutral-500">Langkah 3</p>

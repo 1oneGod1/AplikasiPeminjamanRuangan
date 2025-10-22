@@ -133,7 +133,6 @@
                 >
                     <option value="">Pilih Role</option>
                     <option value="kepala_sekolah" {{ (old('role', $role ?? '') == 'kepala_sekolah') ? 'selected' : '' }}>Kepala Sekolah</option>
-                    <option value="guru" {{ (old('role', $role ?? '') == 'guru') ? 'selected' : '' }}>Guru</option>
                     <option value="cleaning_service" {{ (old('role', $role ?? '') == 'cleaning_service') ? 'selected' : '' }}>Cleaning Service</option>
                     <option value="peminjam" {{ (old('role', $role ?? '') == 'peminjam') ? 'selected' : '' }}>Peminjam</option>
                 </select>
