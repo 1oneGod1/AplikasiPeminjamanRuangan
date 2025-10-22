@@ -9,22 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminPasswordChangeController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            if (!Auth::user()->isAdmin()) {
-                abort(403, 'Unauthorized action.');
-            }
-            return $next($request);
-        });
-    }
-
     /**
      * Display a listing of password change requests
      */
     public function index()
     {
+        // Check if user is admin
+        if (!Auth::check() || !Auth::user()->isAdmin()) {
+            abort(403, 'Unauthorized action.');
+        }
         $pendingRequests = PasswordChangeRequest::with('user')
             ->where('status', PasswordChangeRequest::STATUS_PENDING)
             ->orderBy('created_at', 'desc')
@@ -44,6 +37,11 @@ class AdminPasswordChangeController extends Controller
      */
     public function approve(Request $request, PasswordChangeRequest $passwordChangeRequest)
     {
+        // Check if user is admin
+        if (!Auth::check() || !Auth::user()->isAdmin()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         if ($passwordChangeRequest->status !== PasswordChangeRequest::STATUS_PENDING) {
             return back()->with('error', 'Request ini sudah diproses sebelumnya.');
         }
@@ -69,6 +67,11 @@ class AdminPasswordChangeController extends Controller
      */
     public function reject(Request $request, PasswordChangeRequest $passwordChangeRequest)
     {
+        // Check if user is admin
+        if (!Auth::check() || !Auth::user()->isAdmin()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         if ($passwordChangeRequest->status !== PasswordChangeRequest::STATUS_PENDING) {
             return back()->with('error', 'Request ini sudah diproses sebelumnya.');
         }
