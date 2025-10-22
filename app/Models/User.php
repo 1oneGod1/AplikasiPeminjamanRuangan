@@ -91,6 +91,24 @@ class User extends Authenticatable
     }
 
     /**
+     * Relationship: User has many password change requests
+     */
+    public function passwordChangeRequests()
+    {
+        return $this->hasMany(PasswordChangeRequest::class, 'user_id');
+    }
+
+    /**
+     * Relationship: Get pending password change request
+     */
+    public function pendingPasswordChangeRequest()
+    {
+        return $this->hasOne(PasswordChangeRequest::class, 'user_id')
+            ->where('status', PasswordChangeRequest::STATUS_PENDING)
+            ->latest();
+    }
+
+    /**
      * Check if user has specific role
      */
     public function hasRole(string $role): bool

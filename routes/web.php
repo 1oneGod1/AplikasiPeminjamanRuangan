@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminPasswordChangeController;
 use App\Http\Controllers\AdminRoomController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminSettingController;
@@ -31,6 +33,10 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.attempt');
 // Registration (show + submit)
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
+
+// Password Reset
+Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/password/email', [ForgotPasswordController::class, 'submit'])->name('password.email');
 
 // Logout
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
@@ -79,6 +85,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/settings', [AdminSettingController::class, 'index'])->name('admin.settings.index');
     Route::post('/admin/settings', [AdminSettingController::class, 'update'])->name('admin.settings.update');
     Route::post('/admin/settings/clear-cache', [AdminSettingController::class, 'clearCache'])->name('admin.settings.clear-cache');
+
+    // Password Change Requests
+    Route::get('/admin/password-change-requests', [AdminPasswordChangeController::class, 'index'])->name('admin.password-change.index');
+    Route::post('/admin/password-change-requests/{passwordChangeRequest}/approve', [AdminPasswordChangeController::class, 'approve'])->name('admin.password-change.approve');
+    Route::post('/admin/password-change-requests/{passwordChangeRequest}/reject', [AdminPasswordChangeController::class, 'reject'])->name('admin.password-change.reject');
 });
 
 // Kepala Sekolah routes
