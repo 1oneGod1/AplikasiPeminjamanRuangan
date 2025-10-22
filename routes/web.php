@@ -15,6 +15,7 @@ use App\Http\Controllers\UserBookingController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\CleaningServiceController;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\Booking;
@@ -96,4 +97,10 @@ Route::middleware(['auth', 'role:kepala_sekolah'])->group(function () {
     Route::get('/kepala-sekolah/dashboard', [ReportController::class, 'index'])->name('reports.index');
     Route::post('/kepala-sekolah/reports/export/pdf', [ReportController::class, 'exportPDF'])->name('reports.export.pdf');
     Route::post('/kepala-sekolah/reports/export/excel', [ReportController::class, 'exportExcel'])->name('reports.export.excel');
+});
+
+// Cleaning Service routes
+Route::middleware(['auth', 'role:cleaning_service'])->group(function () {
+    Route::get('/cleaning-service/dashboard', [CleaningServiceController::class, 'index'])->name('cleaning-service.dashboard');
+    Route::get('/cleaning-service/schedule', [CleaningServiceController::class, 'schedule'])->name('cleaning-service.schedule');
 });
