@@ -10,37 +10,20 @@ use Illuminate\Support\Facades\Validator;
 class AdminUserController extends Controller
 {
     /**
-     * Display a listing of teachers (kepala_sekolah + cleaning_service).
+     * Display a listing of peminjam users.
      */
-    public function indexTeachers()
+    public function indexPeminjam()
     {
-    $teachers = User::whereIn('role', ['kepala_sekolah', 'cleaning_service', 'guru'])
+        $peminjam = User::where('role', 'peminjam')
             ->orderBy('name')
             ->paginate(10);
         
-    $totalTeachers = User::whereIn('role', ['kepala_sekolah', 'cleaning_service', 'guru'])->count();
-    $activeTeachers = User::whereIn('role', ['kepala_sekolah', 'cleaning_service', 'guru'])
-            ->where('status', 'active')
+        $totalPeminjam = User::where('role', 'peminjam')->count();
+        $activePeminjam = User::where('role', 'peminjam')
+            ->where('is_active', true)
             ->count();
         
-        return view('admin.users.teachers', compact('teachers', 'totalTeachers', 'activeTeachers'));
-    }
-
-    /**
-     * Display a listing of students (peminjam).
-     */
-    public function indexStudents()
-    {
-        $students = User::where('role', 'peminjam')
-            ->orderBy('name')
-            ->paginate(10);
-        
-        $totalStudents = User::where('role', 'peminjam')->count();
-        $activeStudents = User::where('role', 'peminjam')
-            ->where('status', 'active')
-            ->count();
-        
-        return view('admin.users.students', compact('students', 'totalStudents', 'activeStudents'));
+        return view('admin.users.peminjam', compact('peminjam', 'totalPeminjam', 'activePeminjam'));
     }
 
     /**
