@@ -24,51 +24,9 @@
                 </div>
 
                 <div class="flex items-center gap-3 text-sm">
-                    <button type="button" class="inline-flex items-center justify-center rounded-xl border border-slate-200 p-2 text-slate-600 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800 sm:hidden" data-mobile-nav-toggle aria-expanded="false" aria-label="Buka menu navigasi">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-5 w-5" data-mobile-nav-icon="open">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="hidden h-5 w-5" data-mobile-nav-icon="close">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                    <button type="button" data-darkmode-toggle class="hidden md:inline-flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Toggle dark mode" aria-pressed="false">
-                        <span class="sr-only">Toggle dark mode</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-5 w-5 dark:hidden">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-5 w-5 hidden dark:block">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1.5m0 15V21m9-9h-1.5m-15 0H3m15.364-6.364l-1.06 1.06M6.696 17.303l-1.06 1.06m0-12.728l1.06 1.06m11.668 11.668l1.06 1.06M12 8.25a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5z" />
-                        </svg>
-                    </button>
-                    <div class="h-6 w-px bg-slate-200 dark:bg-slate-700"></div>
                     <a href="{{ route('login') }}" class="hidden sm:inline-flex items-center rounded-xl border border-slate-200 px-4 py-2 text-slate-600 dark:border-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Masuk</a>
                     <a href="{{ route('register') }}" class="inline-flex items-center rounded-xl bg-blue-600 px-4 py-2 text-white font-semibold hover:bg-blue-700 transition shadow-lg shadow-blue-500/30">Daftar</a>
                 </div>
-            </div>
-        </div>
-
-        <!-- Mobile Navigation Menu -->
-        <div data-mobile-nav-menu class="sm:hidden hidden border-t border-slate-200 bg-white shadow-lg dark:border-slate-800 dark:bg-slate-900">
-            <div class="px-4 py-4 space-y-3 text-sm">
-                <a href="{{ route('login') }}" class="flex items-center justify-between rounded-xl border border-slate-200 px-4 py-3 font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">
-                    <span>Masuk</span>
-                </a>
-                <a href="{{ route('register') }}" class="flex items-center justify-between rounded-xl bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700">
-                    <span>Daftar</span>
-                </a>
-                <button type="button" data-darkmode-toggle class="flex w-full items-center justify-between rounded-xl border border-slate-200 px-4 py-3 font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800" aria-pressed="false">
-                    <span>Mode Gelap</span>
-                    <span class="flex items-center gap-2 text-xs" data-darkmode-state>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4 dark:hidden">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="hidden h-4 w-4 dark:block">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1.5m0 15V21m9-9h-1.5m-15 0H3m15.364-6.364l-1.06 1.06M6.696 17.303l-1.06 1.06m0-12.728l1.06 1.06m11.668 11.668l1.06 1.06M12 8.25a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5z" />
-                        </svg>
-                        <span data-darkmode-label>Off</span>
-                    </span>
-                </button>
             </div>
         </div>
     </header>
@@ -218,54 +176,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Initialize dark mode
-        (function() {
-            const isDark = localStorage.getItem('darkMode') === 'true' ||
-                          (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            if (isDark) {
-                document.documentElement.classList.add('dark');
-            }
-        })();
-
-        // Dark mode toggle
-        const darkModeToggle = document.querySelector('[data-darkmode-toggle]');
-        if (darkModeToggle) {
-            darkModeToggle.addEventListener('click', () => {
-                document.documentElement.classList.toggle('dark');
-                const isDark = document.documentElement.classList.contains('dark');
-                localStorage.setItem('darkMode', isDark);
-                darkModeToggle.setAttribute('aria-pressed', isDark);
-            });
-        }
-
-        // Mobile navigation toggle
-        const mobileNavToggle = document.querySelector('[data-mobile-nav-toggle]');
-        const mobileNavMenu = document.querySelector('[data-mobile-nav-menu]');
-        const openIcon = document.querySelector('[data-mobile-nav-icon="open"]');
-        const closeIcon = document.querySelector('[data-mobile-nav-icon="close"]');
-
-        if (mobileNavToggle && mobileNavMenu) {
-            mobileNavToggle.addEventListener('click', () => {
-                const isOpen = mobileNavToggle.getAttribute('aria-expanded') === 'true';
-                mobileNavToggle.setAttribute('aria-expanded', !isOpen);
-                mobileNavMenu.classList.toggle('hidden');
-                openIcon?.classList.toggle('hidden');
-                closeIcon?.classList.toggle('hidden');
-            });
-
-            // Close menu when clicking on links
-            mobileNavMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileNavToggle.setAttribute('aria-expanded', 'false');
-                    mobileNavMenu.classList.add('hidden');
-                    openIcon?.classList.remove('hidden');
-                    closeIcon?.classList.add('hidden');
-                });
-            });
-        }
-    </script>
 
 </body>
 </html>
