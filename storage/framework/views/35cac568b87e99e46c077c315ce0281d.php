@@ -1,18 +1,18 @@
-@extends('admin.layouts.app')
 
-@section('title', 'Dashboard Admin')
-@section('header', 'Selamat Datang, ' . auth()->user()->name)
 
-@section('content')
+<?php $__env->startSection('title', 'Dashboard Admin'); ?>
+<?php $__env->startSection('header', 'Selamat Datang, ' . auth()->user()->name); ?>
+
+<?php $__env->startSection('content'); ?>
 <div class="space-y-4 md:space-y-6">
-      {{-- Quick Stats - Mobile Optimized with Slate Theme --}}
+      
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <!-- Total Peminjaman -->
         <div class="group rounded-2xl border border-white/10 bg-gradient-to-br from-blue-500/20 to-blue-600/10 backdrop-blur-sm p-5 md:p-6 hover:border-blue-500/30 transition-all duration-300">
           <div class="flex items-start justify-between">
             <div class="flex-1">
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Total Peminjaman</p>
-              <p class="mt-2 md:mt-3 text-3xl md:text-4xl font-bold text-white">{{ $totalPeminjaman ?? 0 }}</p>
+              <p class="mt-2 md:mt-3 text-3xl md:text-4xl font-bold text-white"><?php echo e($totalPeminjaman ?? 0); ?></p>
               <p class="mt-1 text-xs text-slate-500">Seluruh pengajuan</p>
             </div>
             <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-500 shadow-lg shadow-blue-500/30">
@@ -26,7 +26,7 @@
           <div class="flex items-start justify-between">
             <div class="flex-1">
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Total Ruangan</p>
-              <p class="mt-2 md:mt-3 text-3xl md:text-4xl font-bold text-white">{{ $totalRuangan ?? 0 }}</p>
+              <p class="mt-2 md:mt-3 text-3xl md:text-4xl font-bold text-white"><?php echo e($totalRuangan ?? 0); ?></p>
               <p class="mt-1 text-xs text-slate-500">Ruangan aktif</p>
             </div>
             <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-purple-500 shadow-lg shadow-purple-500/30">
@@ -40,7 +40,7 @@
           <div class="flex items-start justify-between">
             <div class="flex-1">
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Total Pengguna</p>
-              <p class="mt-2 md:mt-3 text-3xl md:text-4xl font-bold text-white">{{ $totalUsers ?? 0 }}</p>
+              <p class="mt-2 md:mt-3 text-3xl md:text-4xl font-bold text-white"><?php echo e($totalUsers ?? 0); ?></p>
               <p class="mt-1 text-xs text-slate-500">Pengguna terdaftar</p>
             </div>
             <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-green-500 shadow-lg shadow-green-500/30">
@@ -54,7 +54,7 @@
           <div class="flex items-start justify-between">
             <div class="flex-1">
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Pending</p>
-              <p class="mt-2 md:mt-3 text-3xl md:text-4xl font-bold text-white">{{ $pendingCount ?? 0 }}</p>
+              <p class="mt-2 md:mt-3 text-3xl md:text-4xl font-bold text-white"><?php echo e($pendingCount ?? 0); ?></p>
               <p class="mt-1 text-xs text-slate-500">Menunggu approval</p>
             </div>
             <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-orange-500 shadow-lg shadow-orange-500/30">
@@ -64,14 +64,14 @@
         </div>
       </div>
 
-      {{-- Status Overview & Quick Action --}}
+      
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
         <!-- Approved -->
         <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 hover:bg-white/10 transition-colors">
           <div class="flex items-center justify-between">
             <div>
               <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Disetujui</div>
-              <div class="mt-2 text-3xl md:text-4xl font-bold text-green-400">{{ $approvedCount ?? 0 }}</div>
+              <div class="mt-2 text-3xl md:text-4xl font-bold text-green-400"><?php echo e($approvedCount ?? 0); ?></div>
               <p class="mt-1 text-xs text-slate-500">Peminjaman approved</p>
             </div>
             <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-green-500/10">
@@ -85,7 +85,7 @@
           <div class="flex items-center justify-between">
             <div>
               <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Ditolak</div>
-              <div class="mt-2 text-3xl md:text-4xl font-bold text-red-400">{{ $rejectedCount ?? 0 }}</div>
+              <div class="mt-2 text-3xl md:text-4xl font-bold text-red-400"><?php echo e($rejectedCount ?? 0); ?></div>
               <p class="mt-1 text-xs text-slate-500">Peminjaman rejected</p>
             </div>
             <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-red-500/10">
@@ -95,7 +95,7 @@
         </div>
 
         <!-- Quick Action Button -->
-        <a href="{{ route('admin.bookings.pending') }}" class="group rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 p-5 shadow-xl hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center text-center sm:col-span-2 lg:col-span-1">
+        <a href="<?php echo e(route('admin.bookings.pending')); ?>" class="group rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 p-5 shadow-xl hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center text-center sm:col-span-2 lg:col-span-1">
           <div class="flex flex-col sm:flex-row items-center gap-3">
             <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-white/20">
               <i class="fas fa-tasks text-white text-xl"></i>
@@ -108,7 +108,7 @@
         </a>
       </div>
 
-      {{-- List User Non-Peminjam --}}
+      
       <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden mb-6">
         <div class="px-4 md:px-6 py-4 border-b border-white/10 flex items-center justify-between">
           <div class="flex items-center gap-3">
@@ -136,71 +136,73 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-white/5">
-            @foreach(\App\Models\User::where('role', '!=', 'peminjam')->where('role', '!=', 'guru')->get() as $u)
+            <?php $__currentLoopData = \App\Models\User::where('role', '!=', 'peminjam')->where('role', '!=', 'guru')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $u): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <tr class="hover:bg-white/5 transition-colors">
-                <td class="px-4 lg:px-6 py-4 text-slate-400">{{ $loop->iteration }}</td>
+                <td class="px-4 lg:px-6 py-4 text-slate-400"><?php echo e($loop->iteration); ?></td>
                 <td class="px-4 lg:px-6 py-4">
                   <div class="flex items-center gap-3">
                     <div class="w-9 h-9 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-sm">
-                      {{ strtoupper(substr($u->name, 0, 1)) }}
+                      <?php echo e(strtoupper(substr($u->name, 0, 1))); ?>
+
                     </div>
-                    <span class="font-medium text-white">{{ $u->name }}</span>
+                    <span class="font-medium text-white"><?php echo e($u->name); ?></span>
                   </div>
                 </td>
-                <td class="px-4 lg:px-6 py-4 text-slate-300">{{ $u->email }}</td>
-                <td class="px-4 lg:px-6 py-4 text-slate-400">{{ $u->phone ?? '-' }}</td>
-                <td class="px-4 lg:px-6 py-4 text-slate-400">{{ ucfirst(str_replace('_', ' ', $u->role)) }}</td>
+                <td class="px-4 lg:px-6 py-4 text-slate-300"><?php echo e($u->email); ?></td>
+                <td class="px-4 lg:px-6 py-4 text-slate-400"><?php echo e($u->phone ?? '-'); ?></td>
+                <td class="px-4 lg:px-6 py-4 text-slate-400"><?php echo e(ucfirst(str_replace('_', ' ', $u->role))); ?></td>
                 <td class="px-4 lg:px-6 py-4">
-                  @if($u->is_active)
+                  <?php if($u->is_active): ?>
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-green-500/10 border border-green-500/30 text-green-400">
                       <i class="fas fa-check-circle"></i>
                       Aktif
                     </span>
-                  @else
+                  <?php else: ?>
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-red-500/10 border border-red-500/30 text-red-400">
                       <i class="fas fa-times-circle"></i>
                       Nonaktif
                     </span>
-                  @endif
+                  <?php endif; ?>
                 </td>
               </tr>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
           </table>
         </div>
 
         <!-- Mobile Card View -->
         <div class="md:hidden divide-y divide-white/5">
-          @forelse(\App\Models\User::where('role', '!=', 'peminjam')->where('role', '!=', 'guru')->get() as $u)
+          <?php $__empty_1 = true; $__currentLoopData = \App\Models\User::where('role', '!=', 'peminjam')->where('role', '!=', 'guru')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $u): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
             <div class="p-4">
               <div class="flex items-start justify-between mb-2">
                 <div class="flex items-center gap-3">
                   <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-sm">
-                    {{ strtoupper(substr($u->name, 0, 1)) }}
+                    <?php echo e(strtoupper(substr($u->name, 0, 1))); ?>
+
                   </div>
                   <div>
-                    <div class="font-semibold text-white text-sm">{{ $u->name }}</div>
-                    <div class="text-xs text-slate-400">{{ ucfirst(str_replace('_', ' ', $u->role)) }}</div>
+                    <div class="font-semibold text-white text-sm"><?php echo e($u->name); ?></div>
+                    <div class="text-xs text-slate-400"><?php echo e(ucfirst(str_replace('_', ' ', $u->role))); ?></div>
                   </div>
                 </div>
-                @if($u->is_active)
+                <?php if($u->is_active): ?>
                   <span class="inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full bg-green-500/10 border border-green-500/30 text-green-400">
                     <i class="fas fa-check-circle text-xs"></i>
                   </span>
-                @else
+                <?php else: ?>
                   <span class="inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full bg-red-500/10 border border-red-500/30 text-red-400">
                     <i class="fas fa-times-circle text-xs"></i>
                   </span>
-                @endif
+                <?php endif; ?>
               </div>
-              <div class="text-xs text-slate-400">{{ $u->email }}</div>
+              <div class="text-xs text-slate-400"><?php echo e($u->email); ?></div>
             </div>
-          @empty
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
             <div class="p-6 text-center text-slate-500 text-sm">Tidak ada data user non-peminjam</div>
-          @endforelse
+          <?php endif; ?>
         </div>
       </div>
-      {{-- Recent Bookings - Mobile Optimized --}}
+      
       <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
         <div class="px-4 md:px-6 py-4 border-b border-white/10 flex items-center justify-between">
           <div class="flex items-center gap-3">
@@ -231,70 +233,74 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-white/5">
-            @forelse($recentBookings ?? [] as $b)
+            <?php $__empty_1 = true; $__currentLoopData = $recentBookings ?? []; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
               <tr class="hover:bg-white/5 transition-colors">
                 <td class="px-4 lg:px-6 py-4">
                   <div class="flex items-center gap-3">
                     <div class="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm">
-                      {{ strtoupper(substr($b->user->name ?? '?', 0, 1)) }}
+                      <?php echo e(strtoupper(substr($b->user->name ?? '?', 0, 1))); ?>
+
                     </div>
-                    <span class="font-medium text-white">{{ $b->user->name ?? '-' }}</span>
+                    <span class="font-medium text-white"><?php echo e($b->user->name ?? '-'); ?></span>
                   </div>
                 </td>
-                <td class="px-4 lg:px-6 py-4 text-slate-300">{{ $b->room->name ?? '-' }}</td>
-                <td class="px-4 lg:px-6 py-4 text-slate-400">{{ \Illuminate\Support\Carbon::parse($b->booking_date)->format('d M Y') }}</td>
-                <td class="px-4 lg:px-6 py-4 text-slate-400">{{ substr($b->start_time,0,5) }}–{{ substr($b->end_time,0,5) }}</td>
+                <td class="px-4 lg:px-6 py-4 text-slate-300"><?php echo e($b->room->name ?? '-'); ?></td>
+                <td class="px-4 lg:px-6 py-4 text-slate-400"><?php echo e(\Illuminate\Support\Carbon::parse($b->booking_date)->format('d M Y')); ?></td>
+                <td class="px-4 lg:px-6 py-4 text-slate-400"><?php echo e(substr($b->start_time,0,5)); ?>–<?php echo e(substr($b->end_time,0,5)); ?></td>
                 <td class="px-4 lg:px-6 py-4">
-                  @php
+                  <?php
                     $statusConfig = match($b->status){
                       'approved' => ['bg' => 'bg-green-500/10', 'text' => 'text-green-400', 'border' => 'border-green-500/30', 'label' => 'Approved', 'icon' => 'check-circle'],
                       'rejected' => ['bg' => 'bg-red-500/10', 'text' => 'text-red-400', 'border' => 'border-red-500/30', 'label' => 'Rejected', 'icon' => 'times-circle'],
                       'pending'  => ['bg' => 'bg-yellow-500/10', 'text' => 'text-yellow-400', 'border' => 'border-yellow-500/30', 'label' => 'Pending', 'icon' => 'clock'],
                       default    => ['bg' => 'bg-slate-500/10', 'text' => 'text-slate-400', 'border' => 'border-slate-500/30', 'label' => ucfirst($b->status), 'icon' => 'info-circle']
                     };
-                  @endphp
-                  <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border {{ $statusConfig['bg'] }} {{ $statusConfig['text'] }} {{ $statusConfig['border'] }}">
-                    <i class="fas fa-{{ $statusConfig['icon'] }}"></i>
-                    {{ $statusConfig['label'] }}
+                  ?>
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border <?php echo e($statusConfig['bg']); ?> <?php echo e($statusConfig['text']); ?> <?php echo e($statusConfig['border']); ?>">
+                    <i class="fas fa-<?php echo e($statusConfig['icon']); ?>"></i>
+                    <?php echo e($statusConfig['label']); ?>
+
                   </span>
                 </td>
               </tr>
-            @empty
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
               <tr><td colspan="5" class="px-6 py-12 text-center text-slate-500">
                 <i class="fas fa-inbox text-4xl text-slate-700 mb-3"></i>
                 <p>Belum ada data peminjaman</p>
               </td></tr>
-            @endforelse
+            <?php endif; ?>
             </tbody>
           </table>
         </div>
 
         <!-- Mobile Card View -->
         <div class="md:hidden divide-y divide-white/5">
-          @forelse($recentBookings ?? [] as $b)
+          <?php $__empty_1 = true; $__currentLoopData = $recentBookings ?? []; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
             <div class="p-4 hover:bg-white/5 transition-colors">
               <!-- Header: User & Status -->
               <div class="flex items-start justify-between mb-3">
                 <div class="flex items-center gap-3">
                   <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
-                    {{ strtoupper(substr($b->user->name ?? '?', 0, 1)) }}
+                    <?php echo e(strtoupper(substr($b->user->name ?? '?', 0, 1))); ?>
+
                   </div>
                   <div>
-                    <div class="font-semibold text-white text-sm">{{ $b->user->name ?? '-' }}</div>
+                    <div class="font-semibold text-white text-sm"><?php echo e($b->user->name ?? '-'); ?></div>
                     <div class="text-xs text-slate-500">Peminjam</div>
                   </div>
                 </div>
-                @php
+                <?php
                   $statusConfig = match($b->status){
                     'approved' => ['bg' => 'bg-green-500/10', 'text' => 'text-green-400', 'border' => 'border-green-500/30', 'label' => 'Approved', 'icon' => 'check-circle'],
                     'rejected' => ['bg' => 'bg-red-500/10', 'text' => 'text-red-400', 'border' => 'border-red-500/30', 'label' => 'Rejected', 'icon' => 'times-circle'],
                     'pending'  => ['bg' => 'bg-yellow-500/10', 'text' => 'text-yellow-400', 'border' => 'border-yellow-500/30', 'label' => 'Pending', 'icon' => 'clock'],
                     default    => ['bg' => 'bg-slate-500/10', 'text' => 'text-slate-400', 'border' => 'border-slate-500/30', 'label' => ucfirst($b->status), 'icon' => 'info-circle']
                   };
-                @endphp
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold border {{ $statusConfig['bg'] }} {{ $statusConfig['text'] }} {{ $statusConfig['border'] }}">
-                  <i class="fas fa-{{ $statusConfig['icon'] }}"></i>
-                  {{ $statusConfig['label'] }}
+                ?>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold border <?php echo e($statusConfig['bg']); ?> <?php echo e($statusConfig['text']); ?> <?php echo e($statusConfig['border']); ?>">
+                  <i class="fas fa-<?php echo e($statusConfig['icon']); ?>"></i>
+                  <?php echo e($statusConfig['label']); ?>
+
                 </span>
               </div>
 
@@ -305,7 +311,7 @@
                   <i class="fas fa-door-open text-slate-400"></i>
                   <div class="flex-1">
                     <div class="text-xs text-slate-500">Ruangan</div>
-                    <div class="text-sm font-medium text-white">{{ $b->room->name ?? '-' }}</div>
+                    <div class="text-sm font-medium text-white"><?php echo e($b->room->name ?? '-'); ?></div>
                   </div>
                 </div>
 
@@ -315,7 +321,7 @@
                     <i class="fas fa-calendar text-slate-400"></i>
                     <div class="flex-1 min-w-0">
                       <div class="text-xs text-slate-500">Tanggal</div>
-                      <div class="text-sm font-medium text-white truncate">{{ \Illuminate\Support\Carbon::parse($b->booking_date)->format('d M Y') }}</div>
+                      <div class="text-sm font-medium text-white truncate"><?php echo e(\Illuminate\Support\Carbon::parse($b->booking_date)->format('d M Y')); ?></div>
                     </div>
                   </div>
 
@@ -323,20 +329,22 @@
                     <i class="fas fa-clock text-slate-400"></i>
                     <div class="flex-1 min-w-0">
                       <div class="text-xs text-slate-500">Waktu</div>
-                      <div class="text-sm font-medium text-white truncate">{{ substr($b->start_time,0,5) }}–{{ substr($b->end_time,0,5) }}</div>
+                      <div class="text-sm font-medium text-white truncate"><?php echo e(substr($b->start_time,0,5)); ?>–<?php echo e(substr($b->end_time,0,5)); ?></div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          @empty
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
             <div class="p-12 text-center">
               <i class="fas fa-inbox text-5xl text-slate-700 mb-4"></i>
               <p class="text-slate-500 text-sm">Belum ada data peminjaman</p>
               <p class="text-slate-600 text-xs mt-1">Data akan muncul di sini</p>
             </div>
-          @endforelse
+          <?php endif; ?>
         </div>
       </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\Semester 4\ENG\ALP\Booking-Ruangan\resources\views/admin/dashboard.blade.php ENDPATH**/ ?>

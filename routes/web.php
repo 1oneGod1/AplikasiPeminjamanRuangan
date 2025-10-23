@@ -73,10 +73,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // RUANGAN (CRUD)
     Route::resource('admin/rooms', AdminRoomController::class)->names('admin.rooms');
 
+    // JENIS RUANGAN (CRUD)
+    Route::resource('admin/room-types', App\Http\Controllers\Admin\RoomTypeController::class)->names('admin.room-types');
+
     // PEMINJAM: kelola user dengan role peminjam
     Route::get('/admin/users/peminjam', [AdminUserController::class, 'indexPeminjam'])->name('admin.users.peminjam');
-    Route::get('/admin/users/create/{role}', [AdminUserController::class, 'create'])->name('admin.users.create');
-    Route::post('/admin/users/store/{role}', [AdminUserController::class, 'store'])->name('admin.users.store');
+    Route::get('/admin/users/non-peminjam', [AdminUserController::class, 'indexNonPeminjam'])->name('admin.users.nonpeminjam');
+    Route::get('/admin/users/create/{role?}', [AdminUserController::class, 'create'])->name('admin.users.create');
+    Route::post('/admin/users/store/{role?}', [AdminUserController::class, 'store'])->name('admin.users.store');
     Route::get('/admin/users/{user}/edit', [AdminUserController::class, 'edit'])->name('admin.users.edit');
     Route::put('/admin/users/{user}', [AdminUserController::class, 'update'])->name('admin.users.update');
     Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');

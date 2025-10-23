@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@yield('title', 'Admin Dashboard') - Sistem Peminjaman Ruangan</title>
+  <title><?php echo $__env->yieldContent('title', 'Admin Dashboard'); ?> - Sistem Peminjaman Ruangan</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,41 +24,41 @@
       </div>
 
       <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
-        <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.dashboard') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+        <a href="<?php echo e(route('admin.dashboard')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.dashboard') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
           <i class="fas fa-home w-5"></i>
           <span>Beranda</span>
         </a>
-        <a href="{{ route('admin.bookings.pending') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.bookings.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+        <a href="<?php echo e(route('admin.bookings.pending')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.bookings.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
           <i class="fas fa-clipboard-list w-5"></i>
           <span>Peminjaman Pending</span>
         </a>
-        <a href="{{ route('admin.password-change.index') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.password-change.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+        <a href="<?php echo e(route('admin.password-change.index')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.password-change.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
           <i class="fas fa-key w-5"></i>
           <span>Pengajuan Password</span>
         </a>
         
         <div class="mt-6 mb-3 px-4 text-xs uppercase tracking-[0.2em] font-semibold text-slate-500">Master Data</div>
-        <a href="{{ route('admin.rooms.index') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.rooms.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+        <a href="<?php echo e(route('admin.rooms.index')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.rooms.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
           <i class="fas fa-door-open w-5"></i>
           <span>Ruangan</span>
         </a>
-        <a href="{{ route('admin.users.peminjam') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.users.peminjam') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+        <a href="<?php echo e(route('admin.users.peminjam')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.users.peminjam') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
           <i class="fas fa-users w-5"></i>
           <span>Peminjam</span>
         </a>
-        <a href="{{ route('admin.users.nonpeminjam') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.users.nonpeminjam') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+        <a href="<?php echo e(route('admin.users.nonpeminjam')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.users.nonpeminjam') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
           <i class="fas fa-user-shield w-5"></i>
           <span>User Non-Peminjam</span>
         </a>
-        <a href="{{ route('admin.settings.index') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.settings.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+        <a href="<?php echo e(route('admin.settings.index')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.settings.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
           <i class="fas fa-cog w-5"></i>
           <span>Pengaturan</span>
         </a>
       </nav>
 
       <div class="p-4 border-t border-white/10">
-        <form method="POST" action="{{ route('logout') }}">
-          @csrf
+        <form method="POST" action="<?php echo e(route('logout')); ?>">
+          <?php echo csrf_field(); ?>
           <button type="submit" class="flex items-center gap-3 w-full rounded-xl px-4 py-3 text-sm font-medium text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all">
             <i class="fas fa-sign-out-alt w-5"></i>
             <span>Keluar</span>
@@ -92,41 +92,41 @@
         </div>
 
         <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
-          <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.dashboard') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+          <a href="<?php echo e(route('admin.dashboard')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.dashboard') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
             <i class="fas fa-home w-5"></i>
             <span>Beranda</span>
           </a>
-          <a href="{{ route('admin.bookings.pending') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.bookings.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+          <a href="<?php echo e(route('admin.bookings.pending')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.bookings.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
             <i class="fas fa-clipboard-list w-5"></i>
             <span>Peminjaman Pending</span>
           </a>
-          <a href="{{ route('admin.password-change.index') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.password-change.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+          <a href="<?php echo e(route('admin.password-change.index')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.password-change.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
             <i class="fas fa-key w-5"></i>
             <span>Pengajuan Password</span>
           </a>
           
           <div class="mt-6 mb-3 px-4 text-xs uppercase tracking-[0.2em] font-semibold text-slate-500">Master Data</div>
-          <a href="{{ route('admin.rooms.index') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.rooms.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+          <a href="<?php echo e(route('admin.rooms.index')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.rooms.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
             <i class="fas fa-door-open w-5"></i>
             <span>Ruangan</span>
           </a>
-          <a href="{{ route('admin.users.peminjam') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.users.peminjam') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+          <a href="<?php echo e(route('admin.users.peminjam')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.users.peminjam') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
             <i class="fas fa-users w-5"></i>
             <span>Peminjam</span>
           </a>
-          <a href="{{ route('admin.users.nonpeminjam') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.users.nonpeminjam') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+          <a href="<?php echo e(route('admin.users.nonpeminjam')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.users.nonpeminjam') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
             <i class="fas fa-user-shield w-5"></i>
             <span>User Non-Peminjam</span>
           </a>
-          <a href="{{ route('admin.settings.index') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.settings.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+          <a href="<?php echo e(route('admin.settings.index')); ?>" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium <?php echo e(request()->routeIs('admin.settings.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white'); ?> transition-all">
             <i class="fas fa-cog w-5"></i>
             <span>Pengaturan</span>
           </a>
         </nav>
 
         <div class="p-4 border-t border-white/10">
-          <form method="POST" action="{{ route('logout') }}">
-            @csrf
+          <form method="POST" action="<?php echo e(route('logout')); ?>">
+            <?php echo csrf_field(); ?>
             <button type="submit" class="flex items-center gap-3 w-full rounded-xl px-4 py-3 text-sm font-medium text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all">
               <i class="fas fa-sign-out-alt w-5"></i>
               <span>Keluar</span>
@@ -143,43 +143,44 @@
         <div class="flex items-center gap-4">
           <div class="lg:hidden w-12"></div>
           <div>
-            <h2 class="text-base lg:text-lg font-bold text-white">@yield('header', 'Dashboard')</h2>
+            <h2 class="text-base lg:text-lg font-bold text-white"><?php echo $__env->yieldContent('header', 'Dashboard'); ?></h2>
             <p class="text-xs text-slate-400 hidden sm:block">Sekolah Palembang Harapan</p>
           </div>
         </div>
         <div class="flex items-center gap-3">
           <div class="hidden sm:block text-right">
-            <p class="text-sm font-medium text-white">{{ Auth::user()->name }}</p>
+            <p class="text-sm font-medium text-white"><?php echo e(Auth::user()->name); ?></p>
             <p class="text-xs text-slate-400">Administrator</p>
           </div>
           <div class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm border-2 border-white/20">
-            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+            <?php echo e(strtoupper(substr(Auth::user()->name, 0, 1))); ?>
+
           </div>
         </div>
       </header>
 
       <!-- Flash Messages -->
-      @if (session('success'))
+      <?php if(session('success')): ?>
         <div class="mx-4 lg:mx-6 mt-4 rounded-xl bg-green-500/10 border border-green-500/30 p-4">
           <div class="flex items-center gap-2">
             <i class="fas fa-check-circle text-green-400"></i>
-            <p class="text-sm text-green-300">{{ session('success') }}</p>
+            <p class="text-sm text-green-300"><?php echo e(session('success')); ?></p>
           </div>
         </div>
-      @endif
+      <?php endif; ?>
 
-      @if (session('error'))
+      <?php if(session('error')): ?>
         <div class="mx-4 lg:mx-6 mt-4 rounded-xl bg-red-500/10 border border-red-500/30 p-4">
           <div class="flex items-center gap-2">
             <i class="fas fa-exclamation-circle text-red-400"></i>
-            <p class="text-sm text-red-300">{{ session('error') }}</p>
+            <p class="text-sm text-red-300"><?php echo e(session('error')); ?></p>
           </div>
         </div>
-      @endif
+      <?php endif; ?>
 
       <!-- Page Content -->
       <section class="p-4 lg:p-6">
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
       </section>
     </main>
   </div>
@@ -204,6 +205,7 @@
     if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
   </script>
 
-  @stack('scripts')
+  <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
+<?php /**PATH E:\Semester 4\ENG\ALP\Booking-Ruangan\resources\views/admin/layouts/app.blade.php ENDPATH**/ ?>

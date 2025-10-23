@@ -1,9 +1,9 @@
-@extends('admin.layouts.app')
 
-@section('title', 'Pending Approval')
-@section('header', 'Pengajuan Menunggu Persetujuan')
 
-@section('content')
+<?php $__env->startSection('title', 'Pending Approval'); ?>
+<?php $__env->startSection('header', 'Pengajuan Menunggu Persetujuan'); ?>
+
+<?php $__env->startSection('content'); ?>
 <div class="space-y-4 md:space-y-6">
   <!-- Header with Count Badge -->
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -11,7 +11,8 @@
       <div class="flex items-center gap-3">
         <h3 class="text-xl md:text-2xl font-bold text-white">Pending Approval</h3>
         <span class="inline-flex items-center justify-center h-8 min-w-8 px-2 rounded-full bg-orange-500 text-white text-sm font-bold">
-          {{ $bookings->total() }}
+          <?php echo e($bookings->total()); ?>
+
         </span>
       </div>
       <p class="mt-1 text-sm text-slate-400">Kelola pengajuan peminjaman ruangan yang menunggu persetujuan</p>
@@ -34,44 +35,46 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-white/5">
-        @forelse($bookings as $b)
+        <?php $__empty_1 = true; $__currentLoopData = $bookings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
           <tr class="hover:bg-white/5 transition-colors">
             <td class="px-4 lg:px-6 py-4">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold">
                 <i class="fas fa-hashtag"></i>
-                {{ $b->id }}
+                <?php echo e($b->id); ?>
+
               </span>
             </td>
             <td class="px-4 lg:px-6 py-4">
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm">
-                  {{ strtoupper(substr($b->user->name ?? '?', 0, 1)) }}
+                  <?php echo e(strtoupper(substr($b->user->name ?? '?', 0, 1))); ?>
+
                 </div>
-                <span class="font-medium text-white">{{ $b->user->name ?? '-' }}</span>
+                <span class="font-medium text-white"><?php echo e($b->user->name ?? '-'); ?></span>
               </div>
             </td>
-            <td class="px-4 lg:px-6 py-4 text-slate-300">{{ $b->room->name ?? '-' }}</td>
-            <td class="px-4 lg:px-6 py-4 text-slate-400">{{ \Illuminate\Support\Carbon::parse($b->booking_date)->format('d M Y') }}</td>
-            <td class="px-4 lg:px-6 py-4 text-slate-400">{{ substr($b->start_time,0,5) }}–{{ substr($b->end_time,0,5) }}</td>
+            <td class="px-4 lg:px-6 py-4 text-slate-300"><?php echo e($b->room->name ?? '-'); ?></td>
+            <td class="px-4 lg:px-6 py-4 text-slate-400"><?php echo e(\Illuminate\Support\Carbon::parse($b->booking_date)->format('d M Y')); ?></td>
+            <td class="px-4 lg:px-6 py-4 text-slate-400"><?php echo e(substr($b->start_time,0,5)); ?>–<?php echo e(substr($b->end_time,0,5)); ?></td>
             <td class="px-4 lg:px-6 py-4">
-              @if($b->purpose)
-                <button type="button" data-purpose-modal-trigger data-purpose="{{ e($b->purpose) }}" data-purpose-title="Tujuan · Pengajuan #{{ $b->id }}" class="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:bg-white/10 hover:border-white/30">
+              <?php if($b->purpose): ?>
+                <button type="button" data-purpose-modal-trigger data-purpose="<?php echo e(e($b->purpose)); ?>" data-purpose-title="Tujuan · Pengajuan #<?php echo e($b->id); ?>" class="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:bg-white/10 hover:border-white/30">
                   <i class="fas fa-eye"></i>
                   <span>Lihat tujuan</span>
                 </button>
-              @else
+              <?php else: ?>
                 <span class="text-xs text-slate-500">-</span>
-              @endif
+              <?php endif; ?>
             </td>
             <td class="px-4 lg:px-6 py-4">
               <div class="flex items-center justify-center gap-3">
-                <button type="button" onclick="showApproveConfirm({{ $b->id }})" class="text-green-400 hover:text-green-300 font-medium transition-colors">Setujui</button>
+                <button type="button" onclick="showApproveConfirm(<?php echo e($b->id); ?>)" class="text-green-400 hover:text-green-300 font-medium transition-colors">Setujui</button>
                 <span class="text-slate-700">·</span>
-                <button type="button" onclick="showRejectModal({{ $b->id }})" class="text-red-400 hover:text-red-300 font-medium transition-colors">Tolak</button>
+                <button type="button" onclick="showRejectModal(<?php echo e($b->id); ?>)" class="text-red-400 hover:text-red-300 font-medium transition-colors">Tolak</button>
               </div>
             </td>
           </tr>
-        @empty
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
           <tr>
             <td colspan="7" class="px-6 py-12 text-center">
               <i class="fas fa-check-circle text-5xl text-slate-700 mb-4"></i>
@@ -79,7 +82,7 @@
               <p class="text-slate-600 text-xs mt-1">Semua pengajuan sudah diproses</p>
             </td>
           </tr>
-        @endforelse
+        <?php endif; ?>
         </tbody>
       </table>
     </div>
@@ -87,17 +90,18 @@
 
   <!-- Mobile Card View -->
   <div class="md:hidden space-y-3">
-    @forelse($bookings as $b)
+    <?php $__empty_1 = true; $__currentLoopData = $bookings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
       <div class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-4 space-y-3">
         <!-- Header -->
         <div class="flex items-start justify-between">
           <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
-              {{ strtoupper(substr($b->user->name ?? '?', 0, 1)) }}
+              <?php echo e(strtoupper(substr($b->user->name ?? '?', 0, 1))); ?>
+
             </div>
             <div>
-              <div class="font-semibold text-white text-sm">{{ $b->user->name ?? '-' }}</div>
-              <div class="text-xs text-slate-500">Pengajuan #{{ $b->id }}</div>
+              <div class="font-semibold text-white text-sm"><?php echo e($b->user->name ?? '-'); ?></div>
+              <div class="text-xs text-slate-500">Pengajuan #<?php echo e($b->id); ?></div>
             </div>
           </div>
         </div>
@@ -106,48 +110,49 @@
         <div class="space-y-2">
           <div class="flex items-center gap-2 text-sm text-slate-300">
             <i class="fas fa-door-open text-blue-400 w-4"></i>
-            <span><strong>{{ $b->room->name ?? '-' }}</strong></span>
+            <span><strong><?php echo e($b->room->name ?? '-'); ?></strong></span>
           </div>
           <div class="grid grid-cols-2 gap-2 text-xs text-slate-400">
             <div class="flex items-center gap-2">
               <i class="fas fa-calendar text-slate-500 w-4"></i>
-              <span>{{ \Illuminate\Support\Carbon::parse($b->booking_date)->format('d M Y') }}</span>
+              <span><?php echo e(\Illuminate\Support\Carbon::parse($b->booking_date)->format('d M Y')); ?></span>
             </div>
             <div class="flex items-center gap-2">
               <i class="fas fa-clock text-slate-500 w-4"></i>
-              <span>{{ substr($b->start_time,0,5) }}–{{ substr($b->end_time,0,5) }}</span>
+              <span><?php echo e(substr($b->start_time,0,5)); ?>–<?php echo e(substr($b->end_time,0,5)); ?></span>
             </div>
           </div>
-          @if($b->purpose)
-            <button type="button" data-purpose-modal-trigger data-purpose="{{ e($b->purpose) }}" data-purpose-title="Tujuan · Pengajuan #{{ $b->id }}" class="w-full flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-xs font-semibold text-slate-300 transition hover:bg-white/10">
+          <?php if($b->purpose): ?>
+            <button type="button" data-purpose-modal-trigger data-purpose="<?php echo e(e($b->purpose)); ?>" data-purpose-title="Tujuan · Pengajuan #<?php echo e($b->id); ?>" class="w-full flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-xs font-semibold text-slate-300 transition hover:bg-white/10">
               <i class="fas fa-eye"></i>
               <span>Lihat Tujuan</span>
             </button>
-          @endif
+          <?php endif; ?>
         </div>
 
         <!-- Actions -->
         <div class="flex items-center gap-2 pt-2 border-t border-white/10 text-sm">
-          <button type="button" onclick="showApproveConfirm({{ $b->id }})" class="flex-1 text-green-400 hover:text-green-300 font-medium transition-colors">Setujui</button>
+          <button type="button" onclick="showApproveConfirm(<?php echo e($b->id); ?>)" class="flex-1 text-green-400 hover:text-green-300 font-medium transition-colors">Setujui</button>
           <span class="text-slate-700">·</span>
-          <button type="button" onclick="showRejectModal({{ $b->id }})" class="flex-1 text-red-400 hover:text-red-300 font-medium transition-colors">Tolak</button>
+          <button type="button" onclick="showRejectModal(<?php echo e($b->id); ?>)" class="flex-1 text-red-400 hover:text-red-300 font-medium transition-colors">Tolak</button>
         </div>
       </div>
-    @empty
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
       <div class="rounded-xl border border-white/10 bg-white/5 p-8 text-center">
         <i class="fas fa-check-circle text-5xl text-slate-700 mb-4"></i>
         <p class="text-slate-500 text-sm font-medium">Tidak ada pengajuan pending</p>
         <p class="text-slate-600 text-xs mt-1">Semua pengajuan sudah diproses</p>
       </div>
-    @endforelse
+    <?php endif; ?>
   </div>
 
   <!-- Pagination -->
-  @if($bookings->hasPages())
+  <?php if($bookings->hasPages()): ?>
     <div class="flex justify-center">
-      {{ $bookings->links() }}
+      <?php echo e($bookings->links()); ?>
+
     </div>
-  @endif
+  <?php endif; ?>
 </div>
 
 <!-- Reject Modal -->
@@ -162,7 +167,7 @@
         </button>
       </div>
       <form id="rejectForm" method="POST" action="">
-        @csrf
+        <?php echo csrf_field(); ?>
         <div class="space-y-4">
           <div>
             <label class="block text-sm font-semibold text-slate-300 mb-2">Alasan Penolakan</label>
@@ -188,7 +193,7 @@ function showApproveConfirm(bookingId) {
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = `/admin/bookings/${bookingId}/approve`;
-    form.innerHTML = '@csrf';
+    form.innerHTML = '<?php echo csrf_field(); ?>';
     document.body.appendChild(form);
     form.submit();
   }
@@ -209,6 +214,8 @@ function closeRejectModal() {
 }
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@include('components.purpose-modal')
+<?php echo $__env->make('components.purpose-modal', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
+<?php echo $__env->make('admin.layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\Semester 4\ENG\ALP\Booking-Ruangan\resources\views/admin/pending.blade.php ENDPATH**/ ?>

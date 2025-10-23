@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminUserController extends Controller
 {
+    private const NON_PEMINJAM_EXCLUDED_ROLES = ['peminjam', 'guru'];
+    private const ALLOWED_ROLES = ['kepala_sekolah', 'cleaning_service', 'peminjam'];
+
     /**
      * Display a listing of peminjam users.
      */
@@ -17,13 +20,25 @@ class AdminUserController extends Controller
         $peminjam = User::where('role', 'peminjam')
             ->orderBy('name')
             ->paginate(10);
-        
+
         $totalPeminjam = User::where('role', 'peminjam')->count();
         $activePeminjam = User::where('role', 'peminjam')
             ->where('is_active', true)
             ->count();
-        
+
         return view('admin.users.peminjam', compact('peminjam', 'totalPeminjam', 'activePeminjam'));
+    }
+
+    /**
+     * Display a listing of non-peminjam users (admin, kepala sekolah, cleaning service).
+     */
+    public function indexNonPeminjam()
+    {
+        $users = User::whereNotIn('role', self::NON_PEMINJAM_EXCLUDED_ROLES)
+            ->orderBy('name')
+            ->get();
+
+        return view('admin.users.non-peminjam', compact('users'));
     }
 
     /**
@@ -31,11 +46,10 @@ class AdminUserController extends Controller
      */
     public function create($role = null)
     {
-        // Validasi role agar hanya role yang diizinkan
-    $allowedRoles = ['kepala_sekolah', 'cleaning_service', 'guru', 'peminjam'];
-        if (!in_array($role, $allowedRoles)) {
+        if (!in_array($role, self::ALLOWED_ROLES, true)) {
             $role = null;
         }
+
         return view('admin.users.create', compact('role'));
     }
 
@@ -49,13 +63,13 @@ class AdminUserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'phone' => 'nullable|string|max:20',
-            'role' => 'required|in:kepala_sekolah,cleaning_service,guru,peminjam',
+            'role' => 'required|in:' . implode(',', self::ALLOWED_ROLES),
             'status' => 'required|in:active,inactive',
         ]);
 
         if ($validator->fails()) {
             return redirect()
-                ->route('admin.users.create')
+                ->route('admin.users.create', $request->role)
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -66,15 +80,11 @@ class AdminUserController extends Controller
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'role' => $request->role,
-            'status' => $request->status,
+            'is_active' => $request->status === 'active',
         ]);
 
-    $redirectRoute = in_array($request->role, ['kepala_sekolah', 'cleaning_service', 'guru']) 
-            ? 'admin.users.teachers' 
-            : 'admin.users.students';
-
         return redirect()
-            ->route($redirectRoute)
+            ->route($this->redirectRouteForRole($request->role))
             ->with('success', 'User berhasil ditambahkan');
     }
 
@@ -84,6 +94,7 @@ class AdminUserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
+
         return view('admin.users.edit', compact('user'));
     }
 
@@ -99,7 +110,7 @@ class AdminUserController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'password' => 'nullable|string|min:8|confirmed',
             'phone' => 'nullable|string|max:20',
-            'role' => 'required|in:kepala_sekolah,cleaning_service,guru,peminjam',
+            'role' => 'required|in:' . implode(',', self::ALLOWED_ROLES),
             'status' => 'required|in:active,inactive',
         ]);
 
@@ -115,7 +126,7 @@ class AdminUserController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'role' => $request->role,
-            'status' => $request->status,
+            'is_active' => $request->status === 'active',
         ];
 
         if ($request->filled('password')) {
@@ -124,12 +135,8 @@ class AdminUserController extends Controller
 
         $user->update($data);
 
-    $redirectRoute = in_array($request->role, ['kepala_sekolah', 'cleaning_service', 'guru']) 
-            ? 'admin.users.teachers' 
-            : 'admin.users.students';
-
         return redirect()
-            ->route($redirectRoute)
+            ->route($this->redirectRouteForRole($request->role))
             ->with('success', 'User berhasil diperbarui');
     }
 
@@ -140,7 +147,6 @@ class AdminUserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        // Prevent deleting users with upcoming bookings
         $hasUpcomingBookings = $user->bookings()
             ->whereIn('status', ['pending', 'approved'])
             ->where('booking_date', '>=', now()->toDateString())
@@ -153,12 +159,15 @@ class AdminUserController extends Controller
         $role = $user->role;
         $user->delete();
 
-        $redirectRoute = in_array($role, ['kepala_sekolah', 'cleaning_service', 'guru']) 
-            ? 'admin.users.teachers' 
-            : 'admin.users.students';
-
         return redirect()
-            ->route($redirectRoute)
+            ->route($this->redirectRouteForRole($role))
             ->with('success', 'User berhasil dihapus');
+    }
+
+    private function redirectRouteForRole(string $role): string
+    {
+        return $role === 'peminjam'
+            ? 'admin.users.peminjam'
+            : 'admin.users.nonpeminjam';
     }
 }

@@ -28,7 +28,8 @@ class AdminRoomController extends Controller
      */
     public function create()
     {
-        return view('admin.rooms.create');
+        $roomTypes = \App\Models\RoomType::active()->orderBy('label')->get();
+        return view('admin.rooms.create', compact('roomTypes'));
     }
 
     /**
@@ -86,7 +87,8 @@ class AdminRoomController extends Controller
     public function edit($id)
     {
         $room = Room::findOrFail($id);
-        return view('admin.rooms.edit', compact('room'));
+        $roomTypes = \App\Models\RoomType::active()->orderBy('label')->get();
+        return view('admin.rooms.edit', compact('room', 'roomTypes'));
     }
 
     /**
