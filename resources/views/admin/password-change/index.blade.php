@@ -18,7 +18,7 @@
 
     <!-- Pending Requests -->
     <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
-        <div class="bg-gradient-to-r from-yellow-500 to-orange-500 px-4 md:px-6 py-4">
+    <div class="bg-linear-to-r from-yellow-500 to-orange-500 px-4 md:px-6 py-4">
             <div class="flex items-center gap-3">
                 <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-white/20">
                     <i class="fas fa-clock text-white"></i>
@@ -40,7 +40,7 @@
                         <div class="rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition-colors">
                             <div class="flex items-start justify-between gap-4">
                                 <div class="flex items-start gap-4 flex-1">
-                                    <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold flex-shrink-0">
+                                    <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold shrink-0">
                                         {{ strtoupper(substr($request->user->name, 0, 1)) }}
                                     </div>
                                     <div class="flex-1">
@@ -60,7 +60,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="flex items-center gap-2 flex-shrink-0">
+                                <div class="flex items-center gap-2 shrink-0">
                                     <form action="{{ route('admin.password-change.approve', $request) }}" method="POST" class="inline">
                                         @csrf
                                         <button 
@@ -91,7 +91,7 @@
                     @foreach ($pendingRequests as $request)
                         <div class="rounded-xl border border-white/10 bg-white/5 p-4 space-y-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold flex-shrink-0">
+                                <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold shrink-0">
                                     {{ strtoupper(substr($request->user->name, 0, 1)) }}
                                 </div>
                                 <div class="flex-1 min-w-0">
@@ -141,7 +141,7 @@
 
     <!-- Recent Processed Requests -->
     <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
-        <div class="bg-gradient-to-r from-slate-800 to-slate-900 px-4 md:px-6 py-4">
+    <div class="bg-linear-to-r from-slate-800 to-slate-900 px-4 md:px-6 py-4">
             <div class="flex items-center gap-3">
                 <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-white/10">
                     <i class="fas fa-history text-white"></i>

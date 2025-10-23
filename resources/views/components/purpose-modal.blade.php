@@ -15,7 +15,7 @@
 				</button>
 			</div>
 			<div class="px-6 py-5">
-				<p data-purpose-modal-text class="max-h-60 overflow-y-auto whitespace-pre-wrap break-words text-sm leading-6 text-slate-600 dark:text-slate-300">Tujuan peminjaman belum diisi.</p>
+				<p data-purpose-modal-text class="max-h-60 overflow-y-auto whitespace-pre-wrap wrap-break-word text-sm leading-6 text-slate-600 dark:text-slate-300">Tujuan peminjaman belum diisi.</p>
 			</div>
 		</div>
 	</div>

@@ -11,7 +11,11 @@
                 <div>
                     <label for="name" class="block text-sm font-semibold text-slate-100 mb-2">Nama Lengkap <span class="text-red-400">*</span></label>
                     <input type="text" id="name" name="name" value="{{ old('name') }}" required
-                                 class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('name') border-red-500 @enderror"
+                                 class="@class([
+                                     'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+                                     'border-red-500' => $errors->has('name'),
+                                     'border-white/20' => !$errors->has('name'),
+                                 ])"
                                  placeholder="Nama Lengkap">
                     @error('name')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
@@ -22,7 +26,11 @@
                 <div>
                     <label for="email" class="block text-sm font-semibold text-slate-100 mb-2">Email <span class="text-red-400">*</span></label>
                     <input type="email" id="email" name="email" value="{{ old('email') }}" required
-                                 class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('email') border-red-500 @enderror"
+                                 class="@class([
+                                     'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+                                     'border-red-500' => $errors->has('email'),
+                                     'border-white/20' => !$errors->has('email'),
+                                 ])"
                                  placeholder="Email">
                     @error('email')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
@@ -33,7 +41,11 @@
                 <div>
                     <label for="password" class="block text-sm font-semibold text-slate-100 mb-2">Password <span class="text-red-400">*</span></label>
                     <input type="password" id="password" name="password" required minlength="8"
-                                 class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('password') border-red-500 @enderror"
+                                 class="@class([
+                                     'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+                                     'border-red-500' => $errors->has('password'),
+                                     'border-white/20' => !$errors->has('password'),
+                                 ])"
                                  placeholder="Password">
                     @error('password')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
@@ -53,7 +65,11 @@
                 <div>
                     <label for="phone" class="block text-sm font-semibold text-slate-100 mb-2">No. Telepon</label>
                     <input type="text" id="phone" name="phone" value="{{ old('phone') }}"
-                                 class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('phone') border-red-500 @enderror"
+                                 class="@class([
+                                     'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+                                     'border-red-500' => $errors->has('phone'),
+                                     'border-white/20' => !$errors->has('phone'),
+                                 ])"
                                  placeholder="No. Telepon">
                     @error('phone')
                         <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
@@ -63,7 +79,11 @@
                 <!-- Role -->
                 <div>
                     <label for="role" class="block text-sm font-semibold text-slate-100 mb-2">Role <span class="text-red-400">*</span></label>
-                                <select id="role" name="role" required class="w-full px-4 py-2 border border-white/20 bg-slate-800 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('role') border-red-500 @enderror">
+                                <select id="role" name="role" required class="@class([
+                                    'w-full px-4 py-2 border bg-slate-800 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+                                    'border-red-500' => $errors->has('role'),
+                                    'border-white/20' => !$errors->has('role'),
+                                ])">
                                     <option value="" class="bg-slate-800 text-slate-400">Pilih Role</option>
                                     <option value="kepala_sekolah" class="bg-slate-800 text-white" {{ (old('role', $role ?? '') == 'kepala_sekolah') ? 'selected' : '' }}>Kepala Sekolah</option>
                                     <option value="cleaning_service" class="bg-slate-800 text-white" {{ (old('role', $role ?? '') == 'cleaning_service') ? 'selected' : '' }}>Cleaning Service</option>
@@ -77,7 +97,11 @@
                 <!-- Status -->
                 <div>
                     <label for="status" class="block text-sm font-semibold text-slate-100 mb-2">Status <span class="text-red-400">*</span></label>
-                                <select id="status" name="status" required class="w-full px-4 py-2 border border-white/20 bg-slate-800 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('status') border-red-500 @enderror">
+                                <select id="status" name="status" required class="@class([
+                                    'w-full px-4 py-2 border bg-slate-800 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+                                    'border-red-500' => $errors->has('status'),
+                                    'border-white/20' => !$errors->has('status'),
+                                ])">
                                     <option value="active" class="bg-slate-800 text-white" {{ old('status') == 'active' ? 'selected' : '' }}>Aktif</option>
                                     <option value="inactive" class="bg-slate-800 text-white" {{ old('status') == 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>
                                 </select>

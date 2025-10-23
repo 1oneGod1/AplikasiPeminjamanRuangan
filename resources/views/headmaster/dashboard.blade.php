@@ -3,7 +3,7 @@
 @section('title', 'Dashboard Kepala Sekolah')
 
 @section('content')
-<div class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950/90 pb-16">
+<div class="bg-linear-to-br from-slate-950 via-slate-900 to-slate-950/90 pb-16">
     <div class="mx-auto w-full max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
         <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div>

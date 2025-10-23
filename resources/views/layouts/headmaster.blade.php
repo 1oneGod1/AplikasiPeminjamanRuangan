@@ -25,7 +25,7 @@
 </head>
 <body class="min-h-screen bg-slate-950 text-slate-100">
     <div class="min-h-screen flex flex-col">
-        <header class="border-b border-white/10 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950/80">
+    <header class="border-b border-white/10 bg-linear-to-r from-slate-950 via-slate-900 to-slate-950/80">
             <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
                 <div class="flex items-center gap-3">
                     <img src="https://static.wixstatic.com/media/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png/v1/fill/w_559,h_512,al_c/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png" alt="Logo Sekolah Palembang Harapan" class="h-12 w-12 rounded-2xl border border-white/10 bg-white/10 p-1 object-contain" loading="lazy">

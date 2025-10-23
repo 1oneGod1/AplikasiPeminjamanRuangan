@@ -8,7 +8,7 @@
       {{-- Quick Stats - Mobile Optimized with Slate Theme --}}
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <!-- Total Peminjaman -->
-        <div class="group rounded-2xl border border-white/10 bg-gradient-to-br from-blue-500/20 to-blue-600/10 backdrop-blur-sm p-5 md:p-6 hover:border-blue-500/30 transition-all duration-300">
+  <div class="group rounded-2xl border border-white/10 bg-linear-to-br from-blue-500/20 to-blue-600/10 backdrop-blur-sm p-5 md:p-6 hover:border-blue-500/30 transition-all duration-300">
           <div class="flex items-start justify-between">
             <div class="flex-1">
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Total Peminjaman</p>
@@ -22,7 +22,7 @@
         </div>
 
         <!-- Total Ruangan -->
-        <div class="group rounded-2xl border border-white/10 bg-gradient-to-br from-purple-500/20 to-purple-600/10 backdrop-blur-sm p-5 md:p-6 hover:border-purple-500/30 transition-all duration-300">
+  <div class="group rounded-2xl border border-white/10 bg-linear-to-br from-purple-500/20 to-purple-600/10 backdrop-blur-sm p-5 md:p-6 hover:border-purple-500/30 transition-all duration-300">
           <div class="flex items-start justify-between">
             <div class="flex-1">
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Total Ruangan</p>
@@ -36,7 +36,7 @@
         </div>
 
         <!-- Total Pengguna -->
-        <div class="group rounded-2xl border border-white/10 bg-gradient-to-br from-green-500/20 to-green-600/10 backdrop-blur-sm p-5 md:p-6 hover:border-green-500/30 transition-all duration-300">
+  <div class="group rounded-2xl border border-white/10 bg-linear-to-br from-green-500/20 to-green-600/10 backdrop-blur-sm p-5 md:p-6 hover:border-green-500/30 transition-all duration-300">
           <div class="flex items-start justify-between">
             <div class="flex-1">
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Total Pengguna</p>
@@ -50,7 +50,7 @@
         </div>
 
         <!-- Menunggu Persetujuan -->
-        <div class="group rounded-2xl border border-white/10 bg-gradient-to-br from-orange-500/20 to-orange-600/10 backdrop-blur-sm p-5 md:p-6 hover:border-orange-500/30 transition-all duration-300">
+  <div class="group rounded-2xl border border-white/10 bg-linear-to-br from-orange-500/20 to-orange-600/10 backdrop-blur-sm p-5 md:p-6 hover:border-orange-500/30 transition-all duration-300">
           <div class="flex items-start justify-between">
             <div class="flex-1">
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Pending</p>
@@ -95,7 +95,7 @@
         </div>
 
         <!-- Quick Action Button -->
-        <a href="{{ route('admin.bookings.pending') }}" class="group rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 p-5 shadow-xl hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center text-center sm:col-span-2 lg:col-span-1">
+  <a href="{{ route('admin.bookings.pending') }}" class="group rounded-2xl bg-linear-to-r from-blue-500 to-blue-600 p-5 shadow-xl hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center text-center sm:col-span-2 lg:col-span-1">
           <div class="flex flex-col sm:flex-row items-center gap-3">
             <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-white/20">
               <i class="fas fa-tasks text-white text-xl"></i>

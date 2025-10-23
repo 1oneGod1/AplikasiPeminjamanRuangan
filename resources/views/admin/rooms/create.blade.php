@@ -16,8 +16,12 @@
         <!-- Nama Ruangan -->
         <div>
           <label for="name" class="block text-sm font-semibold text-slate-100 mb-2">Nama Ruangan <span class="text-red-400">*</span></label>
-          <input type="text" id="name" name="name" value="{{ old('name', $room->name ?? '') }}" required
-                 class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('name') border-red-500 @enderror"
+     <input type="text" id="name" name="name" value="{{ old('name', $room->name ?? '') }}" required
+       class="@class([
+      'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+      'border-red-500' => $errors->has('name'),
+      'border-white/20' => !$errors->has('name'),
+       ])"
                  placeholder="Contoh: Lab Komputer 1">
           @error('name')
             <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
@@ -30,7 +34,11 @@
             <label for="type" class="block text-sm font-semibold text-slate-100">Jenis Ruangan <span class="text-red-400">*</span></label>
             <a href="{{ route('admin.room-types.index') }}" class="text-xs text-blue-400 hover:underline">Kelola Jenis Ruangan</a>
           </div>
-          <select id="type" name="type" required class="w-full px-4 py-2 border border-white/20 bg-slate-800 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('type') border-red-500 @enderror">
+      <select id="type" name="type" required class="@class([
+        'w-full px-4 py-2 border bg-slate-800 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+        'border-red-500' => $errors->has('type'),
+        'border-white/20' => !$errors->has('type'),
+      ])">
             <option value="" class="bg-slate-800 text-slate-400">Pilih Jenis</option>
             @foreach($roomTypes as $type)
               <option value="{{ $type->name }}" class="bg-slate-800 text-white" {{ old('type', $room->type ?? '') == $type->name ? 'selected' : '' }}>{{ $type->label }}</option>
@@ -44,8 +52,12 @@
         <!-- Kapasitas -->
         <div>
           <label for="capacity" class="block text-sm font-semibold text-slate-100 mb-2">Kapasitas <span class="text-red-400">*</span></label>
-          <input type="number" id="capacity" name="capacity" value="{{ old('capacity', $room->capacity ?? '') }}" required min="1"
-                 class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('capacity') border-red-500 @enderror"
+     <input type="number" id="capacity" name="capacity" value="{{ old('capacity', $room->capacity ?? '') }}" required min="1"
+       class="@class([
+      'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+      'border-red-500' => $errors->has('capacity'),
+      'border-white/20' => !$errors->has('capacity'),
+       ])"
                  placeholder="Jumlah orang">
           @error('capacity')
             <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
@@ -55,8 +67,12 @@
         <!-- Lokasi -->
         <div>
           <label for="location" class="block text-sm font-semibold text-slate-100 mb-2">Lokasi</label>
-          <input type="text" id="location" name="location" value="{{ old('location', $room->location ?? '') }}"
-                 class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('location') border-red-500 @enderror"
+     <input type="text" id="location" name="location" value="{{ old('location', $room->location ?? '') }}"
+       class="@class([
+      'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+      'border-red-500' => $errors->has('location'),
+      'border-white/20' => !$errors->has('location'),
+       ])"
                  placeholder="Contoh: Lantai 2, Gedung A">
           @error('location')
             <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
@@ -66,8 +82,12 @@
         <!-- Fasilitas -->
         <div>
           <label for="facilities" class="block text-sm font-semibold text-slate-100 mb-2">Fasilitas</label>
-          <textarea id="facilities" name="facilities" rows="3"
-                    class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('facilities') border-red-500 @enderror"
+      <textarea id="facilities" name="facilities" rows="3"
+          class="@class([
+            'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+            'border-red-500' => $errors->has('facilities'),
+            'border-white/20' => !$errors->has('facilities'),
+          ])"
                     placeholder="Contoh: Proyektor, AC, Whiteboard, 30 Komputer">{{ old('facilities', $room->facilities ?? '') }}</textarea>
           @error('facilities')
             <p class="mt-1 text-sm text-red-400">{{ $message }}</p>

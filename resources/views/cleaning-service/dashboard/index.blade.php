@@ -16,7 +16,7 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
         <div class="bg-white rounded-lg shadow p-6">
             <div class="flex items-center">
-                <div class="flex-shrink-0 bg-blue-100 rounded-full p-3">
+                <div class="shrink-0 bg-blue-100 rounded-full p-3">
                     <i class="fas fa-door-open text-blue-600 text-2xl"></i>
                 </div>
                 <div class="ml-4">
@@ -28,7 +28,7 @@
 
         <div class="bg-white rounded-lg shadow p-6">
             <div class="flex items-center">
-                <div class="flex-shrink-0 bg-red-100 rounded-full p-3">
+                <div class="shrink-0 bg-red-100 rounded-full p-3">
                     <i class="fas fa-users text-red-600 text-2xl"></i>
                 </div>
                 <div class="ml-4">
@@ -40,7 +40,7 @@
 
         <div class="bg-white rounded-lg shadow p-6">
             <div class="flex items-center">
-                <div class="flex-shrink-0 bg-green-100 rounded-full p-3">
+                <div class="shrink-0 bg-green-100 rounded-full p-3">
                     <i class="fas fa-door-closed text-green-600 text-2xl"></i>
                 </div>
                 <div class="ml-4">
@@ -52,7 +52,7 @@
 
         <div class="bg-white rounded-lg shadow p-6">
             <div class="flex items-center">
-                <div class="flex-shrink-0 bg-purple-100 rounded-full p-3">
+                <div class="shrink-0 bg-purple-100 rounded-full p-3">
                     <i class="fas fa-calendar-check text-purple-600 text-2xl"></i>
                 </div>
                 <div class="ml-4">

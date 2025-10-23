@@ -31,14 +31,14 @@
         </div>
     </header>
 
-    <section class="relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950/80 py-20">
+    <section class="relative overflow-hidden bg-linear-to-b from-slate-950 via-slate-900 to-slate-950/80 py-20">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.08),transparent_50%)]"></div>
         <div class="relative mx-auto max-w-6xl px-6 text-center">
             <div class="mb-4">
                 <span class="inline-flex items-center justify-center rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.35em] text-blue-300">Sistem Terpadu</span>
             </div>
             <h2 class="text-5xl font-extrabold leading-tight text-white lg:text-6xl">
-                Kelola Peminjaman Ruangan<br><span class="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Lebih Praktis</span>
+                Kelola Peminjaman Ruangan<br><span class="bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Lebih Praktis</span>
             </h2>
             <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">Platform modern untuk mengelola jadwal peminjaman ruangan di lingkungan Sekolah Palembang Harapan. Proses cepat, transparan, dan terintegrasi.</p>
             <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -149,7 +149,7 @@
         </div>
     </section>
 
-    <section class="bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 py-16">
+    <section class="bg-linear-to-br from-blue-600 via-blue-500 to-blue-400 py-16">
         <div class="mx-auto max-w-4xl px-6 text-center">
             <h2 class="text-3xl font-extrabold text-white lg:text-4xl">Siap Merasakan Kemudahan Peminjaman Ruangan?</h2>
             <p class="mt-4 text-lg text-blue-50">Daftar sekarang dan kelola jadwal peminjaman dengan lebih efisien.</p>

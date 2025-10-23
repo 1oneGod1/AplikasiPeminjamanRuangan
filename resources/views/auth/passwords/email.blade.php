@@ -12,7 +12,7 @@
   <main class="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white">
     <!-- Background image -->
     <img src="https://proditp.unismuh.ac.id/wp-content/uploads/2023/01/Lab-Komputer-SMP-Negeri-12-Binjai-Gambar-Ilustrasi-768x439.jpg" alt="Lab Komputer Sekolah Palembang Harapan" class="absolute inset-0 h-full w-full object-cover object-center opacity-40" />
-    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90"></div>
+  <div class="absolute inset-0 bg-linear-to-b from-black/80 via-black/60 to-black/90"></div>
 
     <!-- Card -->
     <div class="relative z-10 w-full max-w-md rounded-2xl border border-white/10 bg-white/10 backdrop-blur-lg p-8 shadow-2xl">

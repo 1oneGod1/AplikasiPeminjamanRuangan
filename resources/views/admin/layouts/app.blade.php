@@ -12,7 +12,7 @@
 <body class="min-h-screen bg-slate-950 text-slate-100">
   <div class="flex h-screen overflow-hidden">
     <!-- Sidebar Desktop -->
-    <aside class="hidden lg:flex w-64 bg-gradient-to-b from-slate-900 to-slate-950 border-r border-white/10 flex-col">
+  <aside class="hidden lg:flex w-64 bg-linear-to-b from-slate-900 to-slate-950 border-r border-white/10 flex-col">
       <div class="px-6 py-5 border-b border-white/10">
         <div class="flex items-center gap-3">
           <img src="https://static.wixstatic.com/media/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png/v1/fill/w_559,h_512,al_c/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png" alt="SPH Logo" class="h-10 w-10 rounded-xl border border-white/10 bg-white/10 p-1 object-contain">
@@ -77,7 +77,7 @@
     <!-- Mobile Sidebar -->
     <aside id="mobile-sidebar" class="lg:hidden fixed inset-0 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="mobile-overlay"></div>
-      <div class="relative w-72 h-full bg-gradient-to-b from-slate-900 to-slate-950 border-r border-white/10 flex flex-col shadow-2xl">
+  <div class="relative w-72 h-full bg-linear-to-b from-slate-900 to-slate-950 border-r border-white/10 flex flex-col shadow-2xl">
         <div class="px-6 py-5 border-b border-white/10 flex items-center justify-between">
           <div class="flex items-center gap-3">
             <img src="https://static.wixstatic.com/media/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png/v1/fill/w_559,h_512,al_c/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png" alt="SPH Logo" class="h-10 w-10 rounded-xl border border-white/10 bg-white/10 p-1 object-contain">
@@ -139,7 +139,7 @@
     <!-- Main Content -->
     <main class="flex-1 overflow-y-auto bg-slate-950">
       <!-- Header -->
-      <header class="sticky top-0 z-30 flex items-center justify-between bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-900/90 border-b border-white/10 px-4 lg:px-6 py-4 backdrop-blur-sm">
+  <header class="sticky top-0 z-30 flex items-center justify-between bg-linear-to-r from-slate-900 via-slate-900/95 to-slate-900/90 border-b border-white/10 px-4 lg:px-6 py-4 backdrop-blur-sm">
         <div class="flex items-center gap-4">
           <div class="lg:hidden w-12"></div>
           <div>

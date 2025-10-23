@@ -19,7 +19,7 @@
 
   <!-- Desktop Table View -->
   <div class="hidden md:block rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
-    <div class="bg-gradient-to-r from-slate-800 to-slate-900 px-4 md:px-6 py-4">
+  <div class="bg-linear-to-r from-slate-800 to-slate-900 px-4 md:px-6 py-4">
       <div class="flex items-center gap-3">
         <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-green-500/10">
           <i class="fas fa-user-shield text-green-400"></i>
@@ -93,7 +93,7 @@
         <!-- Header -->
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3 flex-1 min-w-0">
-            <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white font-bold flex-shrink-0">
+            <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white font-bold shrink-0">
               {{ strtoupper(substr($u->name, 0, 1)) }}
             </div>
             <div class="flex-1 min-w-0">

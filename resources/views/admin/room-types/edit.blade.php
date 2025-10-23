@@ -12,8 +12,12 @@
       <div class="space-y-6">
         <div>
           <label for="name" class="block text-sm font-semibold text-slate-100 mb-2">Nama Jenis (unik, untuk sistem) <span class="text-red-400">*</span></label>
-          <input type="text" id="name" name="name" value="{{ old('name', $roomType->name) }}" required
-                 class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('name') border-red-500 @enderror"
+     <input type="text" id="name" name="name" value="{{ old('name', $roomType->name) }}" required
+              class="@class([
+                  'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+      'border-red-500' => $errors->has('name'),
+      'border-white/20' => !$errors->has('name'),
+       ])"
                  placeholder="Contoh: laboratorium">
           @error('name')
             <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
@@ -21,8 +25,12 @@
         </div>
         <div>
           <label for="label" class="block text-sm font-semibold text-slate-100 mb-2">Label Tampilan <span class="text-red-400">*</span></label>
-          <input type="text" id="label" name="label" value="{{ old('label', $roomType->label) }}" required
-                 class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('label') border-red-500 @enderror"
+     <input type="text" id="label" name="label" value="{{ old('label', $roomType->label) }}" required
+              class="@class([
+                  'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+      'border-red-500' => $errors->has('label'),
+      'border-white/20' => !$errors->has('label'),
+       ])"
                  placeholder="Contoh: Laboratorium">
           @error('label')
             <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
@@ -31,7 +39,11 @@
         <div>
           <label for="description" class="block text-sm font-semibold text-slate-100 mb-2">Deskripsi</label>
           <textarea id="description" name="description" rows="2"
-                    class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('description') border-red-500 @enderror"
+              class="@class([
+                'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+            'border-red-500' => $errors->has('description'),
+            'border-white/20' => !$errors->has('description'),
+          ])"
                     placeholder="Contoh: Ruangan untuk praktikum dan eksperimen">{{ old('description', $roomType->description) }}</textarea>
           @error('description')
             <p class="mt-1 text-sm text-red-400">{{ $message }}</p>

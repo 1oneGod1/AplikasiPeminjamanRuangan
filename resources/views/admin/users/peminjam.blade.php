@@ -19,7 +19,7 @@
 
   <!-- Stats Cards -->
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <div class="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm p-6">
+  <div class="rounded-2xl border border-white/10 bg-linear-to-br from-white/10 to-white/5 backdrop-blur-sm p-6">
       <div class="flex items-center gap-4">
         <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-500/20">
           <i class="fas fa-users text-blue-400 text-xl"></i>
@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <div class="rounded-2xl border border-white/10 bg-gradient-to-br from-green-500/20 to-green-500/10 backdrop-blur-sm p-6">
+  <div class="rounded-2xl border border-white/10 bg-linear-to-br from-green-500/20 to-green-500/10 backdrop-blur-sm p-6">
       <div class="flex items-center gap-4">
         <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-green-500/20">
           <i class="fas fa-user-check text-green-400 text-xl"></i>
@@ -45,7 +45,7 @@
 
   <!-- Desktop Table View -->
   <div class="hidden md:block rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
-    <div class="bg-gradient-to-r from-slate-800 to-slate-900 px-4 md:px-6 py-4">
+  <div class="bg-linear-to-r from-slate-800 to-slate-900 px-4 md:px-6 py-4">
       <div class="flex items-center gap-3">
         <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-white/10">
           <i class="fas fa-list text-white"></i>
@@ -135,7 +135,7 @@
         <!-- Header -->
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3 flex-1 min-w-0">
-            <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold flex-shrink-0">
+            <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold shrink-0">
               {{ strtoupper(substr($user->name, 0, 1)) }}
             </div>
             <div class="flex-1 min-w-0">
