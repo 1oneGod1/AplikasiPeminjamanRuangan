@@ -67,6 +67,14 @@ class AdminUserController extends Controller
         ]);
 
         if ($validator->fails()) {
+            // Check if this is an AJAX request
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors(),
+                ], 422);
+            }
+
             return redirect()
                 ->route('admin.users.create', $request->role)
                 ->withErrors($validator)
@@ -82,17 +90,43 @@ class AdminUserController extends Controller
             'is_active' => $request->status === 'active',
         ]);
 
+        $redirectRoute = $this->redirectRouteForRole($request->role);
+
+        // Check if this is an AJAX request
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'User berhasil ditambahkan',
+                'redirect' => route($redirectRoute),
+            ], 201);
+        }
+
         return redirect()
-            ->route($this->redirectRouteForRole($request->role))
+            ->route($redirectRoute)
             ->with('success', 'User berhasil ditambahkan');
     }
 
     /**
      * Show the form for editing the specified user.
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $user = User::findOrFail($id);
+
+        // Check if this is an AJAX request
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'phone' => $user->phone,
+                    'role' => $user->role,
+                    'status' => $user->is_active ? 'active' : 'inactive',
+                ],
+            ]);
+        }
 
         return view('admin.users.edit', compact('user'));
     }
@@ -114,6 +148,14 @@ class AdminUserController extends Controller
         ]);
 
         if ($validator->fails()) {
+            // Check if this is an AJAX request
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors(),
+                ], 422);
+            }
+
             return redirect()
                 ->route('admin.users.edit', $id)
                 ->withErrors($validator)
@@ -133,6 +175,15 @@ class AdminUserController extends Controller
         }
 
         $user->update($data);
+
+        // Check if this is an AJAX request
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'User berhasil diperbarui',
+                'redirect' => route($this->redirectRouteForRole($request->role)),
+            ], 200);
+        }
 
         return redirect()
             ->route($this->redirectRouteForRole($request->role))

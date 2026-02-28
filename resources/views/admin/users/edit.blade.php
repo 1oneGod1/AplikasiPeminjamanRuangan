@@ -2,178 +2,178 @@
 
 @section('content')
 <div class="max-w-4xl mx-auto">
-    <!-- Header -->
-    <div class="mb-6">
-        <h1 class="text-3xl font-bold text-gray-800">Edit User</h1>
-        <p class="text-gray-600 mt-1">Ubah data user: {{ $user->name }}</p>
+    @php
+        $adminFormDefaults = config('admin_form');
+        $adminFormCardClass = $adminFormCardClass ?? $adminFormDefaults['card'];
+        $adminFormHeaderClass = $adminFormHeaderClass ?? $adminFormDefaults['header'];
+        $adminFormSubtextClass = $adminFormSubtextClass ?? $adminFormDefaults['subtext'];
+        $adminLabelClass = $adminLabelClass ?? $adminFormDefaults['label'];
+        $adminHelperTextClass = $adminHelperTextClass ?? $adminFormDefaults['helper'];
+        $adminInputClass = $adminInputClass ?? $adminFormDefaults['input'];
+        $adminTextareaClass = $adminTextareaClass ?? $adminFormDefaults['textarea'];
+        $adminSelectClass = $adminSelectClass ?? $adminFormDefaults['select'];
+        $adminCheckboxClass = $adminCheckboxClass ?? $adminFormDefaults['checkbox'];
+        $adminPrimaryButtonClass = $adminPrimaryButtonClass ?? $adminFormDefaults['primary_button'];
+        $adminSecondaryButtonClass = $adminSecondaryButtonClass ?? $adminFormDefaults['secondary_button'];
+        $adminFormSectionDivider = $adminFormSectionDivider ?? $adminFormDefaults['divider'];
+    @endphp
+
+    <div class="mb-8">
+        <h1 class="text-3xl font-semibold text-white">Edit User</h1>
+        <p class="text-sm text-slate-400 mt-2">Ubah data pengguna <span class="font-semibold text-slate-200">{{ $user->name }}</span> untuk menjaga data tetap mutakhir.</p>
     </div>
 
-    <!-- Form Card -->
-    <div class="bg-white rounded-lg shadow-md p-6">
-        <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
+    <div class="{{ $adminFormCardClass }}">
+        <form action="{{ route('admin.users.update', $user->id) }}" method="POST" class="space-y-7">
             @csrf
             @method('PUT')
 
-            <!-- Name -->
-            <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                    Nama Lengkap <span class="text-red-500">*</span>
-                </label>
-                <input 
-                    type="text" 
-                    name="name" 
-                    id="name" 
+            <div class="space-y-2.5">
+                <label for="name" class="{{ $adminLabelClass }}">Nama Lengkap <span class="text-rose-400">*</span></label>
+                <input
+                    type="text"
+                    name="name"
+                    id="name"
                     value="{{ old('name', $user->name) }}"
                     class="@class([
-                        'w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent',
-                        'border-red-500' => $errors->has('name'),
-                        'border-gray-300' => !$errors->has('name')
+                        $adminInputClass,
+                        'border-rose-500/80 focus:border-rose-400 focus:ring-rose-400/40 focus:shadow-rose-500/20' => $errors->has('name')
                     ])"
                     required
                 >
                 @error('name')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    <p class="text-xs text-rose-400">{{ $message }}</p>
                 @enderror
             </div>
 
-            <!-- Email -->
-            <div class="mb-4">
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                    Email <span class="text-red-500">*</span>
-                </label>
-                <input 
-                    type="email" 
-                    name="email" 
-                    id="email" 
+            <div class="space-y-2.5">
+                <label for="email" class="{{ $adminLabelClass }}">Email <span class="text-rose-400">*</span></label>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
                     value="{{ old('email', $user->email) }}"
                     class="@class([
-                        'w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent',
-                        'border-red-500' => $errors->has('email'),
-                        'border-gray-300' => !$errors->has('email')
+                        $adminInputClass,
+                        'border-rose-500/80 focus:border-rose-400 focus:ring-rose-400/40 focus:shadow-rose-500/20' => $errors->has('email')
                     ])"
                     required
                 >
                 @error('email')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    <p class="text-xs text-rose-400">{{ $message }}</p>
                 @enderror
             </div>
 
-            <!-- Password -->
-            <div class="mb-4">
-                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-                    Password Baru
-                </label>
-                <input 
-                    type="password" 
-                    name="password" 
-                    id="password" 
+            <div class="space-y-2.5">
+                <label for="password" class="{{ $adminLabelClass }}">Password Baru</label>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
                     class="@class([
-                        'w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent',
-                        'border-red-500' => $errors->has('password'),
-                        'border-gray-300' => !$errors->has('password')
+                        $adminInputClass,
+                        'border-rose-500/80 focus:border-rose-400 focus:ring-rose-400/40 focus:shadow-rose-500/20' => $errors->has('password')
                     ])"
                     minlength="8"
                 >
                 @error('password')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    <p class="text-xs text-rose-400">{{ $message }}</p>
                 @enderror
-                <p class="mt-1 text-xs text-gray-500">Kosongkan jika tidak ingin mengubah password. Minimal 8 karakter.</p>
+                <p class="{{ $adminHelperTextClass }}">Kosongkan jika tidak ingin mengubah password. Minimal 8 karakter.</p>
             </div>
 
-            <!-- Password Confirmation -->
-            <div class="mb-4">
-                <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">
-                    Konfirmasi Password Baru
-                </label>
-                <input 
-                    type="password" 
-                    name="password_confirmation" 
-                    id="password_confirmation" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            <div class="space-y-2.5">
+                <label for="password_confirmation" class="{{ $adminLabelClass }}">Konfirmasi Password Baru</label>
+                <input
+                    type="password"
+                    name="password_confirmation"
+                    id="password_confirmation"
+                    class="{{ $adminInputClass }}"
                     minlength="8"
                 >
             </div>
 
-            <!-- Phone -->
-            <div class="mb-4">
-                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
-                    No. Telepon
-                </label>
-                <input 
-                    type="text" 
-                    name="phone" 
-                    id="phone" 
+            <div class="space-y-2.5">
+                <label for="phone" class="{{ $adminLabelClass }}">No. Telepon</label>
+                <input
+                    type="text"
+                    name="phone"
+                    id="phone"
                     value="{{ old('phone', $user->phone) }}"
                     class="@class([
-                        'w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent',
-                        'border-red-500' => $errors->has('phone'),
-                        'border-gray-300' => !$errors->has('phone')
+                        $adminInputClass,
+                        'border-rose-500/80 focus:border-rose-400 focus:ring-rose-400/40 focus:shadow-rose-500/20' => $errors->has('phone')
                     ])"
                 >
                 @error('phone')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    <p class="text-xs text-rose-400">{{ $message }}</p>
                 @enderror
             </div>
 
-            <!-- Role -->
-            <div class="mb-4">
-                <label for="role" class="block text-sm font-medium text-gray-700 mb-2">
-                    Role <span class="text-red-500">*</span>
-                </label>
-                <select 
-                    name="role" 
-                    id="role" 
-                    class="@class([
-                        'w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent',
-                        'border-red-500' => $errors->has('role'),
-                        'border-gray-300' => !$errors->has('role')
-                    ])"
-                    required
-                >
-                    <option value="">Pilih Role</option>
-                    <option value="kepala_sekolah" {{ old('role', $user->role) == 'kepala_sekolah' ? 'selected' : '' }}>Kepala Sekolah</option>
-                    <option value="cleaning_service" {{ old('role', $user->role) == 'cleaning_service' ? 'selected' : '' }}>Cleaning Service</option>
-                    <option value="peminjam" {{ old('role', $user->role) == 'peminjam' ? 'selected' : '' }}>Peminjam</option>
-                </select>
+            <div class="space-y-2.5">
+                <label for="role" class="{{ $adminLabelClass }}">Role <span class="text-rose-400">*</span></label>
+                <div class="relative w-full">
+                    <select
+                        name="role"
+                        id="role"
+                        class="@class([
+                            $adminSelectClass,
+                            'border-rose-500/80 focus:border-rose-400 focus:ring-rose-400/40 focus:shadow-rose-500/20' => $errors->has('role')
+                        ])"
+                        required
+                    >
+                        <option value="" class="bg-slate-900 text-slate-400">Pilih Role</option>
+                        <option value="kepala_sekolah" class="bg-slate-900 text-white" {{ old('role', $user->role) == 'kepala_sekolah' ? 'selected' : '' }}>Kepala Sekolah</option>
+                        <option value="cleaning_service" class="bg-slate-900 text-white" {{ old('role', $user->role) == 'cleaning_service' ? 'selected' : '' }}>Cleaning Service</option>
+                        <option value="peminjam" class="bg-slate-900 text-white" {{ old('role', $user->role) == 'peminjam' ? 'selected' : '' }}>Peminjam</option>
+                    </select>
+                    <span class="pointer-events-none absolute right-4 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-slate-800/70 text-slate-300 shadow-inner shadow-black/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-3.5 w-3.5">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                </div>
                 @error('role')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    <p class="text-xs text-rose-400">{{ $message }}</p>
                 @enderror
             </div>
 
-            <!-- Status -->
-            <div class="mb-6">
-                <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
-                    Status <span class="text-red-500">*</span>
-                </label>
-                <select 
-                    name="status" 
-                    id="status" 
-                    class="@class([
-                        'w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent',
-                        'border-red-500' => $errors->has('status'),
-                        'border-gray-300' => !$errors->has('status')
-                    ])"
-                    required
-                >
-                    <option value="active" {{ old('status', $user->status) == 'active' ? 'selected' : '' }}>Aktif</option>
-                    <option value="inactive" {{ old('status', $user->status) == 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>
-                </select>
+            <div class="space-y-2.5">
+                <label for="status" class="{{ $adminLabelClass }}">Status <span class="text-rose-400">*</span></label>
+                <div class="relative w-full">
+                    <select
+                        name="status"
+                        id="status"
+                        class="@class([
+                            $adminSelectClass,
+                            'border-rose-500/80 focus:border-rose-400 focus:ring-rose-400/40 focus:shadow-rose-500/20' => $errors->has('status')
+                        ])"
+                        required
+                    >
+                        <option value="active" class="bg-slate-900 text-white" {{ old('status', $user->status) == 'active' ? 'selected' : '' }}>Aktif</option>
+                        <option value="inactive" class="bg-slate-900 text-white" {{ old('status', $user->status) == 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>
+                    </select>
+                    <span class="pointer-events-none absolute right-4 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-slate-800/70 text-slate-300 shadow-inner shadow-black/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-3.5 w-3.5">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                </div>
                 @error('status')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    <p class="text-xs text-rose-400">{{ $message }}</p>
                 @enderror
             </div>
 
-            <!-- Action Buttons -->
-            <div class="flex items-center justify-end space-x-3">
-                <a 
-                    href="{{ url()->previous() }}" 
-                    class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+            <div class="flex flex-col gap-3 pt-6 sm:flex-row sm:justify-end sm:items-center {{ $adminFormSectionDivider }}">
+                <a
+                    href="{{ url()->previous() }}"
+                    class="{{ $adminSecondaryButtonClass }}"
                 >
                     Batal
                 </a>
-                <button 
-                    type="submit" 
-                    class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                <button
+                    type="submit"
+                    class="{{ $adminPrimaryButtonClass }}"
                 >
                     Update User
                 </button>

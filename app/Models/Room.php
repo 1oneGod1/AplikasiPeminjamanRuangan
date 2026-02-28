@@ -51,6 +51,15 @@ class Room extends Model
     }
 
     /**
+     * Relationship: Room has many managers (Users)
+     */
+    public function managers()
+    {
+        return $this->belongsToMany(User::class, 'room_user', 'room_id', 'user_id')
+            ->withTimestamps();
+    }
+
+    /**
      * Relationship: Get approved bookings only
      */
     public function approvedBookings()

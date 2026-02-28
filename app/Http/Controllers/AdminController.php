@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Room;
 use App\Models\User;
+use App\Models\BookingChangeRequest;
 use App\Services\BookingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,9 +35,16 @@ class AdminController extends Controller
         $approvedCount = Booking::where('status', 'approved')->count();
         $rejectedCount = Booking::where('status', 'rejected')->count();
 
+        $pendingChangeRequests = BookingChangeRequest::with(['booking.room', 'requester'])
+            ->pending()
+            ->latest()
+            ->limit(6)
+            ->get();
+
         return view('admin.dashboard', compact(
             'totalUsers','totalRuangan','totalPeminjaman',
-            'recentBookings','pendingCount','approvedCount','rejectedCount'
+            'recentBookings','pendingCount','approvedCount','rejectedCount',
+            'pendingChangeRequests'
         ));
     }
 

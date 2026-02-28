@@ -11,10 +11,10 @@
       <h3 class="text-xl md:text-2xl font-bold text-white">Manajemen Peminjam</h3>
       <p class="mt-1 text-sm text-slate-400">Kelola data peminjam ruangan yang terdaftar</p>
     </div>
-    <a href="{{ route('admin.users.create', 'peminjam') }}" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-500 text-white rounded-xl font-semibold hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/30">
+    <button onclick="openCreateUserModal('peminjam')" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-500 text-white rounded-xl font-semibold hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/30">
       <i class="fas fa-plus"></i>
       <span>Tambah User</span>
-    </a>
+    </button>
   </div>
 
   <!-- Stats Cards -->
@@ -94,7 +94,7 @@
               </td>
               <td class="px-4 lg:px-6 py-4">
                 <div class="flex items-center justify-center gap-2">
-                  <a href="{{ route('admin.users.edit', $user) }}" class="text-yellow-400 hover:text-yellow-300 font-medium transition-colors">Edit</a>
+                  <button onclick="openEditUserModal({{ $user->id }})" class="text-yellow-400 hover:text-yellow-300 font-medium transition-colors">Edit</button>
                   <span class="text-slate-700">·</span>
                   <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline" onsubmit="return confirm('Yakin hapus peminjam ini?')">
                     @csrf
@@ -169,17 +169,12 @@
 
         <!-- Actions -->
         <div class="flex items-center gap-2 pt-2 border-t border-white/10">
-          <a href="{{ route('admin.users.edit', $user) }}" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-yellow-500 text-white text-sm font-semibold hover:bg-yellow-600 transition-colors">
-            <i class="fas fa-edit"></i>
-            <span>Edit</span>
-          </a>
+          <button onclick="openEditUserModal({{ $user->id }})" class="flex-1 text-yellow-400 hover:text-yellow-300 font-medium transition-colors text-center">Edit</button>
+          <span class="text-slate-700">·</span>
           <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="flex-1" onsubmit="return confirm('Yakin hapus peminjam ini?')">
             @csrf
             @method('DELETE')
-            <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-red-500 text-white text-sm font-semibold hover:bg-red-600 transition-colors">
-              <i class="fas fa-trash"></i>
-              <span>Hapus</span>
-            </button>
+            <button type="submit" class="w-full text-red-400 hover:text-red-300 font-medium transition-colors text-center">Hapus</button>
           </form>
         </div>
       </div>
@@ -202,4 +197,7 @@
     @endif
   </div>
 </div>
+
+@include('admin.modals.create-user-modal')
+@include('admin.modals.edit-user-modal')
 @endsection

@@ -289,6 +289,79 @@ php artisan test
 php artisan test --filter=PasswordResetTest
 ```
 
+## 🌐 Deployment ke Production
+
+Aplikasi ini siap di-deploy ke berbagai platform cloud. **Lihat panduan lengkap di [DEPLOYMENT.md](DEPLOYMENT.md)**
+
+### Quick Deploy Options:
+
+#### 1️⃣ Railway (Paling Mudah - Recommended)
+```powershell
+# Windows PowerShell
+.\deploy-railway.ps1
+```
+Atau manual:
+```bash
+npm install -g @railway/cli
+railway init
+railway up
+railway domain
+```
+✅ **2-3 menit** dan aplikasi online!
+
+#### 2️⃣ Google Cloud Run (Ekosistem Google/Firebase)
+```powershell
+# Windows PowerShell
+.\deploy-gcloud.ps1
+```
+Atau manual:
+```bash
+gcloud builds submit --tag gcr.io/PROJECT_ID/booking-ruangan
+gcloud run deploy booking-ruangan --image gcr.io/PROJECT_ID/booking-ruangan
+```
+
+#### 3️⃣ Heroku
+```bash
+heroku create booking-ruangan-sph
+git push heroku main
+heroku run php artisan migrate --force
+```
+
+#### 4️⃣ Docker (Universal)
+```bash
+docker build -t booking-ruangan .
+docker run -p 8080:8080 booking-ruangan
+```
+
+### Platform Comparison:
+
+| Platform | Kemudahan | Free Tier | PHP Support | Database | Waktu Deploy |
+|----------|-----------|-----------|-------------|----------|--------------|
+| **Railway** | ⭐⭐⭐⭐⭐ | $5 credit/month | ✅ Native | SQLite/PostgreSQL | 2-3 min |
+| **Google Cloud Run** | ⭐⭐⭐⭐ | 2M req/month | ✅ Docker | Cloud SQL | 5-10 min |
+| **Heroku** | ⭐⭐⭐⭐⭐ | 550 hours/month | ✅ Native | PostgreSQL | 3-5 min |
+| **DigitalOcean** | ⭐⭐⭐⭐ | $200 credit (60d) | ✅ Native | PostgreSQL | 5-10 min |
+
+> 💡 **Rekomendasi**: Gunakan **Railway** untuk deployment tercepat dan termudah!
+
+### Environment Variables untuk Production:
+
+```env
+APP_ENV=production
+APP_DEBUG=false
+APP_KEY=base64:xxxxx
+APP_URL=https://your-app.com
+
+DB_CONNECTION=sqlite  # atau pgsql/mysql
+DB_DATABASE=/data/database.sqlite
+
+EMAILJS_PUBLIC_KEY=your_key
+EMAILJS_SERVICE_ID=your_service
+EMAILJS_TEMPLATE_ID_BOOKING_CREATED=template_xxx
+EMAILJS_TEMPLATE_ID_BOOKING_APPROVED=template_xxx
+EMAILJS_TEMPLATE_ID_BOOKING_REJECTED=template_xxx
+```
+
 ## 👥 Tim Pengembang
 
 -   Andi Pandapotan Purba

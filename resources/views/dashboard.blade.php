@@ -4,14 +4,21 @@
 
 @section('content')
 <div class="bg-slate-100 dark:bg-slate-950 min-h-screen pb-16">
-	<div class="relative bg-slate-900 text-white">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+	<div class="relative bg-slate-900 text-white overflow-hidden">
+		<!-- Animated gradient background -->
+		<div class="absolute inset-0 opacity-40 pointer-events-none">
+			<div class="absolute top-0 -left-48 w-96 h-96 bg-yellow-400/40 rounded-full blur-3xl animate-float"></div>
+			<div class="absolute top-32 -right-32 w-80 h-80 bg-blue-400/30 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+			<div class="absolute bottom-0 left-1/3 w-72 h-72 bg-cyan-400/20 rounded-full blur-3xl animate-float" style="animation-delay: 4s;"></div>
+		</div>
+
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 relative z-10">
 			<div class="grid lg:grid-cols-12 gap-8 items-start">
 				<div class="lg:col-span-8 space-y-6">
-					<div>
-						<p class="text-sm uppercase tracking-wider text-slate-300">Cari Ketersediaan Ruangan</p>
-						<h1 class="mt-2 text-3xl sm:text-4xl font-semibold">Halo, {{ auth()->user()->name }} 👋</h1>
-						<p class="text-slate-200 mt-2">Pilih tanggal dan jam, lalu filter jenis ruangan sesuai kebutuhanmu.</p>
+					<div class="animate-fade-in-up">
+						<span class="hero-badge animate-slide-in-down">✨ Cari Ketersediaan</span>
+						<h1 class="mt-5 text-4xl sm:text-5xl font-bold animate-slide-in-down" style="animation-delay: 0.1s;">Halo, {{ auth()->user()->name }} 👋</h1>
+						<p class="text-slate-200 mt-4 text-lg max-w-2xl animate-fade-in-up font-medium" style="animation-delay: 0.2s;">Temukan ruangan yang sempurna dengan fitur pencarian real-time, dapatkan notifikasi instan saat ada perubahan jadwal.</p>
 					</div>
 
 					@if(session('success'))
@@ -44,7 +51,7 @@
 								<span class="block text-xs font-semibold uppercase tracking-wide text-slate-300">Jenis Ruangan</span>
 								<select name="type" class="mt-2 w-full rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-white focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/60">
 									@foreach($roomTypes as $value => $label)
-										<option value="{{ $value }}" {{ $filters['type'] === $value ? 'selected' : '' }} class="text-slate-900">{{ $label }}</option>
+										<option value="{{ $value }}" {{ $filters['type'] === $value ? 'selected' : '' }}>{{ $label }}</option>
 									@endforeach
 								</select>
 							</label>
@@ -75,24 +82,24 @@
 				</div>
 
 				<div class="lg:col-span-4">
-					<div class="rounded-3xl bg-slate-800/80 border border-white/10 backdrop-blur p-6 space-y-5 shadow-xl">
+					<div class="rounded-3xl bg-slate-800/80 border border-white/10 backdrop-blur p-6 space-y-5 shadow-xl animate-pulse-glow">
 						<h2 class="text-lg font-semibold text-white">Ringkasan Hari Ini</h2>
-						<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-							<div class="rounded-2xl bg-yellow-400/90 px-5 py-6 text-slate-900 shadow flex flex-col items-center text-center">
-								<p class="text-xs font-semibold uppercase tracking-wide">Tersedia</p>
-								<p class="mt-3 text-3xl font-bold">{{ $summary['available'] }}</p>
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+							<div class="hero-stat-card rounded-3xl px-6 py-8 text-white shadow-lg flex flex-col items-center text-center hover:shadow-2xl transition-shadow" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+								<p class="text-xs font-bold uppercase tracking-widest">Tersedia</p>
+								<p class="mt-4 text-5xl font-black">{{ $summary['available'] }}</p>
 							</div>
-							<div class="rounded-2xl bg-yellow-400/90 px-5 py-6 text-slate-900 shadow flex flex-col items-center text-center">
-								<p class="text-xs font-semibold uppercase tracking-wide">Terpesan</p>
-								<p class="mt-3 text-3xl font-bold">{{ $summary['booked'] }}</p>
+							<div class="hero-stat-card rounded-3xl px-6 py-8 text-white shadow-lg flex flex-col items-center text-center hover:shadow-2xl transition-shadow" style="background: linear-gradient(135deg, #f87171 0%, #dc2626 100%);">
+								<p class="text-xs font-bold uppercase tracking-widest">Terpesan</p>
+								<p class="mt-4 text-5xl font-black">{{ $summary['booked'] }}</p>
 							</div>
-							<div class="rounded-2xl bg-yellow-400/90 px-5 py-6 text-slate-900 shadow flex flex-col items-center text-center">
-								<p class="text-xs font-semibold uppercase tracking-wide">Jumlah Ruangan</p>
-								<p class="mt-3 text-3xl font-bold">{{ $summary['total_rooms'] }}</p>
+							<div class="hero-stat-card rounded-3xl px-6 py-8 text-white shadow-lg flex flex-col items-center text-center hover:shadow-2xl transition-shadow" style="background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);">
+								<p class="text-xs font-bold uppercase tracking-widest">Jumlah Ruangan</p>
+								<p class="mt-4 text-5xl font-black">{{ $summary['total_rooms'] }}</p>
 							</div>
-							<div class="rounded-2xl bg-yellow-400/90 px-5 py-6 text-slate-900 shadow flex flex-col items-center text-center">
-								<p class="text-xs font-semibold uppercase tracking-wide">Pengajuan Saya</p>
-								<p class="mt-3 text-3xl font-bold">{{ $summary['my_requests'] }}</p>
+							<div class="hero-stat-card rounded-3xl px-6 py-8 text-white shadow-lg flex flex-col items-center text-center hover:shadow-2xl transition-shadow" style="background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%);">
+								<p class="text-xs font-bold uppercase tracking-widest">Pengajuan Saya</p>
+								<p class="mt-4 text-5xl font-black">{{ $summary['my_requests'] }}</p>
 							</div>
 						</div>
 					</div>

@@ -4,61 +4,79 @@
 @section('header', 'Tambah Jenis Ruangan')
 
 @section('content')
-<div class="max-w-xl mx-auto">
-  <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6">
-    <form action="{{ route('admin.room-types.store') }}" method="POST">
+<div class="max-w-2xl mx-auto">
+  @php
+    $adminFormDefaults = config('admin_form');
+    $adminFormCardClass = $adminFormCardClass ?? $adminFormDefaults['card'];
+    $adminFormHeaderClass = $adminFormHeaderClass ?? $adminFormDefaults['header'];
+    $adminFormSubtextClass = $adminFormSubtextClass ?? $adminFormDefaults['subtext'];
+    $adminLabelClass = $adminLabelClass ?? $adminFormDefaults['label'];
+    $adminHelperTextClass = $adminHelperTextClass ?? $adminFormDefaults['helper'];
+    $adminInputClass = $adminInputClass ?? $adminFormDefaults['input'];
+    $adminTextareaClass = $adminTextareaClass ?? $adminFormDefaults['textarea'];
+    $adminSelectClass = $adminSelectClass ?? $adminFormDefaults['select'];
+    $adminCheckboxClass = $adminCheckboxClass ?? $adminFormDefaults['checkbox'];
+    $adminPrimaryButtonClass = $adminPrimaryButtonClass ?? $adminFormDefaults['primary_button'];
+    $adminSecondaryButtonClass = $adminSecondaryButtonClass ?? $adminFormDefaults['secondary_button'];
+    $adminFormSectionDivider = $adminFormSectionDivider ?? $adminFormDefaults['divider'];
+  @endphp
+  <div class="{{ $adminFormCardClass }}">
+    <form action="{{ route('admin.room-types.store') }}" method="POST" class="space-y-8">
       @csrf
       <div class="space-y-6">
-        <div>
-          <label for="name" class="block text-sm font-semibold text-slate-100 mb-2">Nama Jenis (unik, untuk sistem) <span class="text-red-400">*</span></label>
-     <input type="text" id="name" name="name" value="{{ old('name') }}" required
-       class="@class([
-      'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
-      'border-red-500' => $errors->has('name'),
-      'border-white/20' => !$errors->has('name'),
-       ])"
+        <div class="space-y-3">
+          <h3 class="{{ $adminFormHeaderClass }}">Tambah jenis ruangan</h3>
+          <p class="{{ $adminFormSubtextClass }}">Nama jenis digunakan untuk identifikasi sistem, sedangkan label tampil untuk pengguna.</p>
+        </div>
+        <div class="space-y-2">
+          <label for="name" class="{{ $adminLabelClass }}">Nama Jenis (unik, untuk sistem) <span class="text-rose-400">*</span></label>
+          <input type="text" id="name" name="name" value="{{ old('name') }}" required
+            class="@class([
+              $adminInputClass,
+              'border-rose-500/80 bg-rose-900/30 text-rose-100 placeholder-rose-200 focus:border-rose-400 focus:ring-rose-400/40' => $errors->has('name'),
+            ])"
                  placeholder="Contoh: laboratorium">
           @error('name')
-            <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
+            <p class="text-xs text-rose-400">{{ $message }}</p>
           @enderror
         </div>
-        <div>
-          <label for="label" class="block text-sm font-semibold text-slate-100 mb-2">Label Tampilan <span class="text-red-400">*</span></label>
-     <input type="text" id="label" name="label" value="{{ old('label') }}" required
-       class="@class([
-      'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
-      'border-red-500' => $errors->has('label'),
-      'border-white/20' => !$errors->has('label'),
-       ])"
+        <div class="space-y-2">
+          <label for="label" class="{{ $adminLabelClass }}">Label Tampilan <span class="text-rose-400">*</span></label>
+          <input type="text" id="label" name="label" value="{{ old('label') }}" required
+            class="@class([
+              $adminInputClass,
+              'border-rose-500/80 bg-rose-900/30 text-rose-100 placeholder-rose-200 focus:border-rose-400 focus:ring-rose-400/40' => $errors->has('label'),
+            ])"
                  placeholder="Contoh: Laboratorium">
           @error('label')
-            <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
+            <p class="text-xs text-rose-400">{{ $message }}</p>
           @enderror
         </div>
-        <div>
-          <label for="description" class="block text-sm font-semibold text-slate-100 mb-2">Deskripsi</label>
-      <textarea id="description" name="description" rows="2"
-          class="@class([
-            'w-full px-4 py-2 border bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
-            'border-red-500' => $errors->has('description'),
-            'border-white/20' => !$errors->has('description'),
-          ])"
+        <div class="space-y-2">
+          <label for="description" class="{{ $adminLabelClass }}">Deskripsi</label>
+          <textarea id="description" name="description" rows="3"
+            class="@class([
+              $adminTextareaClass,
+              'border-rose-500/80 bg-rose-900/30 text-rose-100 placeholder-rose-200 focus:border-rose-400 focus:ring-rose-400/40' => $errors->has('description'),
+            ])"
                     placeholder="Contoh: Ruangan untuk praktikum dan eksperimen">{{ old('description') }}</textarea>
           @error('description')
-            <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
+            <p class="text-xs text-rose-400">{{ $message }}</p>
           @enderror
         </div>
-        <div>
-          <label class="flex items-center gap-3">
-            <input type="checkbox" name="is_active" value="1" checked class="w-4 h-4 text-blue-500 border-white/20 rounded focus:ring-blue-500">
-            <span class="text-sm font-semibold text-slate-100">Aktif (bisa dipilih)</span>
-          </label>
-        </div>
-        <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-          <button type="submit" class="px-6 py-2 bg-blue-500 text-white rounded-xl font-semibold hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/30">
+        <label class="flex flex-col gap-2 rounded-2xl border border-slate-700/70 bg-slate-800/50 p-5 text-sm text-slate-200 shadow-inner shadow-black/30">
+          <span class="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Status Jenis</span>
+          <span class="flex items-center gap-3 text-base font-semibold text-white">
+            <input type="checkbox" name="is_active" value="1" checked class="{{ $adminCheckboxClass }}">
+            Aktif (bisa dipilih)
+          </span>
+          <span class="{{ $adminHelperTextClass }}">Nonaktifkan jika jenis ruangan belum ingin ditampilkan pada pilihan peminjaman.</span>
+        </label>
+        <div class="flex flex-col gap-3 pt-6 sm:flex-row sm:items-center {{ $adminFormSectionDivider }}">
+          <button type="submit" class="{{ $adminPrimaryButtonClass }}">
             Simpan Jenis
           </button>
-          <a href="{{ route('admin.room-types.index') }}" class="px-6 py-2 border border-white/20 text-slate-100 rounded-xl hover:bg-white/10 transition-colors">
+          <a href="{{ route('admin.room-types.index') }}" class="{{ $adminSecondaryButtonClass }}">
             Batal
           </a>
         </div>

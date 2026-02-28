@@ -9,56 +9,56 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <!-- Total Peminjaman -->
   <div class="group rounded-2xl border border-white/10 bg-linear-to-br from-blue-500/20 to-blue-600/10 backdrop-blur-sm p-5 md:p-6 hover:border-blue-500/30 transition-all duration-300">
-          <div class="flex items-start justify-between">
-            <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <div>
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Total Peminjaman</p>
-              <p class="mt-2 md:mt-3 text-3xl md:text-4xl font-bold text-white">{{ $totalPeminjaman ?? 0 }}</p>
+              <p class="mt-2 text-3xl md:text-4xl font-bold text-white">{{ $totalPeminjaman ?? 0 }}</p>
               <p class="mt-1 text-xs text-slate-500">Seluruh pengajuan</p>
             </div>
-            <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-500 shadow-lg shadow-blue-500/30">
-              <i class="fas fa-clipboard-list text-white text-lg"></i>
+            <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-blue-500 shadow-lg shadow-blue-500/30">
+              <i class="fas fa-clipboard-list text-white text-2xl"></i>
             </div>
           </div>
         </div>
 
         <!-- Total Ruangan -->
   <div class="group rounded-2xl border border-white/10 bg-linear-to-br from-purple-500/20 to-purple-600/10 backdrop-blur-sm p-5 md:p-6 hover:border-purple-500/30 transition-all duration-300">
-          <div class="flex items-start justify-between">
-            <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <div>
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Total Ruangan</p>
-              <p class="mt-2 md:mt-3 text-3xl md:text-4xl font-bold text-white">{{ $totalRuangan ?? 0 }}</p>
+              <p class="mt-2 text-3xl md:text-4xl font-bold text-white">{{ $totalRuangan ?? 0 }}</p>
               <p class="mt-1 text-xs text-slate-500">Ruangan aktif</p>
             </div>
-            <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-purple-500 shadow-lg shadow-purple-500/30">
-              <i class="fas fa-door-open text-white text-lg"></i>
+            <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-purple-500 shadow-lg shadow-purple-500/30">
+              <i class="fas fa-door-open text-white text-2xl"></i>
             </div>
           </div>
         </div>
 
         <!-- Total Pengguna -->
   <div class="group rounded-2xl border border-white/10 bg-linear-to-br from-green-500/20 to-green-600/10 backdrop-blur-sm p-5 md:p-6 hover:border-green-500/30 transition-all duration-300">
-          <div class="flex items-start justify-between">
-            <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <div>
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Total Pengguna</p>
-              <p class="mt-2 md:mt-3 text-3xl md:text-4xl font-bold text-white">{{ $totalUsers ?? 0 }}</p>
+              <p class="mt-2 text-3xl md:text-4xl font-bold text-white">{{ $totalUsers ?? 0 }}</p>
               <p class="mt-1 text-xs text-slate-500">Pengguna terdaftar</p>
             </div>
-            <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-green-500 shadow-lg shadow-green-500/30">
-              <i class="fas fa-users text-white text-lg"></i>
+            <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-green-500 shadow-lg shadow-green-500/30">
+              <i class="fas fa-users text-white text-2xl"></i>
             </div>
           </div>
         </div>
 
         <!-- Menunggu Persetujuan -->
   <div class="group rounded-2xl border border-white/10 bg-linear-to-br from-orange-500/20 to-orange-600/10 backdrop-blur-sm p-5 md:p-6 hover:border-orange-500/30 transition-all duration-300">
-          <div class="flex items-start justify-between">
-            <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <div>
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Pending</p>
-              <p class="mt-2 md:mt-3 text-3xl md:text-4xl font-bold text-white">{{ $pendingCount ?? 0 }}</p>
+              <p class="mt-2 text-3xl md:text-4xl font-bold text-white">{{ $pendingCount ?? 0 }}</p>
               <p class="mt-1 text-xs text-slate-500">Menunggu approval</p>
             </div>
-            <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-orange-500 shadow-lg shadow-orange-500/30">
-              <i class="fas fa-clock text-white text-lg"></i>
+            <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-orange-500 shadow-lg shadow-orange-500/30">
+              <i class="fas fa-clock text-white text-2xl"></i>
             </div>
           </div>
         </div>
@@ -71,11 +71,11 @@
           <div class="flex items-center justify-between">
             <div>
               <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Disetujui</div>
-              <div class="mt-2 text-3xl md:text-4xl font-bold text-green-400">{{ $approvedCount ?? 0 }}</div>
+              <div class="mt-2 text-3xl md:text-4xl font-bold text-white">{{ $approvedCount ?? 0 }}</div>
               <p class="mt-1 text-xs text-slate-500">Peminjaman approved</p>
             </div>
-            <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-green-500/10">
-              <i class="fas fa-check-circle text-green-400 text-2xl"></i>
+            <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-green-500 shadow-lg shadow-green-500/30">
+              <i class="fas fa-check-circle text-white text-2xl"></i>
             </div>
           </div>
         </div>
@@ -85,27 +85,137 @@
           <div class="flex items-center justify-between">
             <div>
               <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Ditolak</div>
-              <div class="mt-2 text-3xl md:text-4xl font-bold text-red-400">{{ $rejectedCount ?? 0 }}</div>
+              <div class="mt-2 text-3xl md:text-4xl font-bold text-white">{{ $rejectedCount ?? 0 }}</div>
               <p class="mt-1 text-xs text-slate-500">Peminjaman rejected</p>
             </div>
-            <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-red-500/10">
-              <i class="fas fa-times-circle text-red-400 text-2xl"></i>
+            <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-red-500 shadow-lg shadow-red-500/30">
+              <i class="fas fa-times-circle text-white text-2xl"></i>
             </div>
           </div>
         </div>
 
         <!-- Quick Action Button -->
-  <a href="{{ route('admin.bookings.pending') }}" class="group rounded-2xl bg-linear-to-r from-blue-500 to-blue-600 p-5 shadow-xl hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center text-center sm:col-span-2 lg:col-span-1">
+  <a href="{{ route('admin.bookings.pending') }}" class="group rounded-2xl bg-gradient-to-br from-yellow-400 to-yellow-500 p-5 shadow-2xl shadow-yellow-500/40 hover:shadow-yellow-500/60 hover:scale-105 transition-all duration-300 flex items-center justify-center text-center sm:col-span-2 lg:col-span-1">
           <div class="flex flex-col sm:flex-row items-center gap-3">
-            <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-white/20">
+            <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-white/30">
               <i class="fas fa-tasks text-white text-xl"></i>
             </div>
             <div class="text-center sm:text-left">
-              <span class="block text-white font-bold text-base md:text-lg">Kelola Pending</span>
-              <span class="block text-blue-100 text-xs mt-0.5">Tinjau pengajuan →</span>
+              <span class="block text-slate-900 font-bold text-base md:text-lg">Kelola Pending</span>
+              <span class="block text-slate-800 text-xs mt-0.5">Tinjau pengajuan →</span>
             </div>
           </div>
         </a>
+      </div>
+
+      {{-- Pending Change Requests --}}
+      <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
+        <div class="px-4 md:px-6 py-4 border-b border-white/10 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-yellow-400/15">
+              <i class="fas fa-file-signature text-yellow-400"></i>
+            </div>
+            <div>
+              <h3 class="text-base md:text-lg font-bold text-white">Pengajuan Perubahan Jadwal</h3>
+              <p class="text-xs text-slate-400 hidden sm:block">Alasan edit/pembatalan dari pengatur ruangan</p>
+            </div>
+          </div>
+          <span class="inline-flex items-center gap-2 rounded-full border border-yellow-400/40 bg-yellow-400/10 px-3 py-1 text-xs font-semibold text-yellow-300">
+            <i class="fas fa-clock"></i>
+            {{ ($pendingChangeRequests ?? collect())->count() }} pending
+          </span>
+        </div>
+
+        <div class="hidden md:block overflow-x-auto">
+          <table class="min-w-full text-sm">
+            <thead class="bg-white/5 border-b border-white/10">
+              <tr>
+                <th class="px-4 lg:px-6 py-3 text-left font-semibold text-slate-300">Jadwal</th>
+                <th class="px-4 lg:px-6 py-3 text-left font-semibold text-slate-300">Permintaan</th>
+                <th class="px-4 lg:px-6 py-3 text-left font-semibold text-slate-300">Alasan</th>
+                <th class="px-4 lg:px-6 py-3 text-left font-semibold text-slate-300">Diajukan Oleh</th>
+                <th class="px-4 lg:px-6 py-3 text-left font-semibold text-slate-300">Masuk</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/5">
+            @forelse($pendingChangeRequests ?? [] as $request)
+              <tr class="hover:bg-white/5 transition-colors">
+                <td class="px-4 lg:px-6 py-4">
+                  <div class="font-medium text-white">{{ optional($request->booking->room)->name ?? 'Ruangan tidak ditemukan' }}</div>
+                  @if($request->booking)
+                    <div class="text-xs text-slate-400 mt-1">
+                      {{ \Illuminate\Support\Carbon::parse($request->booking->booking_date)->translatedFormat('d M Y') }} · {{ substr($request->booking->start_time, 0, 5) }}–{{ substr($request->booking->end_time, 0, 5) }}
+                    </div>
+                  @endif
+                </td>
+                <td class="px-4 lg:px-6 py-4">
+                  @php
+                    $typeConfig = match($request->type) {
+                      \App\Models\BookingChangeRequest::TYPE_EDIT => ['label' => 'Perubahan Jadwal', 'bg' => 'bg-blue-500/10', 'text' => 'text-blue-300', 'border' => 'border-blue-500/30', 'icon' => 'pen'],
+                      \App\Models\BookingChangeRequest::TYPE_CANCEL => ['label' => 'Pembatalan Jadwal', 'bg' => 'bg-red-500/10', 'text' => 'text-red-300', 'border' => 'border-red-500/30', 'icon' => 'ban'],
+                      default => ['label' => ucfirst($request->type), 'bg' => 'bg-slate-500/10', 'text' => 'text-slate-300', 'border' => 'border-slate-500/30', 'icon' => 'info-circle']
+                    };
+                  @endphp
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border {{ $typeConfig['bg'] }} {{ $typeConfig['text'] }} {{ $typeConfig['border'] }}">
+                    <i class="fas fa-{{ $typeConfig['icon'] }}"></i>
+                    {{ $typeConfig['label'] }}
+                  </span>
+                </td>
+                <td class="px-4 lg:px-6 py-4">
+                  <p class="text-sm text-slate-200 whitespace-pre-line leading-relaxed">{{ $request->reason }}</p>
+                </td>
+                <td class="px-4 lg:px-6 py-4">
+                  <div class="font-medium text-white">{{ optional($request->requester)->name ?? 'Tidak diketahui' }}</div>
+                  <div class="text-xs text-slate-500">{{ optional($request->requester)->email }}</div>
+                </td>
+                <td class="px-4 lg:px-6 py-4 text-slate-400">
+                  <div>{{ $request->created_at?->diffForHumans() }}</div>
+                  <div class="text-xs text-slate-500">{{ $request->created_at?->format('d M Y H:i') }}</div>
+                </td>
+              </tr>
+            @empty
+              <tr>
+                <td colspan="5" class="px-6 py-8 text-center text-sm text-slate-500">Belum ada pengajuan perubahan baru.</td>
+              </tr>
+            @endforelse
+            </tbody>
+          </table>
+        </div>
+
+        <div class="md:hidden divide-y divide-white/5">
+          @forelse($pendingChangeRequests ?? [] as $request)
+            <div class="p-4 space-y-3">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="font-semibold text-white text-sm">{{ optional($request->booking->room)->name ?? 'Ruangan tidak ditemukan' }}</div>
+                  @if($request->booking)
+                    <div class="text-xs text-slate-400 mt-1">
+                      {{ \Illuminate\Support\Carbon::parse($request->booking->booking_date)->translatedFormat('d M Y') }} · {{ substr($request->booking->start_time, 0, 5) }}–{{ substr($request->booking->end_time, 0, 5) }}
+                    </div>
+                  @endif
+                </div>
+                @php
+                  $typeConfig = match($request->type) {
+                    \App\Models\BookingChangeRequest::TYPE_EDIT => ['label' => 'Perubahan', 'bg' => 'bg-blue-500/10', 'text' => 'text-blue-300', 'border' => 'border-blue-500/30', 'icon' => 'pen'],
+                    \App\Models\BookingChangeRequest::TYPE_CANCEL => ['label' => 'Pembatalan', 'bg' => 'bg-red-500/10', 'text' => 'text-red-300', 'border' => 'border-red-500/30', 'icon' => 'ban'],
+                    default => ['label' => ucfirst($request->type), 'bg' => 'bg-slate-500/10', 'text' => 'text-slate-300', 'border' => 'border-slate-500/30', 'icon' => 'info-circle']
+                  };
+                @endphp
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-full border {{ $typeConfig['bg'] }} {{ $typeConfig['text'] }} {{ $typeConfig['border'] }}">
+                  <i class="fas fa-{{ $typeConfig['icon'] }}"></i>
+                  {{ $typeConfig['label'] }}
+                </span>
+              </div>
+              <div class="rounded-xl bg-white/5 p-3 text-xs text-slate-200 whitespace-pre-line">{{ $request->reason }}</div>
+              <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>{{ optional($request->requester)->name ?? 'Tidak diketahui' }}</span>
+                <span>{{ $request->created_at?->diffForHumans() }}</span>
+              </div>
+            </div>
+          @empty
+            <div class="p-8 text-center text-slate-500 text-sm">Belum ada pengajuan perubahan baru.</div>
+          @endforelse
+        </div>
       </div>
 
       {{-- List User Non-Peminjam --}}
@@ -149,7 +259,7 @@
                 </td>
                 <td class="px-4 lg:px-6 py-4 text-slate-300">{{ $u->email }}</td>
                 <td class="px-4 lg:px-6 py-4 text-slate-400">{{ $u->phone ?? '-' }}</td>
-                <td class="px-4 lg:px-6 py-4 text-slate-400">{{ ucfirst(str_replace('_', ' ', $u->role)) }}</td>
+                <td class="px-4 lg:px-6 py-4 text-slate-400">{{ $u->getRoleLabel() }}</td>
                 <td class="px-4 lg:px-6 py-4">
                   @if($u->is_active)
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-green-500/10 border border-green-500/30 text-green-400">
@@ -180,7 +290,7 @@
                   </div>
                   <div>
                     <div class="font-semibold text-white text-sm">{{ $u->name }}</div>
-                    <div class="text-xs text-slate-400">{{ ucfirst(str_replace('_', ' ', $u->role)) }}</div>
+                    <div class="text-xs text-slate-400">{{ $u->getRoleLabel() }}</div>
                   </div>
                 </div>
                 @if($u->is_active)

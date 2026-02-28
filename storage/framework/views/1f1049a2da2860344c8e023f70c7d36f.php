@@ -13,6 +13,246 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <style>
         body{font-family:'Inter',sans-serif;}
+
+        input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']):not([type='file']),
+        select,
+        textarea{
+            border-radius:16px;
+            border:1px solid rgba(71,85,105,.75);
+            background-color:rgba(15,23,42,.82)!important;
+            color:#f8fafc!important;
+            padding:0.75rem 1rem;
+            font-size:0.95rem;
+            line-height:1.4;
+            box-shadow:inset 0 0 0 1px rgba(15,23,42,.25),inset 0 20px 48px rgba(15,23,42,.35);
+            backdrop-filter:blur(4px);
+            transition:border-color .18s ease,box-shadow .18s ease,background-color .18s ease;
+        }
+
+        input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']):not([type='file']):focus,
+        select:focus,
+        textarea:focus{
+            border-color:rgba(250,204,21,.75);
+            background-color:rgba(15,23,42,.9);
+            box-shadow:0 0 0 2px rgba(250,204,21,.25),inset 0 0 0 1px rgba(250,204,21,.2);
+            outline:none;
+        }
+
+        input::placeholder,
+        textarea::placeholder{
+            color:#94a3b8!important;
+        }
+
+        select{
+            padding-right:3rem;
+            appearance:none;
+            background-image:linear-gradient(45deg,transparent 50%,rgba(250,204,21,.65) 50%),linear-gradient(135deg,rgba(250,204,21,.65) 50%,transparent 50%),linear-gradient(to right,rgba(250,204,21,.4),rgba(250,204,21,.4));
+            background-position:calc(100% - 20px) calc(1.2rem),calc(100% - 14px) calc(1.2rem),calc(100% - 2.5rem) .9rem;
+            background-size:10px 10px,10px 10px,1px 1.6rem;
+            background-repeat:no-repeat;
+        }
+
+        select option{
+            background-color:#0f172a;
+            color:#f8fafc;
+        }
+
+        input[type='checkbox'],
+        input[type='radio']{
+            background-color:rgba(15,23,42,.9)!important;
+            border:1px solid rgba(71,85,105,.8);
+            accent-color:rgba(250,204,21,.9);
+        }
+
+        input:-webkit-autofill,
+        textarea:-webkit-autofill,
+        select:-webkit-autofill{
+            -webkit-text-fill-color:#f8fafc!important;
+            box-shadow:0 0 0px 1000px rgba(15,23,42,.82) inset;
+            border-radius:16px;
+        }
+
+        /* 2D Hero Animations - Bold & Eye-catching */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.85);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(250, 204, 21, 0.4), 0 0 30px rgba(56, 189, 248, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+            }
+            50% {
+                box-shadow: 0 0 35px rgba(250, 204, 21, 0.7), 0 0 60px rgba(56, 189, 248, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+            }
+        }
+
+        @keyframes float-smooth {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+                opacity: 0.6;
+            }
+            25% {
+                transform: translateY(-20px) translateX(15px);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-40px) translateX(0px);
+                opacity: 0.8;
+            }
+            75% {
+                transform: translateY(-20px) translateX(-15px);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes shimmer-shine {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes smoothBounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.6) translateY(30px);
+            }
+            60% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            80% {
+                transform: scale(0.95);
+            }
+            100% {
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .animate-slide-in-down {
+            animation: slideInDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .animate-slide-in-left {
+            animation: slideInLeft 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 2.5s ease-in-out infinite;
+        }
+
+        .animate-float {
+            animation: float-smooth 6s ease-in-out infinite;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.65rem 1.25rem;
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.25), rgba(56, 189, 248, 0.15));
+            border: 1.5px solid rgba(250, 204, 21, 0.5);
+            border-radius: 999px;
+            color: rgba(250, 204, 21, 1);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: slideInDown 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 20px rgba(250, 204, 21, 0.3);
+        }
+
+        .hero-stat-card {
+            animation: smoothBounceIn 0.7s cubic-bezier(0.34, 1.26, 0.64, 1);
+            animation-fill-mode: both;
+            transform-origin: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+        }
+
+        .hero-stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.15) 50%, transparent 70%);
+            animation: shimmer-shine 4s infinite;
+            opacity: 0;
+        }
+
+        .hero-stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .hero-stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .hero-stat-card:nth-child(2) { animation-delay: 0.25s; }
+        .hero-stat-card:nth-child(3) { animation-delay: 0.4s; }
+        .hero-stat-card:nth-child(4) { animation-delay: 0.55s; }
     </style>
     <script>
         (() => {
@@ -53,7 +293,7 @@
                     ]); ?>">
                         <span>Notifikasi</span>
                         <?php if(($headerUnreadNotifications ?? 0) > 0): ?>
-                            <span class="absolute -top-2 -right-2 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-red-500 px-1 text-[11px] font-semibold text-white">
+                            <span class="absolute -top-2 -right-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[11px] font-semibold text-white">
                                 <?php echo e($headerUnreadNotifications > 99 ? '99+' : $headerUnreadNotifications); ?>
 
                             </span>
@@ -75,6 +315,16 @@
                     ]); ?>">
                         <span>Riwayat</span>
                     </a>
+                    <?php ($roomManagerActive = request()->routeIs('room-manager.*')); ?>
+                    <?php if(auth()->check() && auth()->user()->isRoomManager()): ?>
+                        <a href="<?php echo e(route('room-manager.dashboard')); ?>" class="<?php echo \Illuminate\Support\Arr::toCssClasses([
+                            'hidden sm:inline-flex items-center gap-2 rounded-xl px-4 py-2 transition',
+                            'bg-yellow-400 text-slate-950 hover:bg-yellow-300' => $roomManagerActive,
+                            'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800' => !$roomManagerActive,
+                        ]); ?>">
+                            <span>Kelola Ruangan</span>
+                        </a>
+                    <?php endif; ?>
                     <button type="button" data-darkmode-toggle class="hidden md:inline-flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Toggle dark mode" aria-pressed="false">
                         <span class="sr-only">Toggle dark mode</span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-5 w-5 dark:hidden">
@@ -108,7 +358,7 @@
                 ]); ?>">
                     <span>Notifikasi</span>
                     <?php if(($headerUnreadNotifications ?? 0) > 0): ?>
-                        <span class="inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-red-500 px-1 text-[11px] font-semibold text-white">
+                        <span class="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[11px] font-semibold text-white">
                             <?php echo e($headerUnreadNotifications > 99 ? '99+' : $headerUnreadNotifications); ?>
 
                         </span>
@@ -134,6 +384,18 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l3 3" />
                     </svg>
                 </a>
+                <?php if(auth()->check() && auth()->user()->isRoomManager()): ?>
+                    <a href="<?php echo e(route('room-manager.dashboard')); ?>" class="<?php echo \Illuminate\Support\Arr::toCssClasses([
+                        'flex items-center justify-between rounded-xl border px-4 py-3 font-semibold',
+                        'border-yellow-400 bg-yellow-400 text-slate-950' => $roomManagerActive,
+                        'border-slate-200 text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800' => !$roomManagerActive,
+                    ]); ?>">
+                        <span>Kelola Ruangan</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l2.25 2.25L15 9.75" />
+                        </svg>
+                    </a>
+                <?php endif; ?>
                 <button type="button" data-darkmode-toggle class="flex w-full items-center justify-between rounded-xl border border-slate-200 px-4 py-3 font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800" aria-pressed="false">
                     <span>Mode Gelap</span>
                     <span class="flex items-center gap-2 text-xs" data-darkmode-state>

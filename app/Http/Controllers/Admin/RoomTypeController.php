@@ -34,10 +34,23 @@ class RoomTypeController extends Controller
             'name' => 'required|string|unique:room_types,name',
             'label' => 'required|string',
             'description' => 'nullable|string',
-            'is_active' => 'boolean',
+            'is_active' => 'nullable',
         ]);
-        $validated['is_active'] = $request->has('is_active');
+        
+        // Convert is_active to boolean
+        $validated['is_active'] = in_array($request->input('is_active'), ['1', 1, true, 'true'], true);
+        
         RoomType::create($validated);
+
+        // Check if this is an AJAX request
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Jenis ruangan berhasil ditambahkan',
+                'redirect' => route('admin.room-types.index'),
+            ], 201);
+        }
+
         return redirect()->route('admin.room-types.index')->with('success', 'Jenis ruangan berhasil ditambahkan.');
     }
 
@@ -46,6 +59,11 @@ class RoomTypeController extends Controller
      */
     public function edit(RoomType $roomType)
     {
+        // If AJAX request, return JSON
+        if (request()->expectsJson()) {
+            return response()->json($roomType);
+        }
+
         return view('admin.room-types.edit', compact('roomType'));
     }
 
@@ -58,10 +76,23 @@ class RoomTypeController extends Controller
             'name' => 'required|string|unique:room_types,name,' . $roomType->id,
             'label' => 'required|string',
             'description' => 'nullable|string',
-            'is_active' => 'boolean',
+            'is_active' => 'nullable',
         ]);
-        $validated['is_active'] = $request->has('is_active');
+        
+        // Convert is_active to boolean
+        $validated['is_active'] = in_array($request->input('is_active'), ['1', 1, true, 'true'], true);
+        
         $roomType->update($validated);
+
+        // Check if this is an AJAX request
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Jenis ruangan berhasil diperbarui',
+                'redirect' => route('admin.room-types.index'),
+            ], 200);
+        }
+
         return redirect()->route('admin.room-types.index')->with('success', 'Jenis ruangan berhasil diperbarui.');
     }
 

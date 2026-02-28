@@ -116,20 +116,19 @@
                                     @csrf
                                     <button 
                                         type="submit" 
-                                        class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-green-500 text-white rounded-xl font-bold hover:bg-green-600 transition-colors shadow-lg shadow-green-500/30"
+                                        class="w-full text-green-400 hover:text-green-300 font-medium transition-colors text-center"
                                         onclick="return confirm('Apakah Anda yakin ingin menyetujui perubahan password untuk {{ $request->user->name }}?')"
                                     >
-                                        <i class="fas fa-check"></i>
-                                        <span>Setujui</span>
+                                        Setujui
                                     </button>
                                 </form>
+                                <span class="text-slate-700">·</span>
                                 <button 
                                     type="button"
-                                    class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 transition-colors shadow-lg shadow-red-500/30"
+                                    class="flex-1 text-red-400 hover:text-red-300 font-medium transition-colors text-center"
                                     onclick="showRejectModal({{ $request->id }})"
                                 >
-                                    <i class="fas fa-times"></i>
-                                    <span>Tolak</span>
+                                    Tolak
                                 </button>
                             </div>
                         </div>

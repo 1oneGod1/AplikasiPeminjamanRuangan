@@ -11,15 +11,15 @@
       <h3 class="text-xl md:text-2xl font-bold text-white">Manajemen Ruangan</h3>
       <p class="mt-1 text-sm text-slate-400">Kelola semua ruangan yang tersedia untuk dipinjam</p>
     </div>
-    <a href="<?php echo e(route('admin.rooms.create')); ?>" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-500 text-white rounded-xl font-semibold hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/30">
+    <button onclick="openCreateRoomModal()" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-500 text-white rounded-xl font-semibold hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/30">
       <i class="fas fa-plus"></i>
       <span>Tambah Ruangan</span>
-    </a>
+    </button>
   </div>
 
   <!-- Stats Cards -->
   <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-    <div class="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm p-6">
+  <div class="rounded-2xl border border-white/10 bg-linear-to-br from-white/10 to-white/5 backdrop-blur-sm p-6">
       <div class="flex items-center gap-4">
         <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-500/20">
           <i class="fas fa-door-open text-blue-400 text-xl"></i>
@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <div class="rounded-2xl border border-white/10 bg-gradient-to-br from-green-500/20 to-green-500/10 backdrop-blur-sm p-6">
+  <div class="rounded-2xl border border-white/10 bg-linear-to-br from-green-500/20 to-green-500/10 backdrop-blur-sm p-6">
       <div class="flex items-center gap-4">
         <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-green-500/20">
           <i class="fas fa-check-circle text-green-400 text-xl"></i>
@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <div class="rounded-2xl border border-white/10 bg-gradient-to-br from-red-500/20 to-red-500/10 backdrop-blur-sm p-6">
+  <div class="rounded-2xl border border-white/10 bg-linear-to-br from-red-500/20 to-red-500/10 backdrop-blur-sm p-6">
       <div class="flex items-center gap-4">
         <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-red-500/20">
           <i class="fas fa-times-circle text-red-400 text-xl"></i>
@@ -56,7 +56,7 @@
 
   <!-- Desktop Table View -->
   <div class="hidden md:block rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
-    <div class="bg-gradient-to-r from-slate-800 to-slate-900 px-4 md:px-6 py-4">
+  <div class="bg-linear-to-r from-slate-800 to-slate-900 px-4 md:px-6 py-4">
       <div class="flex items-center gap-3">
         <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-white/10">
           <i class="fas fa-list text-white"></i>
@@ -98,9 +98,7 @@
               </td>
               <td class="px-4 lg:px-6 py-4">
                 <div class="flex items-center justify-center gap-2">
-                  <a href="<?php echo e(route('admin.rooms.show', $room)); ?>" class="text-blue-400 hover:text-blue-300 font-medium transition-colors">Lihat</a>
-                  <span class="text-slate-700">·</span>
-                  <a href="<?php echo e(route('admin.rooms.edit', $room)); ?>" class="text-yellow-400 hover:text-yellow-300 font-medium transition-colors">Edit</a>
+                  <button onclick="openEditRoomModal(<?php echo e($room->id); ?>)" class="text-yellow-400 hover:text-yellow-300 font-medium transition-colors">Edit</button>
                   <span class="text-slate-700">·</span>
                   <form action="<?php echo e(route('admin.rooms.destroy', $room)); ?>" method="POST" class="inline" onsubmit="return confirm('Yakin hapus ruangan ini?')">
                     <?php echo csrf_field(); ?>
@@ -173,21 +171,12 @@
 
         <!-- Actions -->
         <div class="flex items-center gap-2 pt-2 border-t border-white/10">
-          <a href="<?php echo e(route('admin.rooms.show', $room)); ?>" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-blue-500 text-white text-sm font-semibold hover:bg-blue-600 transition-colors">
-            <i class="fas fa-eye"></i>
-            <span>Lihat</span>
-          </a>
-          <a href="<?php echo e(route('admin.rooms.edit', $room)); ?>" class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-yellow-500 text-white text-sm font-semibold hover:bg-yellow-600 transition-colors">
-            <i class="fas fa-edit"></i>
-            <span>Edit</span>
-          </a>
+          <button onclick="openEditRoomModal(<?php echo e($room->id); ?>)" class="flex-1 text-yellow-400 hover:text-yellow-300 font-medium transition-colors text-center">Edit</button>
+          <span class="text-slate-700">·</span>
           <form action="<?php echo e(route('admin.rooms.destroy', $room)); ?>" method="POST" class="flex-1" onsubmit="return confirm('Yakin hapus ruangan ini?')">
             <?php echo csrf_field(); ?>
             <?php echo method_field('DELETE'); ?>
-            <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-red-500 text-white text-sm font-semibold hover:bg-red-600 transition-colors">
-              <i class="fas fa-trash"></i>
-              <span>Hapus</span>
-            </button>
+            <button type="submit" class="w-full text-red-400 hover:text-red-300 font-medium transition-colors text-center">Hapus</button>
           </form>
         </div>
       </div>
@@ -211,6 +200,9 @@
     <?php endif; ?>
   </div>
 </div>
+
+<?php echo $__env->make('admin.modals.create-room-modal', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php echo $__env->make('admin.modals.edit-room-modal', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\Semester 4\ENG\ALP\Booking-Ruangan\resources\views/admin/rooms/index.blade.php ENDPATH**/ ?>

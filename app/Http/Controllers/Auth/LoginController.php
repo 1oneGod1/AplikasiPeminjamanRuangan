@@ -138,7 +138,6 @@ class LoginController extends Controller
                 ->route('cleaning-service.dashboard')
                 ->with('success', $message),
 
-            User::ROLE_GURU,
             User::ROLE_PEMINJAM => redirect()
                 ->route('dashboard')
                 ->with('success', $message),

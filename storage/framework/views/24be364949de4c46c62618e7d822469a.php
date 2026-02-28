@@ -1,4 +1,4 @@
-<?php if (! $__env->hasRenderedOnce('c02d4027-35b5-44b1-81de-fe57083b598e')): $__env->markAsRenderedOnce('c02d4027-35b5-44b1-81de-fe57083b598e'); ?>
+<?php if (! $__env->hasRenderedOnce('db242aba-0e6e-4bc0-aea5-e5665296f6d6')): $__env->markAsRenderedOnce('db242aba-0e6e-4bc0-aea5-e5665296f6d6'); ?>
 <div id="purpose-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
 	<div data-purpose-modal-overlay class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
 	<div class="relative z-10 flex min-h-full items-center justify-center p-4">
@@ -15,7 +15,7 @@
 				</button>
 			</div>
 			<div class="px-6 py-5">
-				<p data-purpose-modal-text class="max-h-60 overflow-y-auto whitespace-pre-wrap break-words text-sm leading-6 text-slate-600 dark:text-slate-300">Tujuan peminjaman belum diisi.</p>
+				<p data-purpose-modal-text class="max-h-60 overflow-y-auto whitespace-pre-wrap wrap-break-word text-sm leading-6 text-slate-600 dark:text-slate-300">Tujuan peminjaman belum diisi.</p>
 			</div>
 		</div>
 	</div>

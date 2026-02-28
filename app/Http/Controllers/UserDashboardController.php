@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use App\Models\Booking;
+use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -12,17 +13,16 @@ class UserDashboardController extends Controller
 {
     public function index(Request $request)
     {
+        $activeRoomTypes = RoomType::query()
+            ->active()
+            ->orderBy('label')
+            ->get();
+
         $request->validate([
             'date' => ['nullable', 'date'],
             'start_time' => ['nullable', 'date_format:H:i'],
             'end_time' => ['nullable', 'date_format:H:i', 'after:start_time'],
-            'type' => ['nullable', Rule::in([
-                Room::TYPE_LABORATORIUM,
-                Room::TYPE_RUANG_MUSIK,
-                Room::TYPE_AUDIO_VISUAL,
-                Room::TYPE_LAPANGAN_BASKET,
-                Room::TYPE_KOLAM_RENANG,
-            ])],
+            'type' => ['nullable', Rule::in($activeRoomTypes->pluck('name')->toArray())],
             'min_capacity' => ['nullable', 'integer', 'min:0'],
             'keyword' => ['nullable', 'string', 'max:255'],
             'available_only' => ['nullable', 'boolean'],
@@ -115,14 +115,11 @@ class UserDashboardController extends Controller
             ->limit(5)
             ->get();
 
-        $roomTypes = [
-            '' => 'Semua',
-            Room::TYPE_LABORATORIUM => 'Laboratorium',
-            Room::TYPE_RUANG_MUSIK => 'Ruang Musik',
-            Room::TYPE_AUDIO_VISUAL => 'Audio Visual',
-            Room::TYPE_LAPANGAN_BASKET => 'Lapangan Basket',
-            Room::TYPE_KOLAM_RENANG => 'Kolam Renang',
-        ];
+        $roomTypeOptions = $activeRoomTypes
+            ->mapWithKeys(fn ($type) => [$type->name => $type->label])
+            ->toArray();
+
+        $roomTypes = ['' => 'Semua'] + $roomTypeOptions;
 
         return view('dashboard', [
             'filters' => $filters,

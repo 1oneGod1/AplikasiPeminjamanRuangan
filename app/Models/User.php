@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\BookingChangeRequest;
 
 class User extends Authenticatable
 {
@@ -56,7 +57,6 @@ class User extends Authenticatable
     const ROLE_ADMIN = 'admin';
     const ROLE_KEPALA_SEKOLAH = 'kepala_sekolah';
     const ROLE_CLEANING_SERVICE = 'cleaning_service';
-    const ROLE_GURU = 'guru';
 
     /**
      * Relationship: User has many Bookings
@@ -64,6 +64,15 @@ class User extends Authenticatable
     public function bookings()
     {
         return $this->hasMany(Booking::class, 'user_id');
+    }
+
+    /**
+     * Relationship: User manages many Rooms
+     */
+    public function managedRooms()
+    {
+        return $this->belongsToMany(Room::class, 'room_user', 'user_id', 'room_id')
+            ->withTimestamps();
     }
 
     /**
@@ -96,6 +105,14 @@ class User extends Authenticatable
     public function passwordChangeRequests()
     {
         return $this->hasMany(PasswordChangeRequest::class, 'user_id');
+    }
+
+    /**
+     * Relationship: user has many booking change requests they submitted.
+     */
+    public function bookingChangeRequests()
+    {
+        return $this->hasMany(BookingChangeRequest::class, 'requested_by');
     }
 
     /**
@@ -149,6 +166,22 @@ class User extends Authenticatable
     }
 
     /**
+     * Check if user manages a specific room
+     */
+    public function managesRoom(Room $room): bool
+    {
+        return $this->managedRooms()->where('room_id', $room->id)->exists();
+    }
+
+    /**
+     * Check if user is a room manager (manages at least one room)
+     */
+    public function isRoomManager(): bool
+    {
+        return $this->managedRooms()->exists();
+    }
+
+    /**
      * Scope: Get active users only
      */
     public function scopeActive($query)
@@ -162,5 +195,19 @@ class User extends Authenticatable
     public function scopeByRole($query, string $role)
     {
         return $query->where('role', $role);
+    }
+
+    /**
+     * Get user-friendly role label
+     */
+    public function getRoleLabel(): string
+    {
+        return match($this->role) {
+            self::ROLE_PEMINJAM => 'Peminjam',
+            self::ROLE_ADMIN => 'Admin',
+            self::ROLE_KEPALA_SEKOLAH => 'Kepala Sekolah',
+            self::ROLE_CLEANING_SERVICE => 'Cleaning Service',
+            default => ucfirst(str_replace('_', ' ', $this->role)),
+        };
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use App\Models\BookingChangeRequest;
 
 class Booking extends Model
 {
@@ -89,6 +90,22 @@ class Booking extends Model
     public function notifications()
     {
         return $this->hasMany(Notification::class, 'related_booking_id');
+    }
+
+    /**
+     * Relationship: Booking has many change requests.
+     */
+    public function changeRequests()
+    {
+        return $this->hasMany(BookingChangeRequest::class);
+    }
+
+    /**
+     * Get pending change requests for the booking.
+     */
+    public function pendingChangeRequests()
+    {
+        return $this->changeRequests()->where('status', BookingChangeRequest::STATUS_PENDING);
     }
 
     /**

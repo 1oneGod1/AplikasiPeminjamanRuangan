@@ -11,61 +11,138 @@
 <body class="h-full">
   <main class="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white">
     <img src="https://proditp.unismuh.ac.id/wp-content/uploads/2023/01/Lab-Komputer-SMP-Negeri-12-Binjai-Gambar-Ilustrasi-768x439.jpg" alt="Lab Komputer Sekolah Palembang Harapan" class="absolute inset-0 h-full w-full object-cover object-center opacity-40" />
-  <div class="absolute inset-0 bg-linear-to-b from-black/80 via-black/60 to-black/90"></div>
+    <div class="absolute inset-0 bg-linear-to-br from-slate-950/90 via-slate-900/65 to-blue-900/70"></div>
 
-    <div class="relative z-10 w-full max-w-md rounded-2xl border border-white/10 bg-white/10 backdrop-blur-lg p-8 shadow-2xl">
-      <div class="text-center mb-8">
-        <div class="mx-auto mb-3 h-16 w-16 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm p-2">
-          <img src="https://static.wixstatic.com/media/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png/v1/fill/w_559,h_512,al_c/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png" alt="Logo Sekolah Palembang Harapan" class="h-full w-full object-contain" loading="lazy">
+    <div class="relative z-10 w-full max-w-5xl px-4">
+      <div class="grid gap-10 rounded-[30px] border border-white/10 bg-slate-950/60 p-10 shadow-2xl shadow-blue-900/30 backdrop-blur-xl lg:grid-cols-[1.2fr_0.9fr]">
+        <div class="flex flex-col justify-between gap-10">
+          <div class="space-y-8">
+            <div class="flex flex-col gap-6 text-slate-300">
+              <div class="flex flex-wrap items-center gap-4">
+                <img src="https://static.wixstatic.com/media/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png/v1/fill/w_559,h_512,al_c/07639e_83549958900b44ad9fea05d99e380dd5~mv2.png" alt="Logo Sekolah Palembang Harapan" class="h-16 w-16 object-contain" loading="lazy">
+                <span class="text-[11px] font-semibold uppercase tracking-[0.42em] text-slate-400">Portal Peminjaman</span>
+              </div>
+              <div class="space-y-3 text-left">
+                <h1 class="text-3xl font-semibold tracking-tight text-white">Daftar Akun Peminjaman</h1>
+                <p class="text-sm leading-relaxed text-slate-300">Bergabung sebagai peminjam untuk mengajukan jadwal ruangan, memantau status persetujuan, dan menerima notifikasi terbaru.</p>
+              </div>
+            </div>
+
+            <ul class="space-y-5 text-sm text-slate-200">
+              <li class="flex gap-4">
+                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-900/70 text-yellow-400 shadow-inner shadow-blue-900/40">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-6 w-6">
+                    <rect x="3" y="4.5" width="18" height="16" rx="2.25" ry="2.25" />
+                    <path d="M3 9.5h18" />
+                    <path d="M8.5 3v3" />
+                    <path d="M15.5 3v3" />
+                    <circle cx="12" cy="13.5" r="2.5" />
+                  </svg>
+                </span>
+                <div class="space-y-1">
+                  <p class="text-base font-semibold text-white">Akses kalender peminjaman</p>
+                  <p class="text-slate-400">Lihat ketersediaan ruangan secara real-time dan pilih slot yang sesuai.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-900/70 text-yellow-400 shadow-inner shadow-blue-900/40">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-6 w-6">
+                    <path d="M18 8a6 6 0 1 0-12 0v4a6 6 0 0 0 12 0V8Z" />
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                  </svg>
+                </span>
+                <div class="space-y-1">
+                  <p class="text-base font-semibold text-white">Notifikasi otomatis</p>
+                  <p class="text-slate-400">Dapatkan update instan saat peminjaman disetujui atau membutuhkan revisi.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-900/70 text-yellow-400 shadow-inner shadow-blue-900/40">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-6 w-6">
+                    <path d="M5 7.5A2.5 2.5 0 0 1 7.5 5h9A2.5 2.5 0 0 1 19 7.5V18a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.5Z" />
+                    <path d="M9 9.5h6" />
+                    <path d="M9 13h6" />
+                  </svg>
+                </span>
+                <div class="space-y-1">
+                  <p class="text-base font-semibold text-white">Histori terarsip rapi</p>
+                  <p class="text-slate-400">Pantau seluruh riwayat pengajuan dalam satu tempat untuk evaluasi berkala.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <p class="text-xs text-slate-500">Dengan mendaftar, Anda menyetujui tata tertib penggunaan fasilitas Sekolah Palembang Harapan.</p>
         </div>
-        <h1 class="text-2xl font-bold tracking-tight">Buat Akun Baru</h1>
-        <p class="mt-1 text-sm text-gray-300">Sekolah Palembang Harapan</p>
+
+        <div class="space-y-6 rounded-2xl border border-white/10 bg-slate-950/55 p-8 shadow-lg shadow-black/20">
+          @if (session('status'))
+            <div class="rounded-xl border border-blue-500/40 bg-blue-500/15 p-4 text-sm text-blue-100">{{ session('status') }}</div>
+          @endif
+
+          <form id="register-form" action="{{ route('register') }}" method="POST" class="space-y-6" novalidate>
+            @csrf
+            <input type="hidden" id="role" name="role" value="peminjam">
+
+            <div>
+              <label for="name" class="block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Nama Lengkap</label>
+              <input id="name" name="name" type="text" autocomplete="name" required value="{{ old('name') }}" placeholder="Nama lengkap"
+                     class="mt-2 w-full rounded-xl border px-4 py-3 text-sm text-white placeholder-slate-400 shadow-inner shadow-slate-900/40 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/60 {{ $errors->has('name') ? 'border-rose-400 bg-rose-500/20' : 'border-white/10 bg-slate-900/70' }}">
+              @error('name')<p class="mt-2 text-xs text-rose-300">{{ $message }}</p>@enderror
+            </div>
+
+            <div>
+              <label for="email" class="block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Alamat Email</label>
+              <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required value="{{ old('email') }}" placeholder="nama@sekolah.sch.id"
+                     class="mt-2 w-full rounded-xl border px-4 py-3 text-sm text-white placeholder-slate-400 shadow-inner shadow-slate-900/40 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/60 {{ $errors->has('email') ? 'border-rose-400 bg-rose-500/20' : 'border-white/10 bg-slate-900/70' }}">
+              @error('email')<p class="mt-2 text-xs text-rose-300">{{ $message }}</p>@enderror
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between">
+                <label for="password" class="block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Kata Sandi</label>
+                <button type="button" id="togglePassword" class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 transition hover:text-white" aria-pressed="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4">
+                    <path d="M1.5 12s4-7 10.5-7 10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12Z" />
+                    <circle cx="12" cy="12" r="2.5" />
+                  </svg>
+                  <span>Tampilkan</span>
+                </button>
+              </div>
+              <input id="password" name="password" type="password" autocomplete="new-password" required placeholder="••••••••"
+                     class="mt-2 w-full rounded-xl border px-4 py-3 text-sm text-white placeholder-slate-400 shadow-inner shadow-slate-900/40 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/60 {{ $errors->has('password') ? 'border-rose-400 bg-rose-500/20' : 'border-white/10 bg-slate-900/70' }}">
+              @error('password')<p class="mt-2 text-xs text-rose-300">{{ $message }}</p>@enderror
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between">
+                <label for="password_confirmation" class="block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Konfirmasi Kata Sandi</label>
+                <button type="button" id="toggleConfirm" class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 transition hover:text-white" aria-pressed="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4">
+                    <path d="M1.5 12s4-7 10.5-7 10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12Z" />
+                    <circle cx="12" cy="12" r="2.5" />
+                  </svg>
+                  <span>Tampilkan</span>
+                </button>
+              </div>
+              <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" required placeholder="••••••••"
+                     class="mt-2 w-full rounded-xl border px-4 py-3 text-sm text-white placeholder-slate-400 shadow-inner shadow-slate-900/40 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/60 {{ $errors->has('password_confirmation') ? 'border-rose-400 bg-rose-500/20' : 'border-white/10 bg-slate-900/70' }}">
+              @error('password_confirmation')<p class="mt-2 text-xs text-rose-300">{{ $message }}</p>@enderror
+            </div>
+
+            <button type="submit" id="submit-btn"
+                    class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-yellow-400 px-4 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-yellow-500/30 transition hover:bg-yellow-300 focus:outline-none focus:ring-4 focus:ring-yellow-400/40">
+              Daftar Akun
+            </button>
+
+            <p class="text-center text-sm text-slate-300">Sudah punya akun? <a href="{{ route('login') }}" class="font-semibold text-yellow-400 hover:text-yellow-300">Masuk</a></p>
+          </form>
+
+          <div class="border-t border-white/10 pt-6 text-xs text-slate-500">
+            © {{ date('Y') }} Sekolah Palembang Harapan · Sistem Peminjaman Ruangan
+          </div>
+        </div>
       </div>
-
-      @if (session('status'))
-        <div class="mb-4 rounded-md bg-white/10 p-3 text-sm">{{ session('status') }}</div>
-      @endif
-
-      <form id="register-form" action="{{ route('register') }}" method="POST" class="space-y-5" novalidate>
-        @csrf
-        <input type="hidden" id="role" name="role" value="peminjam">
-
-        <div>
-          <label for="name" class="block text-sm font-medium text-gray-200">Nama Lengkap</label>
-          <input id="name" name="name" type="text" autocomplete="name" required value="{{ old('name') }}" placeholder="Nama lengkap" class="mt-1 w-full rounded-xl border bg-black/30 px-3 py-2 text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-white/70 {{ $errors->has('name') ? 'border-red-400' : 'border-white/20' }}">
-          @error('name')<p class="mt-1 text-xs text-red-400">{{ $message }}</p>@enderror
-        </div>
-
-        <div>
-          <label for="email" class="block text-sm font-medium text-gray-200">Alamat Email</label>
-          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required value="{{ old('email') }}" placeholder="nama@sekolah.sch.id" class="mt-1 w-full rounded-xl border bg-black/30 px-3 py-2 text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-white/70 {{ $errors->has('email') ? 'border-red-400' : 'border-white/20' }}">
-          @error('email')<p class="mt-1 text-xs text-red-400">{{ $message }}</p>@enderror
-        </div>
-
-        <div>
-          <div class="flex items-center justify-between">
-            <label for="password" class="block text-sm font-medium text-gray-200">Kata Sandi</label>
-            <button type="button" id="togglePassword" class="text-xs text-gray-400 hover:text-white underline underline-offset-4">Tampilkan</button>
-          </div>
-          <input id="password" name="password" type="password" autocomplete="new-password" required placeholder="••••••••" class="mt-1 w-full rounded-xl border bg-black/30 px-3 py-2 text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-white/70 {{ $errors->has('password') ? 'border-red-400' : 'border-white/20' }}">
-          @error('password')<p class="mt-1 text-xs text-red-400">{{ $message }}</p>@enderror
-        </div>
-
-        <div>
-          <div class="flex items-center justify-between">
-            <label for="password_confirmation" class="block text-sm font-medium text-gray-200">Konfirmasi Kata Sandi</label>
-            <button type="button" id="toggleConfirm" class="text-xs text-gray-400 hover:text-white underline underline-offset-4">Tampilkan</button>
-          </div>
-          <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" required placeholder="••••••••" class="mt-1 w-full rounded-xl border bg-black/30 px-3 py-2 text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-white/70 {{ $errors->has('password_confirmation') ? 'border-red-400' : 'border-white/20' }}">
-          @error('password_confirmation')<p class="mt-1 text-xs text-red-400">{{ $message }}</p>@enderror
-        </div>
-
-        <button type="submit" id="submit-btn" class="w-full rounded-xl border border-white/30 bg-white/10 px-4 py-2 font-medium text-white transition hover:bg-white/20 focus:ring-4 focus:ring-white/40">Daftar Akun</button>
-
-        <p class="text-center text-sm text-gray-400 mt-4">Sudah punya akun? <a href="{{ route('login') }}" class="underline hover:text-white">Masuk</a></p>
-      </form>
-
-      <p class="mt-8 text-center text-xs text-gray-500">© {{ date('Y') }} Sekolah Palembang Harapan — Lab Komputer Theme</p>
     </div>
   </main>
 
@@ -74,10 +151,26 @@
     (function(){
       const t=document.getElementById('togglePassword');
       const p=document.getElementById('password');
-      if(t&&p){t.addEventListener('click',()=>{const h=p.type==='password';p.type=h?'text':'password';t.textContent=h?'Sembunyikan':'Tampilkan';});}
+      if(t&&p){
+        const label=t.querySelector('span');
+        t.addEventListener('click',()=>{
+          const hidden=p.type==='password';
+          p.type=hidden?'text':'password';
+          t.setAttribute('aria-pressed',hidden.toString());
+          if(label){label.textContent=hidden?'Sembunyikan':'Tampilkan';}
+        });
+      }
       const tc=document.getElementById('toggleConfirm');
       const pc=document.getElementById('password_confirmation');
-      if(tc&&pc){tc.addEventListener('click',()=>{const h=pc.type==='password';pc.type=h?'text':'password';tc.textContent=h?'Sembunyikan':'Tampilkan';});}
+      if(tc&&pc){
+        const label=tc.querySelector('span');
+        tc.addEventListener('click',()=>{
+          const hidden=pc.type==='password';
+          pc.type=hidden?'text':'password';
+          tc.setAttribute('aria-pressed',hidden.toString());
+          if(label){label.textContent=hidden?'Sembunyikan':'Tampilkan';}
+        });
+      }
     })();
   </script>
 </body>

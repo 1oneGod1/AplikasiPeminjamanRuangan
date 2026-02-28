@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use App\Models\User;
+use App\Models\RoomType;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,9 +19,9 @@ class AdminRoomController extends Controller
         $rooms = Room::orderBy('name')->paginate(10);
         
         $totalRooms = Room::count();
-        $availableRooms = Room::where('is_available', true)->count();
-        $unavailableRooms = Room::where('is_available', false)->count();
-        
+        $availableRooms = Room::where('is_active', true)->count();
+        $unavailableRooms = Room::where('is_active', false)->count();
+
         return view('admin.rooms.index', compact('rooms', 'totalRooms', 'availableRooms', 'unavailableRooms'));
     }
 
@@ -39,28 +41,51 @@ class AdminRoomController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255|unique:rooms',
-            'type' => 'required|in:laboratorium,ruang_musik,audio_visual,lapangan_basket,kolam_renang',
+            'type' => 'required|string|exists:room_types,name',
             'capacity' => 'required|integer|min:1',
             'location' => 'required|string|max:255',
             'facilities' => 'nullable|string',
-            'is_active' => 'boolean',
+            'is_active' => 'nullable',
+            'manager_ids' => 'nullable|array',
+            'manager_ids.*' => 'integer|exists:users,id',
         ]);
 
         if ($validator->fails()) {
+            // Check if this is an AJAX request
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors(),
+                ], 422);
+            }
+
             return redirect()
                 ->route('admin.rooms.create')
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        Room::create([
+        $room = Room::create([
             'name' => $request->name,
             'type' => $request->type,
             'capacity' => $request->capacity,
             'location' => $request->location,
             'facilities' => $request->facilities,
-            'is_active' => $request->has('is_active'),
+            'is_active' => in_array($request->input('is_active'), ['1', 1, true, 'true'], true),
         ]);
+
+        if ($request->has('manager_ids')) {
+            $room->managers()->sync($request->manager_ids ?? []);
+        }
+
+        // Check if this is an AJAX request
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Ruangan berhasil ditambahkan',
+                'redirect' => route('admin.rooms.index'),
+            ], 201);
+        }
 
         return redirect()
             ->route('admin.rooms.index')
@@ -84,9 +109,27 @@ class AdminRoomController extends Controller
     /**
      * Show the form for editing the specified room.
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $room = Room::findOrFail($id);
+        
+        // Check if this is an AJAX request
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'id' => $room->id,
+                    'name' => $room->name,
+                    'type' => $room->type,
+                    'capacity' => $room->capacity,
+                    'location' => $room->location,
+                    'facilities' => $room->facilities,
+                    'is_active' => $room->is_active,
+                    'manager_ids' => $room->managers()->pluck('user_id')->toArray(),
+                ],
+            ]);
+        }
+        
         $roomTypes = \App\Models\RoomType::active()->orderBy('label')->get();
         return view('admin.rooms.edit', compact('room', 'roomTypes'));
     }
@@ -100,13 +143,24 @@ class AdminRoomController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255|unique:rooms,name,' . $id,
+            'type' => 'required|string|exists:room_types,name',
             'capacity' => 'required|integer|min:1',
             'location' => 'required|string|max:255',
             'facilities' => 'nullable|string',
-            'is_available' => 'boolean',
+            'is_active' => 'nullable',
+            'manager_ids' => 'nullable|array',
+            'manager_ids.*' => 'integer|exists:users,id',
         ]);
 
         if ($validator->fails()) {
+            // Check if this is an AJAX request
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors(),
+                ], 422);
+            }
+
             return redirect()
                 ->route('admin.rooms.edit', $id)
                 ->withErrors($validator)
@@ -115,11 +169,24 @@ class AdminRoomController extends Controller
 
         $room->update([
             'name' => $request->name,
+            'type' => $request->type,
             'capacity' => $request->capacity,
             'location' => $request->location,
             'facilities' => $request->facilities,
-            'is_available' => $request->has('is_available'),
+            'is_active' => in_array($request->input('is_active'), ['1', 1, true, 'true'], true),
         ]);
+
+        // Sync managers (allow detaching all managers when empty)
+        $room->managers()->sync($request->input('manager_ids', []));
+
+        // Check if this is an AJAX request
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Ruangan berhasil diperbarui',
+                'redirect' => route('admin.rooms.index'),
+            ], 200);
+        }
 
         return redirect()
             ->route('admin.rooms.index')
@@ -150,5 +217,38 @@ class AdminRoomController extends Controller
         return redirect()
             ->route('admin.rooms.index')
             ->with('success', 'Ruangan berhasil dihapus');
+    }
+
+    /**
+     * Get list of peminjam users for manager selection (AJAX endpoint)
+     */
+    public function getPeminjamUsers()
+    {
+        $peminjam = User::where('role', User::ROLE_PEMINJAM)
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->select('id', 'name', 'email')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $peminjam,
+        ]);
+    }
+
+    /**
+     * Get list of active room types (AJAX endpoint)
+     */
+    public function getRoomTypes()
+    {
+        $roomTypes = RoomType::where('is_active', true)
+            ->orderBy('label')
+            ->select('name', 'label')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $roomTypes,
+        ]);
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminPasswordChangeController;
 use App\Http\Controllers\AdminRoomController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminSettingController;
+use App\Http\Controllers\RoomManagerController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\UserBookingController;
 use App\Http\Controllers\NotificationController;
@@ -72,6 +73,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     // RUANGAN (CRUD)
     Route::resource('admin/rooms', AdminRoomController::class)->names('admin.rooms');
+    Route::get('/admin/api/peminjam-users', [AdminRoomController::class, 'getPeminjamUsers'])->name('admin.api.peminjam-users');
+    Route::get('/admin/api/room-types', [AdminRoomController::class, 'getRoomTypes'])->name('admin.api.room-types');
 
     // JENIS RUANGAN (CRUD)
     Route::resource('admin/room-types', App\Http\Controllers\Admin\RoomTypeController::class)->names('admin.room-types');
@@ -94,6 +97,18 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/password-change-requests', [AdminPasswordChangeController::class, 'index'])->name('admin.password-change.index');
     Route::post('/admin/password-change-requests/{passwordChangeRequest}/approve', [AdminPasswordChangeController::class, 'approve'])->name('admin.password-change.approve');
     Route::post('/admin/password-change-requests/{passwordChangeRequest}/reject', [AdminPasswordChangeController::class, 'reject'])->name('admin.password-change.reject');
+});
+
+// Room Manager routes (for peminjam who manage rooms)
+Route::middleware(['auth', 'role:peminjam'])->group(function () {
+    Route::get('/room-manager/dashboard', [RoomManagerController::class, 'dashboard'])->name('room-manager.dashboard');
+    Route::get('/room-manager/rooms', [RoomManagerController::class, 'rooms'])->name('room-manager.rooms');
+    Route::get('/room-manager/rooms/{room}', [RoomManagerController::class, 'showRoom'])->name('room-manager.show-room');
+    Route::get('/room-manager/pending-bookings', [RoomManagerController::class, 'pendingBookings'])->name('room-manager.pending-bookings');
+    Route::get('/room-manager/upcoming-bookings', [RoomManagerController::class, 'upcomingBookings'])->name('room-manager.upcoming-bookings');
+    Route::post('/room-manager/bookings/{booking}/approve', [RoomManagerController::class, 'approveBooking'])->name('room-manager.approve-booking');
+    Route::post('/room-manager/bookings/{booking}/reject', [RoomManagerController::class, 'rejectBooking'])->name('room-manager.reject-booking');
+    Route::post('/room-manager/bookings/{booking}/change-request', [RoomManagerController::class, 'submitChangeRequest'])->name('room-manager.change-request');
 });
 
 // Kepala Sekolah routes

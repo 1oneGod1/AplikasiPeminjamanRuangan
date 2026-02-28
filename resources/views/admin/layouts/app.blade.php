@@ -7,7 +7,75 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style> body { font-family: 'Inter', sans-serif; } </style>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+
+    input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']):not([type='file']),
+    select,
+    textarea {
+      border-radius: 1rem;
+      border: 1px solid rgba(71, 85, 105, 0.75);
+      background-color: rgba(15, 23, 42, 0.82) !important;
+      color: #f8fafc !important;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(4px);
+      transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+    }
+
+    input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']):not([type='file']):focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(250, 204, 21, 0.75);
+      background-color: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+      outline: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #94a3b8 !important;
+    }
+
+    select {
+      padding-right: 3rem;
+      appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, rgba(250, 204, 21, 0.65) 50%),
+        linear-gradient(135deg, rgba(250, 204, 21, 0.65) 50%, transparent 50%),
+        linear-gradient(to right, rgba(250, 204, 21, 0.4), rgba(250, 204, 21, 0.4));
+      background-position: calc(100% - 20px) calc(1.2rem), calc(100% - 14px) calc(1.2rem), calc(100% - 2.5rem) 0.9rem;
+      background-size: 10px 10px, 10px 10px, 1px 1.6rem;
+      background-repeat: no-repeat;
+      position: relative;
+      z-index: 10;
+    }
+
+    select:focus {
+      z-index: 50;
+    }
+
+    select option {
+      background-color: #0f172a;
+      color: #f8fafc;
+    }
+
+    input[type='checkbox'],
+    input[type='radio'] {
+      background-color: rgba(15, 23, 42, 0.9) !important;
+      border: 1px solid rgba(71, 85, 105, 0.8);
+      accent-color: rgba(250, 204, 21, 0.9);
+    }
+
+    input:-webkit-autofill,
+    textarea:-webkit-autofill,
+    select:-webkit-autofill {
+      -webkit-text-fill-color: #f8fafc !important;
+      box-shadow: 0 0 0px 1000px rgba(15, 23, 42, 0.82) inset;
+      border-radius: 16px;
+    }
+  </style>
 </head>
 <body class="min-h-screen bg-slate-950 text-slate-100">
   <div class="flex h-screen overflow-hidden">
@@ -41,6 +109,10 @@
         <a href="{{ route('admin.rooms.index') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.rooms.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
           <i class="fas fa-door-open w-5"></i>
           <span>Ruangan</span>
+        </a>
+        <a href="{{ route('admin.room-types.index') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.room-types.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+          <i class="fas fa-list w-5"></i>
+          <span>Jenis Ruangan</span>
         </a>
         <a href="{{ route('admin.users.peminjam') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.users.peminjam') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
           <i class="fas fa-users w-5"></i>
@@ -109,6 +181,10 @@
           <a href="{{ route('admin.rooms.index') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.rooms.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
             <i class="fas fa-door-open w-5"></i>
             <span>Ruangan</span>
+          </a>
+          <a href="{{ route('admin.room-types.index') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.room-types.*') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
+            <i class="fas fa-list w-5"></i>
+            <span>Jenis Ruangan</span>
           </a>
           <a href="{{ route('admin.users.peminjam') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium {{ request()->routeIs('admin.users.peminjam') ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' : 'text-slate-300 hover:bg-white/5 hover:text-white' }} transition-all">
             <i class="fas fa-users w-5"></i>
@@ -193,10 +269,12 @@
 
     function openMobileMenu() {
       mobileSidebar.classList.remove('-translate-x-full');
+      mobileMenuBtn.style.display = 'none';
     }
 
     function closeMobileMenu() {
       mobileSidebar.classList.add('-translate-x-full');
+      mobileMenuBtn.style.display = '';
     }
 
     if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileMenu);

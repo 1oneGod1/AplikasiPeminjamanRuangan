@@ -4,166 +4,205 @@
 <?php $__env->startSection('header', isset($room) ? 'Edit Ruangan' : 'Tambah Ruangan Baru'); ?>
 
 <?php $__env->startSection('content'); ?>
-<div class="max-w-3xl">
-  <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6">
-    <form action="<?php echo e(isset($room) ? route('admin.rooms.update', $room) : route('admin.rooms.store')); ?>" method="POST">
+<div class="max-w-4xl mx-auto">
+  <?php
+    $adminFormDefaults = config('admin_form');
+    $adminFormCardClass = $adminFormCardClass ?? $adminFormDefaults['card'];
+    $adminFormHeaderClass = $adminFormHeaderClass ?? $adminFormDefaults['header'];
+    $adminFormSubtextClass = $adminFormSubtextClass ?? $adminFormDefaults['subtext'];
+    $adminLabelClass = $adminLabelClass ?? $adminFormDefaults['label'];
+    $adminHelperTextClass = $adminHelperTextClass ?? $adminFormDefaults['helper'];
+    $adminInputClass = $adminInputClass ?? $adminFormDefaults['input'];
+    $adminTextareaClass = $adminTextareaClass ?? $adminFormDefaults['textarea'];
+    $adminSelectClass = $adminSelectClass ?? $adminFormDefaults['select'];
+    $adminPrimaryButtonClass = $adminPrimaryButtonClass ?? $adminFormDefaults['primary_button'];
+    $adminSecondaryButtonClass = $adminSecondaryButtonClass ?? $adminFormDefaults['secondary_button'];
+    $adminFormSectionDivider = $adminFormSectionDivider ?? $adminFormDefaults['divider'];
+  ?>
+
+  <div class="<?php echo e($adminFormCardClass); ?>">
+    <form action="<?php echo e(isset($room) ? route('admin.rooms.update', $room) : route('admin.rooms.store')); ?>" method="POST" class="space-y-12">
       <?php echo csrf_field(); ?>
       <?php if(isset($room)): ?>
         <?php echo method_field('PUT'); ?>
       <?php endif; ?>
 
-  <div class="space-y-6">
-        <!-- Nama Ruangan -->
-        <div>
-          <label for="name" class="block text-sm font-semibold text-slate-100 mb-2">Nama Ruangan <span class="text-red-400">*</span></label>
-          <input type="text" id="name" name="name" value="<?php echo e(old('name', $room->name ?? '')); ?>" required
-                 class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 <?php $__errorArgs = ['name'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                 placeholder="Contoh: Lab Komputer 1">
-          <?php $__errorArgs = ['name'];
+      <div class="space-y-10">
+        <!-- Intro -->
+        <header class="space-y-2.5">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.36em] text-slate-500">Informasi Ruangan</p>
+          <h3 class="<?php echo e($adminFormHeaderClass); ?>"><?php echo e(isset($room) ? 'Perbarui' : 'Tambah'); ?> data ruangan</h3>
+          <p class="<?php echo e($adminFormSubtextClass); ?>">Mohon lengkapi detail ruangan agar proses peminjaman berjalan tertib dan transparan.</p>
+        </header>
+
+        <!-- Form Fields -->
+        <div class="space-y-7">
+          <div class="space-y-2.5">
+            <label for="name" class="<?php echo e($adminLabelClass); ?>">Nama Ruangan <span class="text-rose-400">*</span></label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              value="<?php echo e(old('name', $room->name ?? '')); ?>"
+              required
+              placeholder="Contoh: Lab Komputer 1"
+              class="class="<?php echo \Illuminate\Support\Arr::toCssClasses([
+                $adminInputClass,
+                'border-rose-500/80 focus:border-rose-400 focus:ring-rose-400/40 focus:shadow-rose-500/20' => $errors->has('name'),
+              ]); ?>""
+            >
+            <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-            <p class="mt-1 text-sm text-red-400"><?php echo e($message); ?></p>
-          <?php unset($message);
+              <p class="text-xs text-rose-400"><?php echo e($message); ?></p>
+            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-        </div>
-
-        <!-- Jenis Ruangan -->
-        <div>
-          <div class="flex items-center justify-between mb-2">
-            <label for="type" class="block text-sm font-semibold text-slate-100">Jenis Ruangan <span class="text-red-400">*</span></label>
-            <a href="<?php echo e(route('admin.room-types.index')); ?>" class="text-xs text-blue-400 hover:underline">Kelola Jenis Ruangan</a>
           </div>
-          <select id="type" name="type" required class="w-full px-4 py-2 border border-white/20 bg-slate-800 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 <?php $__errorArgs = ['type'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>">
-            <option value="" class="bg-slate-800 text-slate-400">Pilih Jenis</option>
-            <?php $__currentLoopData = $roomTypes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-              <option value="<?php echo e($type->name); ?>" class="bg-slate-800 text-white" <?php echo e(old('type', $room->type ?? '') == $type->name ? 'selected' : ''); ?>><?php echo e($type->label); ?></option>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-          </select>
-          <?php $__errorArgs = ['type'];
+
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between">
+                <label for="type" class="<?php echo e($adminLabelClass); ?>">Jenis Ruangan <span class="text-rose-400">*</span></label>
+                <a href="<?php echo e(route('admin.room-types.index')); ?>" class="text-[10px] font-bold tracking-[0.04em] text-yellow-400 hover:text-yellow-300 transition-colors">Kelola Jenis Ruangan</a>
+              </div>
+              <div class="relative">
+                <select
+                  id="type"
+                  name="type"
+                  required
+                  class="class="<?php echo \Illuminate\Support\Arr::toCssClasses([
+                    $adminSelectClass,
+                    'border-rose-500/80 focus:border-rose-400 focus:ring-rose-400/40 focus:shadow-rose-500/20' => $errors->has('type'),
+                  ]); ?>""
+                >
+                  <option value="" class="bg-slate-900 text-slate-400">Pilih Jenis</option>
+                  <?php $__currentLoopData = $roomTypes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($type->name); ?>" class="bg-slate-900 text-white" <?php if(old('type', $room->type ?? '') === $type->name): echo 'selected'; endif; ?>><?php echo e($type->label); ?></option>
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </select>
+                <span class="pointer-events-none absolute right-4 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-slate-800/70 text-slate-300 shadow-inner shadow-black/30">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-3.5 w-3.5">
+                    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </div>
+              <?php $__errorArgs = ['type'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-            <p class="mt-1 text-sm text-red-400"><?php echo e($message); ?></p>
-          <?php unset($message);
+                <p class="text-xs text-rose-400"><?php echo e($message); ?></p>
+              <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-        </div>
+            </div>
 
-        <!-- Kapasitas -->
-        <div>
-          <label for="capacity" class="block text-sm font-semibold text-slate-100 mb-2">Kapasitas <span class="text-red-400">*</span></label>
-          <input type="number" id="capacity" name="capacity" value="<?php echo e(old('capacity', $room->capacity ?? '')); ?>" required min="1"
-                 class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 <?php $__errorArgs = ['capacity'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                 placeholder="Jumlah orang">
-          <?php $__errorArgs = ['capacity'];
+            <div class="space-y-2.5">
+              <label for="capacity" class="<?php echo e($adminLabelClass); ?>">Kapasitas <span class="text-rose-400">*</span></label>
+              <input
+                id="capacity"
+                type="number"
+                name="capacity"
+                value="<?php echo e(old('capacity', $room->capacity ?? '')); ?>"
+                min="1"
+                required
+                placeholder="Jumlah orang"
+                class="class="<?php echo \Illuminate\Support\Arr::toCssClasses([
+                  $adminInputClass,
+                  'border-rose-500/80 focus:border-rose-400 focus:ring-rose-400/40 focus:shadow-rose-500/20' => $errors->has('capacity'),
+                ]); ?>""
+              >
+              <?php $__errorArgs = ['capacity'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-            <p class="mt-1 text-sm text-red-400"><?php echo e($message); ?></p>
-          <?php unset($message);
+                <p class="text-xs text-rose-400"><?php echo e($message); ?></p>
+              <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-        </div>
+            </div>
+          </div>
 
-        <!-- Lokasi -->
-        <div>
-          <label for="location" class="block text-sm font-semibold text-slate-100 mb-2">Lokasi</label>
-          <input type="text" id="location" name="location" value="<?php echo e(old('location', $room->location ?? '')); ?>"
-                 class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 <?php $__errorArgs = ['location'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                 placeholder="Contoh: Lantai 2, Gedung A">
-          <?php $__errorArgs = ['location'];
+          <div class="space-y-2.5">
+            <label for="location" class="<?php echo e($adminLabelClass); ?>">Lokasi</label>
+            <input
+              id="location"
+              type="text"
+              name="location"
+              value="<?php echo e(old('location', $room->location ?? '')); ?>"
+              placeholder="Contoh: Lantai 2, Gedung A"
+              class="class="<?php echo \Illuminate\Support\Arr::toCssClasses([
+                $adminInputClass,
+                'border-rose-500/80 focus:border-rose-400 focus:ring-rose-400/40 focus:shadow-rose-500/20' => $errors->has('location'),
+              ]); ?>""
+              required
+            >
+            <?php $__errorArgs = ['location'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-            <p class="mt-1 text-sm text-red-400"><?php echo e($message); ?></p>
-          <?php unset($message);
+              <p class="text-xs text-rose-400"><?php echo e($message); ?></p>
+            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-        </div>
+          </div>
 
-        <!-- Fasilitas -->
-        <div>
-          <label for="facilities" class="block text-sm font-semibold text-slate-100 mb-2">Fasilitas</label>
-          <textarea id="facilities" name="facilities" rows="3"
-                    class="w-full px-4 py-2 border border-white/20 bg-white/10 text-white placeholder-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 <?php $__errorArgs = ['facilities'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                    placeholder="Contoh: Proyektor, AC, Whiteboard, 30 Komputer"><?php echo e(old('facilities', $room->facilities ?? '')); ?></textarea>
-          <?php $__errorArgs = ['facilities'];
+          <div class="space-y-2.5">
+            <label for="facilities" class="<?php echo e($adminLabelClass); ?>">Fasilitas</label>
+            <textarea
+              id="facilities"
+              name="facilities"
+              rows="4"
+              placeholder="Contoh: Proyektor, AC, Whiteboard, 30 Komputer"
+              class="class="<?php echo \Illuminate\Support\Arr::toCssClasses([
+                $adminTextareaClass,
+                'border-rose-500/80 focus:border-rose-400 focus:ring-rose-400/40 focus:shadow-rose-500/20' => $errors->has('facilities'),
+              ]); ?>""
+            ><?php echo e(old('facilities', $room->facilities ?? '')); ?></textarea>
+            <?php $__errorArgs = ['facilities'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-            <p class="mt-1 text-sm text-red-400"><?php echo e($message); ?></p>
-          <?php unset($message);
+              <p class="text-xs text-rose-400"><?php echo e($message); ?></p>
+            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+          </div>
+
+          <section class="rounded-[22px] border border-slate-700/50 bg-slate-900/40 p-7 text-sm text-slate-200 shadow-inner shadow-black/30">
+            <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+              <div class="space-y-1.5">
+                <span class="text-[10px] font-semibold uppercase tracking-[0.28em] text-slate-400">Status Aktif</span>
+                <p class="text-[15px] font-semibold leading-tight text-white">Ruangan aktif (bisa dipinjam)</p>
+                <p class="text-[11px] leading-relaxed text-slate-500">Ruangan dapat dilihat dan dipilih untuk dipinjam.</p>
+              </div>
+              <div class="shrink-0">
+                <input type="hidden" name="is_active" value="0">
+                <label class="relative inline-flex h-[34px] w-[66px] cursor-pointer items-center">
+                  <input type="checkbox" name="is_active" value="1" class="peer sr-only" <?php if(old('is_active', $room->is_active ?? true)): echo 'checked'; endif; ?>>
+                  <span class="absolute inset-0 rounded-full bg-slate-600/60 shadow-inner shadow-black/30 transition-all duration-200 peer-checked:bg-yellow-400"></span>
+                  <span class="absolute left-[3px] top-[3px] h-7 w-7 rounded-full bg-white shadow-md transition-all duration-200 peer-checked:translate-x-8 peer-checked:bg-slate-950"></span>
+                </label>
+              </div>
+            </div>
+          </section>
         </div>
 
-        <!-- Status Aktif -->
-        <div>
-          <label class="flex items-center gap-3">
-            <input type="checkbox" name="is_active" value="1" <?php echo e(old('is_active', $room->is_active ?? true) ? 'checked' : ''); ?>
-
-                   class="w-4 h-4 text-blue-500 border-white/20 rounded focus:ring-blue-500">
-            <span class="text-sm font-semibold text-slate-100">Ruangan Aktif (bisa dipinjam)</span>
-          </label>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="flex items-center gap-3 pt-4 border-t border-white/10">
-          <button type="submit" class="px-6 py-2 bg-blue-500 text-white rounded-xl font-semibold hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/30">
-            <?php echo e(isset($room) ? 'Perbarui' : 'Simpan'); ?>
-
-          </button>
-          <a href="<?php echo e(route('admin.rooms.index')); ?>" class="px-6 py-2 border border-white/20 text-slate-100 rounded-xl hover:bg-white/10 transition-colors">
-            Batal
-          </a>
-        </div>
+        <footer class="flex flex-col gap-3 pt-6 sm:flex-row sm:items-center sm:justify-end <?php echo e($adminFormSectionDivider); ?>">
+          <a href="<?php echo e(route('admin.rooms.index')); ?>" class="<?php echo e($adminSecondaryButtonClass); ?>">Batal</a>
+          <button type="submit" class="<?php echo e($adminPrimaryButtonClass); ?>"><?php echo e(isset($room) ? 'Perbarui Ruangan' : 'Simpan Ruangan'); ?></button>
+        </footer>
       </div>
     </form>
   </div>

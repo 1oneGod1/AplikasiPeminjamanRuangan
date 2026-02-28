@@ -19,7 +19,7 @@
 
     <!-- Pending Requests -->
     <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
-        <div class="bg-gradient-to-r from-yellow-500 to-orange-500 px-4 md:px-6 py-4">
+    <div class="bg-linear-to-r from-yellow-500 to-orange-500 px-4 md:px-6 py-4">
             <div class="flex items-center gap-3">
                 <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-white/20">
                     <i class="fas fa-clock text-white"></i>
@@ -41,7 +41,7 @@
                         <div class="rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition-colors">
                             <div class="flex items-start justify-between gap-4">
                                 <div class="flex items-start gap-4 flex-1">
-                                    <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold flex-shrink-0">
+                                    <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold shrink-0">
                                         <?php echo e(strtoupper(substr($request->user->name, 0, 1))); ?>
 
                                     </div>
@@ -64,7 +64,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="flex items-center gap-2 flex-shrink-0">
+                                <div class="flex items-center gap-2 shrink-0">
                                     <form action="<?php echo e(route('admin.password-change.approve', $request)); ?>" method="POST" class="inline">
                                         <?php echo csrf_field(); ?>
                                         <button 
@@ -95,7 +95,7 @@
                     <?php $__currentLoopData = $pendingRequests; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $request): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="rounded-xl border border-white/10 bg-white/5 p-4 space-y-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold flex-shrink-0">
+                                <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold shrink-0">
                                     <?php echo e(strtoupper(substr($request->user->name, 0, 1))); ?>
 
                                 </div>
@@ -122,20 +122,19 @@
                                     <?php echo csrf_field(); ?>
                                     <button 
                                         type="submit" 
-                                        class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-green-500 text-white rounded-xl font-bold hover:bg-green-600 transition-colors shadow-lg shadow-green-500/30"
+                                        class="w-full text-green-400 hover:text-green-300 font-medium transition-colors text-center"
                                         onclick="return confirm('Apakah Anda yakin ingin menyetujui perubahan password untuk <?php echo e($request->user->name); ?>?')"
                                     >
-                                        <i class="fas fa-check"></i>
-                                        <span>Setujui</span>
+                                        Setujui
                                     </button>
                                 </form>
+                                <span class="text-slate-700">·</span>
                                 <button 
                                     type="button"
-                                    class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 transition-colors shadow-lg shadow-red-500/30"
+                                    class="flex-1 text-red-400 hover:text-red-300 font-medium transition-colors text-center"
                                     onclick="showRejectModal(<?php echo e($request->id); ?>)"
                                 >
-                                    <i class="fas fa-times"></i>
-                                    <span>Tolak</span>
+                                    Tolak
                                 </button>
                             </div>
                         </div>
@@ -147,7 +146,7 @@
 
     <!-- Recent Processed Requests -->
     <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
-        <div class="bg-gradient-to-r from-slate-800 to-slate-900 px-4 md:px-6 py-4">
+    <div class="bg-linear-to-r from-slate-800 to-slate-900 px-4 md:px-6 py-4">
             <div class="flex items-center gap-3">
                 <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-white/10">
                     <i class="fas fa-history text-white"></i>
